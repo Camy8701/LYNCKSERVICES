@@ -30,7 +30,7 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="flex items-center justify-between px-6 md:px-12 lg:px-16 py-4 mt-8 mb-4 mx-4 md:mx-6 lg:mx-8 glass-card rounded-2xl">
+    <nav className="flex items-center justify-between px-6 md:px-12 lg:px-16 py-4 mt-8 mb-4 mx-4 md:mx-6 lg:mx-8 glass-card rounded-2xl relative z-50">
       <div className="flex items-center gap-12">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-lg"></div>
@@ -51,7 +51,7 @@ const Navigation = () => {
               <div
                 onMouseEnter={() => setServicesOpen(true)}
                 onMouseLeave={() => setServicesOpen(false)}
-                className="absolute top-full left-0 mt-2 w-64 bg-background/95 backdrop-blur-md border border-border rounded-xl shadow-lg z-50 py-2"
+                className="absolute top-full left-0 mt-2 w-64 bg-background/95 backdrop-blur-md border border-border rounded-xl shadow-lg z-[100] py-2"
               >
                 {services.map((service) => (
                   <a
