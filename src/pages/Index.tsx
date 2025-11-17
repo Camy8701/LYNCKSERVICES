@@ -1,6 +1,7 @@
 import Sidebar from "@/components/Sidebar";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
+import TrustBadges from "@/components/TrustBadges";
 import FeaturesSection from "@/components/FeaturesSection";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -13,6 +14,7 @@ const Index = () => {
       <main className="flex-1 overflow-y-auto">
         <Navigation />
         <HeroSection />
+        <TrustBadges />
         <FeaturesSection />
         <PortfolioGrid />
         <TestimonialsSection />
