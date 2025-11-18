@@ -1,54 +1,81 @@
-import { Heart, ArrowUpRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { ClipboardCheck, FileText, MessageSquare, CheckCircle2 } from "lucide-react";
 
-const portfolioItems = [
+const howItWorksSteps = [
   {
-    title: "Tribeca Penthouse",
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
+    number: "1",
+    icon: ClipboardCheck,
+    titleDe: "Service wählen",
+    titleEn: "Choose Service",
+    descriptionDe: "Wählen Sie aus 6 Dienstleistungen: Heizung, Solar, Dachdecker, Klempner, Elektriker oder allgemeine Renovierung.",
+    descriptionEn: "Choose from 6 services: Heating, Solar, Roofing, Plumbing, Electrician or general renovation."
   },
   {
-    title: "Zenith Tech HQ",
-    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80"
+    number: "2",
+    icon: FileText,
+    titleDe: "Formular ausfüllen",
+    titleEn: "Fill Out Form",
+    descriptionDe: "Beschreiben Sie Ihr Projekt in 2 Minuten. Name, Stadt, Details und gewünschter Zeitrahmen.",
+    descriptionEn: "Describe your project in 2 minutes. Name, city, details and desired timeframe."
   },
   {
-    title: "Azure Boutique Hotel",
-    image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
+    number: "3",
+    icon: MessageSquare,
+    titleDe: "Angebote erhalten",
+    titleEn: "Receive Quotes",
+    descriptionDe: "Bis zu 3 geprüfte Fachleute melden sich innerhalb von 24 Stunden bei Ihnen.",
+    descriptionEn: "Up to 3 verified professionals will contact you within 24 hours."
   },
   {
-    title: "Meridian Art Gallery",
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"
+    number: "4",
+    icon: CheckCircle2,
+    titleDe: "Vergleichen & beauftragen",
+    titleEn: "Compare & Hire",
+    descriptionDe: "Vergleichen Sie Angebote, Bewertungen und Verfügbarkeit. Wählen Sie das beste Angebot.",
+    descriptionEn: "Compare quotes, reviews and availability. Choose the best offer."
   }
 ];
 
 const PortfolioGrid = () => {
+  const { t, language } = useLanguage();
+  
   return (
-    <section className="mt-8 px-4 sm:px-6 lg:px-12 pt-8 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-      {portfolioItems.map((item, index) => (
+    <section id="how-it-works" className="mt-8 px-4 sm:px-6 lg:px-12 pt-8">
+      <div className="text-center max-w-3xl mx-auto mb-16">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl tracking-tight text-foreground font-serif font-normal">
+          {t("So einfach geht's", "How It Works")}
+        </h2>
+        <p className="text-lg text-muted-foreground mt-6">
+          {t(
+            "In 4 einfachen Schritten zum perfekten Handwerker",
+            "4 simple steps to the perfect contractor"
+          )}
+        </p>
+      </div>
+      
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      {howItWorksSteps.map((step, index) => (
         <article
           key={index}
           className="group glass-card rounded-xl overflow-hidden hover:border-white/[0.12] transition-all duration-500 min-h-[420px] flex flex-col"
         >
-          <div className="relative overflow-hidden">
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700"
-            />
-            <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm rounded-full p-2">
-              <Heart className="w-4 h-4 stroke-[1.5] hover:fill-primary hover:stroke-primary transition-colors duration-300" />
+          <div className="relative overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center h-56">
+            <step.icon className="w-24 h-24 text-primary/40" />
+            <div className="absolute top-4 left-4 bg-primary text-primary-foreground rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">
+              {step.number}
             </div>
           </div>
           <div className="p-5 flex-1 flex flex-col">
             <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
-              {item.title}
+              {language === 'de' ? step.titleDe : step.titleEn}
             </h3>
-            <div className="flex-1"></div>
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-muted-foreground"></span>
-              <ArrowUpRight className="w-4 h-4 stroke-[1.5] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+              {language === 'de' ? step.descriptionDe : step.descriptionEn}
+            </p>
           </div>
         </article>
       ))}
+      </div>
     </section>
   );
 };
