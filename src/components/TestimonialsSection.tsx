@@ -1,81 +1,105 @@
 import { Star } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const testimonials = [
   {
-    name: "Maria Rodriguez",
-    role: "Urban Farm Owner",
-    initials: "MR",
+    name: "Thomas Müller",
+    roleDe: "Hausbesitzer, Berlin",
+    roleEn: "Homeowner, Berlin",
+    initials: "TM",
     color: "emerald",
     rating: 5,
-    text: "VerdantIQ transformed my urban farm completely. The AI monitoring caught nutrient deficiencies I never would have noticed, and my yield increased by 40% in just one season.",
-    metric: "+40% Yield Increase",
+    textDe: "Innerhalb von 30 Minuten hatte ich 3 Angebote für meine Heizungsreparatur. Der Service war super schnell und völlig unkompliziert!",
+    textEn: "Within 30 minutes I had 3 quotes for my heating repair. The service was super fast and completely uncomplicated!",
+    metricDe: "Heizung repariert in 2 Tagen",
+    metricEn: "Heating repaired in 2 days",
     metricColor: "emerald"
   },
   {
-    name: "James Chen",
-    role: "Hydroponic Specialist",
-    initials: "JC",
-    color: "sky",
-    rating: 5,
-    text: "The precision environmental control is incredible. My hydroponic systems now maintain perfect conditions 24/7, and I've reduced water usage by 35% while improving plant quality.",
-    metric: "-35% Water Usage",
-    metricColor: "sky"
-  },
-  {
-    name: "Sarah Green",
-    role: "Greenhouse Manager",
-    initials: "SG",
-    color: "violet",
-    rating: 5,
-    text: "The growth analytics have revolutionized how we plan our harvests. We can predict optimal harvest times with 95% accuracy and our customers love the consistency.",
-    metric: "95% Accuracy",
-    metricColor: "violet"
-  },
-  {
-    name: "David Wilson",
-    role: "Home Grower",
-    initials: "DW",
+    name: "Anna Klein",
+    roleDe: "Eigenheimbesitzerin, München",
+    roleEn: "Homeowner, Munich",
+    initials: "AK",
     color: "amber",
     rating: 5,
-    text: "As a beginner, VerdantIQ made growing accessible. The mobile app guides me through everything, and I'm amazed that I can monitor my plants while traveling.",
-    metric: "Beginner Friendly",
+    textDe: "Die Solaranlage wurde professionell installiert. Dank Lynck Services habe ich beim Vergleich 15% gespart!",
+    textEn: "The solar system was professionally installed. Thanks to Lynck Services I saved 15% by comparing!",
+    metricDe: "15% Kostenersparnis",
+    metricEn: "15% Cost Savings",
     metricColor: "amber"
   },
   {
-    name: "Lisa Martinez",
-    role: "Organic Farm Co-op",
-    initials: "LM",
-    color: "teal",
+    name: "Michael Richter",
+    roleDe: "Vermieter, Hamburg",
+    roleEn: "Landlord, Hamburg",
+    initials: "MR",
+    color: "sky",
     rating: 5,
-    text: "Resource optimization has been a game-changer for our co-op. We've cut energy costs by 28% while maintaining organic certification and improving soil health.",
-    metric: "-28% Energy Costs",
-    metricColor: "teal"
+    textDe: "Als Vermieter nutze ich Lynck für alle meine Immobilien. Zuverlässige Handwerker, faire Preise, schnelle Abwicklung.",
+    textEn: "As a landlord I use Lynck for all my properties. Reliable contractors, fair prices, fast processing.",
+    metricDe: "12 Projekte erfolgreich",
+    metricEn: "12 Projects Successful",
+    metricColor: "sky"
   },
   {
-    name: "Alex Thompson",
-    role: "Vertical Farm CEO",
-    initials: "AT",
-    color: "rose",
+    name: "Sarah Wagner",
+    roleDe: "Hausbesitzerin, Stuttgart",
+    roleEn: "Homeowner, Stuttgart",
+    initials: "SW",
+    color: "red",
     rating: 5,
-    text: "The expert community feature has been invaluable. Having 24/7 access to growing experts helped us scale from 5 to 50 growing towers without losing quality.",
-    metric: "10x Scale Growth",
-    metricColor: "rose"
+    textDe: "Dach musste dringend repariert werden nach dem Sturm. Innerhalb von 2 Stunden hatte ich Angebote und am nächsten Tag war der Dachdecker da!",
+    textEn: "Roof urgently needed repair after the storm. Within 2 hours I had quotes and the next day the roofer was there!",
+    metricDe: "Notfall-Service in 24h",
+    metricEn: "Emergency Service in 24h",
+    metricColor: "red"
+  },
+  {
+    name: "Lisa Schmidt",
+    roleDe: "Eigenheimbesitzerin, Köln",
+    roleEn: "Homeowner, Cologne",
+    initials: "LS",
+    color: "violet",
+    rating: 5,
+    textDe: "Elektriker gesucht für Smart Home Installation. Alle 3 Angebote waren fair und professionell. Bin sehr zufrieden!",
+    textEn: "Looking for electrician for smart home installation. All 3 quotes were fair and professional. Very satisfied!",
+    metricDe: "Smart Home Installation",
+    metricEn: "Smart Home Installation",
+    metricColor: "violet"
+  },
+  {
+    name: "Daniel Hoffmann",
+    roleDe: "Hausbesitzer, Düsseldorf",
+    roleEn: "Homeowner, Düsseldorf",
+    initials: "DH",
+    color: "teal",
+    rating: 5,
+    textDe: "Badezimmer komplett renoviert. Der Vergleich hat sich gelohnt – gespart und top Qualität bekommen!",
+    textEn: "Bathroom completely renovated. The comparison was worth it - saved money and got top quality!",
+    metricDe: "€2.400 gespart",
+    metricEn: "€2,400 Saved",
+    metricColor: "teal"
   }
 ];
 
 const TestimonialsSection = () => {
+  const { t, language } = useLanguage();
+  
   return (
     <section className="overflow-hidden glass-card rounded-3xl mt-24 mb-20 mx-4 md:mx-6 lg:mx-8">
       <div className="md:px-10 lg:px-14 pt-20 pr-6 pb-16 pl-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl tracking-tight text-foreground font-serif font-normal">
-            Growing Success,
+            {t("Erfolgreiche Projekte,", "Successful Projects,")}
           </h2>
           <h3 className="text-4xl md:text-5xl lg:text-6xl tracking-tight text-muted-foreground font-serif font-normal mb-6">
-            Shared Stories
+            {t("Zufriedene Kunden", "Satisfied Customers")}
           </h3>
           <p className="text-lg text-muted-foreground">
-            Real results from growers who transformed their harvests with intelligent plant care technology.
+            {t(
+              "Echte Erfahrungen von Hausbesitzern, die ihre Projekte erfolgreich umgesetzt haben.",
+              "Real experiences from homeowners who successfully completed their projects."
+            )}
           </p>
         </div>
 
@@ -88,7 +112,9 @@ const TestimonialsSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {language === 'de' ? testimonial.roleDe : testimonial.roleEn}
+                  </p>
                 </div>
               </div>
               <div className="flex gap-1 mb-4">
@@ -96,8 +122,12 @@ const TestimonialsSection = () => {
                   <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                 ))}
               </div>
-              <p className="text-foreground/90 text-sm leading-relaxed mb-4">{testimonial.text}</p>
-              <div className={`text-sm font-medium text-${testimonial.metricColor}-400`}>{testimonial.metric}</div>
+              <p className="text-foreground/90 text-sm leading-relaxed mb-4">
+                {language === 'de' ? testimonial.textDe : testimonial.textEn}
+              </p>
+              <div className={`text-sm font-medium text-${testimonial.metricColor}-400`}>
+                {language === 'de' ? testimonial.metricDe : testimonial.metricEn}
+              </div>
             </div>
           ))}
         </div>
@@ -105,20 +135,28 @@ const TestimonialsSection = () => {
         <div className="mt-16 bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-2xl p-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">10,000+</div>
-              <div className="text-muted-foreground text-sm">Active Growers</div>
+              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">500+</div>
+              <div className="text-muted-foreground text-sm">
+                {t("Geprüfte Handwerker", "Verified Contractors")}
+              </div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">4.9</div>
-              <div className="text-muted-foreground text-sm">Average Rating</div>
+              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">4.8</div>
+              <div className="text-muted-foreground text-sm">
+                {t("Durchschnittsbewertung", "Average Rating")}
+              </div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">45%</div>
-              <div className="text-muted-foreground text-sm">Average Yield Increase</div>
+              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">1.500+</div>
+              <div className="text-muted-foreground text-sm">
+                {t("Erfolgreiche Projekte", "Successful Projects")}
+              </div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">24/7</div>
-              <div className="text-muted-foreground text-sm">Expert Support</div>
+              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">24h</div>
+              <div className="text-muted-foreground text-sm">
+                {t("Durchschnittliche Antwortzeit", "Average Response Time")}
+              </div>
             </div>
           </div>
         </div>
