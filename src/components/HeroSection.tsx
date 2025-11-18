@@ -90,13 +90,13 @@ const HeroSection = () => {
 
         {/* Right Panel - Service Category Grid */}
         <div className="relative md:p-10 lg:p-14 pt-8 pr-8 pb-8 pl-8">
-          <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-white/[0.03] backdrop-blur-sm ring-white/10 ring-1 rounded-3xl items-center justify-center p-8">
+          <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-gray-50 dark:bg-white/[0.03] backdrop-blur-sm ring-gray-200 dark:ring-white/10 ring-1 rounded-3xl items-center justify-center p-8">
             <div className="grid grid-cols-3 gap-4 w-full max-w-md">
               {serviceCategories.map((service, index) => (
                 <a
                   key={index}
                   href={service.slug}
-                  className="group relative flex flex-col items-center justify-center bg-white/[0.05] backdrop-blur-sm border border-white/[0.1] rounded-xl p-6 hover:bg-white/[0.1] hover:scale-105 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
+                  className="group relative flex flex-col items-center justify-center bg-white dark:bg-white/[0.05] backdrop-blur-sm border border-gray-200 dark:border-white/[0.1] rounded-xl p-6 hover:bg-gray-100 dark:hover:bg-white/[0.1] hover:scale-105 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
                 >
                   <service.icon className="w-8 h-8 mb-3 text-primary" />
                   <span className="text-xs text-center text-foreground font-medium">
