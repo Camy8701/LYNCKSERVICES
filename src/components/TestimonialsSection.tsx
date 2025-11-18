@@ -1,6 +1,18 @@
 import { Star } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+const getColorClasses = (color: string) => {
+  const colorMap: Record<string, { bg: string; text: string; metric: string }> = {
+    emerald: { bg: 'bg-emerald-500/20', text: 'text-emerald-300', metric: 'text-emerald-400' },
+    amber: { bg: 'bg-amber-500/20', text: 'text-amber-300', metric: 'text-amber-400' },
+    sky: { bg: 'bg-sky-500/20', text: 'text-sky-300', metric: 'text-sky-400' },
+    red: { bg: 'bg-red-500/20', text: 'text-red-300', metric: 'text-red-400' },
+    violet: { bg: 'bg-violet-500/20', text: 'text-violet-300', metric: 'text-violet-400' },
+    teal: { bg: 'bg-teal-500/20', text: 'text-teal-300', metric: 'text-teal-400' }
+  };
+  return colorMap[color] || colorMap.emerald;
+};
+
 const testimonials = [
   {
     name: "Thomas Müller",
@@ -104,11 +116,13 @@ const TestimonialsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+          {testimonials.map((testimonial, index) => {
+            const colors = getColorClasses(testimonial.color);
+            return (
             <div key={index} className="bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className={`w-12 h-12 bg-${testimonial.color}-500/20 rounded-full flex items-center justify-center`}>
-                  <span className={`text-sm font-semibold text-${testimonial.color}-300`}>{testimonial.initials}</span>
+                <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center`}>
+                  <span className={`text-sm font-semibold ${colors.text}`}>{testimonial.initials}</span>
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
@@ -125,11 +139,12 @@ const TestimonialsSection = () => {
               <p className="text-foreground/90 text-sm leading-relaxed mb-4">
                 {language === 'de' ? testimonial.textDe : testimonial.textEn}
               </p>
-              <div className={`text-sm font-medium text-${testimonial.metricColor}-400`}>
+              <div className={`text-sm font-medium ${colors.metric}`}>
                 {language === 'de' ? testimonial.metricDe : testimonial.metricEn}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-16 bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-2xl p-8">
