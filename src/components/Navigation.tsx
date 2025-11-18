@@ -82,7 +82,7 @@ const Navigation = () => {
         <div className="relative hidden lg:block">
           <input
             type="text"
-            placeholder={t("Suchen...", "Search...")}
+            placeholder={t("Service oder Stadt suchen...", "Search service or city...")}
             className="bg-white/[0.03] border border-white/[0.06] rounded-lg px-4 py-2 pl-10 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 w-96 transition-all duration-300"
           />
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
