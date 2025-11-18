@@ -14,7 +14,206 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      cities: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+        }
+        Relationships: []
+      }
+      companies: {
+        Row: {
+          cities: string[] | null
+          contact_person: string | null
+          created_at: string | null
+          email: string
+          id: string
+          is_active: boolean | null
+          name: string
+          phone: string
+          service_ids: string[] | null
+          whatsapp: string | null
+        }
+        Insert: {
+          cities?: string[] | null
+          contact_person?: string | null
+          created_at?: string | null
+          email: string
+          id?: string
+          is_active?: boolean | null
+          name: string
+          phone: string
+          service_ids?: string[] | null
+          whatsapp?: string | null
+        }
+        Update: {
+          cities?: string[] | null
+          contact_person?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          phone?: string
+          service_ids?: string[] | null
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
+      lead_assignments: {
+        Row: {
+          amount_charged: number
+          assigned_at: string | null
+          assigned_by: string
+          company_id: string | null
+          id: string
+          lead_id: string | null
+          notes: string | null
+        }
+        Insert: {
+          amount_charged: number
+          assigned_at?: string | null
+          assigned_by: string
+          company_id?: string | null
+          id?: string
+          lead_id?: string | null
+          notes?: string | null
+        }
+        Update: {
+          amount_charged?: number
+          assigned_at?: string | null
+          assigned_by?: string
+          company_id?: string | null
+          id?: string
+          lead_id?: string | null
+          notes?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lead_assignments_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lead_assignments_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          admin_notes: string | null
+          city: string
+          created_at: string | null
+          email: string | null
+          id: string
+          name: string
+          phone: string
+          plz: string
+          service_details: string
+          service_id: string | null
+          source: string | null
+          status: string | null
+          timeline: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          city: string
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          name: string
+          phone: string
+          plz: string
+          service_details: string
+          service_id?: string | null
+          source?: string | null
+          status?: string | null
+          timeline: string
+        }
+        Update: {
+          admin_notes?: string | null
+          city?: string
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          name?: string
+          phone?: string
+          plz?: string
+          service_details?: string
+          service_id?: string | null
+          source?: string | null
+          status?: string | null
+          timeline?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      services: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          description_en: string | null
+          icon: string
+          id: string
+          is_active: boolean | null
+          lead_price_shared: number | null
+          name: string
+          name_en: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          description_en?: string | null
+          icon: string
+          id?: string
+          is_active?: boolean | null
+          lead_price_shared?: number | null
+          name: string
+          name_en: string
+          slug: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          description_en?: string | null
+          icon?: string
+          id?: string
+          is_active?: boolean | null
+          lead_price_shared?: number | null
+          name?: string
+          name_en?: string
+          slug?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
