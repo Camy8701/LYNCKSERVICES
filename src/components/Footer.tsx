@@ -27,8 +27,8 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-background dark:bg-[#0a0a0a] border-t border-border mt-24 rounded-t-3xl mx-4 md:mx-6 lg:mx-8">
-      <div className="px-6 md:px-12 lg:px-16 py-12">
+    <footer className="mt-24 px-4 sm:px-6 lg:px-12 mb-8">
+      <div className="glass-card rounded-3xl px-6 md:px-12 lg:px-16 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Column 1: About */}
           <div>
