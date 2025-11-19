@@ -1,25 +1,61 @@
+import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
+import ServicesTable from '@/components/admin/ServicesTable';
+import { getAllServices } from '@/lib/database';
+import type { Service } from '@/lib/database';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const AdminServices = () => {
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const servicesData = await getAllServices();
+        setServices(servicesData);
+      } catch (error) {
+        console.error('Error fetching services:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  const refreshData = async () => {
+    const servicesData = await getAllServices();
+    setServices(servicesData);
+  };
+
+  if (loading) {
+    return (
+      <AdminLayout>
+        <div className="p-6 md:p-8">
+          <div className="mb-8">
+            <Skeleton className="h-10 w-64 mb-2" />
+            <Skeleton className="h-4 w-48" />
+          </div>
+          <Skeleton className="h-96 w-full" />
+        </div>
+      </AdminLayout>
+    );
+  }
+
   return (
     <AdminLayout>
-      <div className="p-8">
-        <h1 className="text-3xl font-instrument-serif text-foreground mb-4">
-          Services
-        </h1>
-        <p className="text-muted-foreground mb-8">
-          Verwalten Sie alle angebotenen Dienstleistungen
-        </p>
-        
-        <div className="bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-2xl p-8 text-center">
-          <div className="text-5xl mb-4">🔧</div>
-          <h2 className="text-xl font-semibold text-foreground mb-2">
-            Service-Verwaltung verfügbar
-          </h2>
+      <div className="p-6 md:p-8">
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-instrument-serif text-foreground mb-2">
+            Services verwalten
+          </h1>
           <p className="text-muted-foreground">
-            Hier können Sie Services hinzufügen, bearbeiten und Preise anpassen
+            {services.length} Services insgesamt
           </p>
         </div>
+        
+        <ServicesTable services={services} onUpdate={refreshData} />
       </div>
     </AdminLayout>
   );

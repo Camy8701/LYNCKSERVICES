@@ -21,6 +21,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminLeads from "./pages/AdminLeads";
 import AdminLeadDetail from "./pages/AdminLeadDetail";
 import AdminCompanies from "./pages/AdminCompanies";
+import AdminCompanyForm from "./pages/AdminCompanyForm";
 import AdminServices from "./pages/AdminServices";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -50,9 +51,10 @@ const App = () => (
             <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
         <Route path="/admin/leads" element={<ProtectedRoute><AdminLeads /></ProtectedRoute>} />
-        <Route path="/admin/leads/:id" element={<ProtectedRoute><AdminLeadDetail /></ProtectedRoute>} />
-        <Route path="/admin/companies" element={<ProtectedRoute><AdminCompanies /></ProtectedRoute>} />
-        <Route path="/admin/services" element={<ProtectedRoute><AdminServices /></ProtectedRoute>} />
+            <Route path="/admin/leads/:id" element={<ProtectedRoute><AdminLeadDetail /></ProtectedRoute>} />
+            <Route path="/admin/companies" element={<ProtectedRoute><AdminCompanies /></ProtectedRoute>} />
+            <Route path="/admin/companies/:id" element={<ProtectedRoute><AdminCompanyForm /></ProtectedRoute>} />
+            <Route path="/admin/services" element={<ProtectedRoute><AdminServices /></ProtectedRoute>} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
