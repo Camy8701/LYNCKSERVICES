@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import type { LeadWithService } from '@/lib/database';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LeadsTableProps {
   leads: LeadWithService[];
@@ -51,16 +52,17 @@ ${lead.service_details}
 
 export default function LeadsTable({ leads, currentPage, totalPages, totalCount }: LeadsTableProps) {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   if (leads.length === 0) {
     return (
       <div className="bg-card backdrop-blur-md border border-border rounded-2xl p-12 text-center">
         <div className="text-5xl mb-4">🔍</div>
         <h3 className="text-lg font-semibold text-foreground mb-2">
-          Keine Leads gefunden
+          {t('Keine Leads gefunden', 'No leads found')}
         </h3>
         <p className="text-muted-foreground">
-          Versuchen Sie, die Filter anzupassen
+          {t('Versuchen Sie, die Filter anzupassen', 'Try adjusting the filters')}
         </p>
       </div>
     );
@@ -74,13 +76,13 @@ export default function LeadsTable({ leads, currentPage, totalPages, totalCount 
             <thead className="bg-muted/30 border-b border-border">
               <tr>
                 <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">ID</th>
-                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Datum</th>
-                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Name</th>
-                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Telefon</th>
-                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Service</th>
-                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Stadt</th>
-                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Status</th>
-                <th className="text-right py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Aktionen</th>
+                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Datum', 'Date')}</th>
+                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Name', 'Name')}</th>
+                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Telefon', 'Phone')}</th>
+                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Service', 'Service')}</th>
+                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Stadt', 'City')}</th>
+                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Status', 'Status')}</th>
+                <th className="text-right py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Aktionen', 'Actions')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -128,8 +130,8 @@ export default function LeadsTable({ leads, currentPage, totalPages, totalCount 
                       lead.status === 'contacted' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
                       'bg-amber-500/10 text-amber-400 border border-amber-500/20'
                     }`}>
-                      {lead.status === 'new' ? 'Neu' : 
-                       lead.status === 'contacted' ? 'Kontaktiert' : 'Umgewandelt'}
+                      {lead.status === 'new' ? t('Neu', 'New') : 
+                       lead.status === 'contacted' ? t('Kontaktiert', 'Contacted') : t('Umgewandelt', 'Converted')}
                     </span>
                   </td>
                   <td className="py-4 px-4">
@@ -137,7 +139,7 @@ export default function LeadsTable({ leads, currentPage, totalPages, totalCount 
                       <button
                         onClick={() => copyLeadToClipboard(lead)}
                         className="p-2 text-muted-foreground hover:text-primary hover:bg-muted/20 rounded-lg transition-all"
-                        title="In Zwischenablage kopieren"
+                        title={t('In Zwischenablage kopieren', 'Copy to clipboard')}
                       >
                         <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -147,7 +149,7 @@ export default function LeadsTable({ leads, currentPage, totalPages, totalCount 
                       <Link
                         to={`/admin/leads/${lead.id}`}
                         className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted/20 rounded-lg transition-all"
-                        title="Details anzeigen"
+                        title={t('Details anzeigen', 'Show details')}
                       >
                         <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -166,7 +168,7 @@ export default function LeadsTable({ leads, currentPage, totalPages, totalCount 
       {totalPages > 1 && (
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-sm text-muted-foreground">
-            Zeige {((currentPage - 1) * 25) + 1} bis {Math.min(currentPage * 25, totalCount)} von {totalCount}
+            {t('Zeige', 'Showing')} {((currentPage - 1) * 25) + 1} {t('bis', 'to')} {Math.min(currentPage * 25, totalCount)} {t('von', 'of')} {totalCount}
           </div>
           <div className="flex gap-2">
             {currentPage > 1 && (
@@ -178,11 +180,11 @@ export default function LeadsTable({ leads, currentPage, totalPages, totalCount 
                 }}
                 className="px-4 py-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-lg transition-all"
               >
-                ← Zurück
+                ← {t('Zurück', 'Back')}
               </button>
             )}
             <span className="px-4 py-2 bg-primary/20 text-primary rounded-lg font-medium">
-              Seite {currentPage} von {totalPages}
+              {t('Seite', 'Page')} {currentPage} {t('von', 'of')} {totalPages}
             </span>
             {currentPage < totalPages && (
               <button
@@ -193,7 +195,7 @@ export default function LeadsTable({ leads, currentPage, totalPages, totalCount 
                 }}
                 className="px-4 py-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-lg transition-all"
               >
-                Weiter →
+                {t('Weiter', 'Next')} →
               </button>
             )}
           </div>
