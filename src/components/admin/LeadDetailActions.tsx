@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateLeadStatus, deleteLead } from '@/lib/database';
 import type { Lead, LeadWithService } from '@/lib/database';
+import AssignLeadModal from './AssignLeadModal';
 
 interface LeadDetailActionsProps {
   lead: Lead | LeadWithService;
@@ -12,6 +13,7 @@ export default function LeadDetailActions({ lead, onUpdate }: LeadDetailActionsP
   const navigate = useNavigate();
   const [status, setStatus] = useState(lead.status);
   const [updating, setUpdating] = useState(false);
+  const [showAssignModal, setShowAssignModal] = useState(false);
 
   const handleCopyLead = async () => {
     const timelineText = 
@@ -76,9 +78,24 @@ ${lead.service_details}
   };
 
   return (
-    <div className="space-y-3">
-      {/* Copy Button */}
-      <button
+    <>
+      <div className="space-y-3">
+        {/* Assign Companies Button */}
+        <button
+          onClick={() => setShowAssignModal(true)}
+          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-all"
+        >
+          <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <line x1="19" y1="8" x2="19" y2="14"/>
+            <line x1="22" y1="11" x2="16" y2="11"/>
+          </svg>
+          Unternehmen zuweisen
+        </button>
+
+        {/* Copy Button */}
+        <button
         onClick={handleCopyLead}
         className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg transition-all"
       >
@@ -117,6 +134,18 @@ ${lead.service_details}
         </svg>
         Lead löschen
       </button>
-    </div>
+      </div>
+
+      {/* Assign Modal */}
+      {showAssignModal && (
+        <AssignLeadModal 
+          leadId={lead.id}
+          onClose={() => {
+            setShowAssignModal(false);
+            onUpdate();
+          }}
+        />
+      )}
+    </>
   );
 }

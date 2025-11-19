@@ -24,6 +24,19 @@ export type City = {
   created_at: string;
 };
 
+export type Company = {
+  id: string;
+  name: string;
+  contact_person: string | null;
+  email: string;
+  phone: string;
+  whatsapp: string | null;
+  service_ids: string[];
+  cities: string[];
+  is_active: boolean;
+  created_at: string;
+};
+
 export type Lead = {
   id: string;
   created_at: string;
@@ -422,4 +435,168 @@ export async function deleteLead(leadId: string) {
     .eq('id', leadId);
   
   if (error) throw error;
+}
+
+// ============================================
+// COMPANIES MANAGEMENT
+// ============================================
+
+export async function getAllCompanies(filters: { 
+  search?: string
+  is_active?: boolean
+} = {}) {
+  let query = supabase
+    .from('companies')
+    .select('*')
+    .order('name', { ascending: true });
+  
+  if (filters.search) {
+    query = query.or(`name.ilike.%${filters.search}%,email.ilike.%${filters.search}%,phone.ilike.%${filters.search}%`);
+  }
+  
+  if (filters.is_active !== undefined) {
+    query = query.eq('is_active', filters.is_active);
+  }
+  
+  const { data, error } = await query;
+  if (error) throw error;
+  return data as Company[];
+}
+
+export async function getCompanyById(id: string) {
+  const { data, error } = await supabase
+    .from('companies')
+    .select('*')
+    .eq('id', id)
+    .single();
+  
+  if (error) throw error;
+  return data as Company;
+}
+
+export async function createCompany(company: Omit<Company, 'id' | 'created_at'>) {
+  const { data, error } = await supabase
+    .from('companies')
+    .insert(company)
+    .select()
+    .single();
+  
+  if (error) throw error;
+  return data as Company;
+}
+
+export async function updateCompany(id: string, updates: Partial<Company>) {
+  const { data, error } = await supabase
+    .from('companies')
+    .update(updates)
+    .eq('id', id)
+    .select()
+    .single();
+  
+  if (error) throw error;
+  return data as Company;
+}
+
+export async function deleteCompany(id: string) {
+  const { error } = await supabase
+    .from('companies')
+    .delete()
+    .eq('id', id);
+  
+  if (error) throw error;
+}
+
+// ============================================
+// LEAD ASSIGNMENT
+// ============================================
+
+export async function getMatchingCompanies(leadId: string) {
+  // Get lead details first
+  const lead = await getLeadById(leadId);
+  
+  // Find companies that:
+  // 1. Offer this service (service_id in service_ids array)
+  // 2. Operate in this city (city in cities array)
+  // 3. Are active
+  const { data, error } = await supabase
+    .from('companies')
+    .select('*')
+    .contains('service_ids', [lead.service_id])
+    .contains('cities', [lead.city])
+    .eq('is_active', true)
+    .order('name', { ascending: true });
+  
+  if (error) throw error;
+  return data as Company[];
+}
+
+export async function assignLeadToCompanies(
+  leadId: string,
+  companyIds: string[],
+  assignedBy: string
+) {
+  // Get lead and service details for pricing
+  const lead = await getLeadById(leadId);
+  
+  const assignments = await Promise.all(
+    companyIds.map(async (companyId) => {
+      // Get service price (default to 50 if not found)
+      const pricePerLead = lead.service?.lead_price_shared || 50;
+      
+      const { data, error } = await supabase
+        .from('lead_assignments')
+        .insert({
+          lead_id: leadId,
+          company_id: companyId,
+          assigned_by: assignedBy,
+          amount_charged: pricePerLead,
+        })
+        .select()
+        .single();
+      
+      if (error) throw error;
+      return data;
+    })
+  );
+  
+  return assignments;
+}
+
+export async function removeLeadAssignment(assignmentId: string) {
+  const { error } = await supabase
+    .from('lead_assignments')
+    .delete()
+    .eq('id', assignmentId);
+  
+  if (error) throw error;
+}
+
+// ============================================
+// SERVICES MANAGEMENT
+// ============================================
+
+export async function getAllServices() {
+  const { data, error } = await supabase
+    .from('services')
+    .select('*')
+    .order('name', { ascending: true });
+  
+  if (error) throw error;
+  return data as Service[];
+}
+
+export async function updateService(id: string, updates: Partial<Service>) {
+  const { data, error } = await supabase
+    .from('services')
+    .update(updates)
+    .eq('id', id)
+    .select()
+    .single();
+  
+  if (error) throw error;
+  return data as Service;
+}
+
+export async function toggleServiceActive(id: string, is_active: boolean) {
+  return updateService(id, { is_active });
 }
