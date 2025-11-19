@@ -45,7 +45,7 @@ const AdminLogin = () => {
         {/* Login Card */}
         <div className="bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-3xl p-8">
           {error && (
-            <div className="mb-6 bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-400 text-sm">
+            <div className="mb-6 bg-destructive/10 border border-destructive/20 rounded-lg p-4 text-destructive-foreground text-sm">
               {error}
             </div>
           )}
