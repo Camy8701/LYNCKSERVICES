@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { deleteCompany } from '@/lib/database';
 import type { Company, Service, City } from '@/lib/database';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface CompaniesTableProps {
   companies: Company[];
@@ -10,6 +11,7 @@ interface CompaniesTableProps {
 }
 
 export default function CompaniesTable({ companies, services, cities, onUpdate }: CompaniesTableProps) {
+  const { t } = useLanguage();
   const getServiceNames = (serviceIds: string[]) => {
     return services
       .filter(s => serviceIds.includes(s.id))
@@ -17,15 +19,15 @@ export default function CompaniesTable({ companies, services, cities, onUpdate }
   };
   
   const handleDelete = async (id: string, name: string) => {
-    if (!confirm(`Möchten Sie "${name}" wirklich löschen?`)) return;
+    if (!confirm(t(`Möchten Sie "${name}" wirklich löschen?`, `Do you really want to delete "${name}"?`))) return;
     
     try {
       await deleteCompany(id);
-      alert('✅ Unternehmen gelöscht');
+      alert(t('✅ Unternehmen gelöscht', '✅ Company deleted'));
       onUpdate();
     } catch (error) {
       console.error('Error deleting company:', error);
-      alert('❌ Fehler beim Löschen');
+      alert(t('❌ Fehler beim Löschen', '❌ Error deleting'));
     }
   };
   
@@ -34,10 +36,10 @@ export default function CompaniesTable({ companies, services, cities, onUpdate }
       <div className="bg-card backdrop-blur-md border border-border rounded-2xl p-12 text-center">
         <div className="text-5xl mb-4">🏢</div>
         <h3 className="text-lg font-semibold text-foreground mb-2">
-          Noch keine Unternehmen
+          {t('Noch keine Unternehmen', 'No Companies Yet')}
         </h3>
         <p className="text-muted-foreground mb-6">
-          Fügen Sie Ihr erstes Unternehmen hinzu, um Leads zuweisen zu können
+          {t('Fügen Sie Ihr erstes Unternehmen hinzu, um Leads zuweisen zu können', 'Add your first company to assign leads')}
         </p>
         <Link
           to="/admin/companies/new"
@@ -46,7 +48,7 @@ export default function CompaniesTable({ companies, services, cities, onUpdate }
           <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M12 5v14M5 12h14"/>
           </svg>
-          Erstes Unternehmen hinzufügen
+          {t('Erstes Unternehmen hinzufügen', 'Add First Company')}
         </Link>
       </div>
     );
@@ -58,12 +60,12 @@ export default function CompaniesTable({ companies, services, cities, onUpdate }
         <table className="w-full">
           <thead className="bg-muted/50 border-b border-border">
             <tr>
-              <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Name</th>
-              <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Kontakt</th>
-              <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Services</th>
-              <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Städte</th>
-              <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Status</th>
-              <th className="text-right py-3 px-4 text-xs font-medium text-muted-foreground uppercase">Aktionen</th>
+              <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Name', 'Name')}</th>
+              <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Kontakt', 'Contact')}</th>
+              <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Services', 'Services')}</th>
+              <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Städte', 'Cities')}</th>
+              <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Status', 'Status')}</th>
+              <th className="text-right py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Aktionen', 'Actions')}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
