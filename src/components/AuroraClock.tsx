@@ -36,7 +36,7 @@ const AuroraClock = () => {
 
       float pi = atan(1.0)*4.0;
       float tau = atan(1.0)*8.0;
-      const float scale = 1.0 / 4.5;
+      const float scale = 1.0 / 12.0;
       vec2 digitSize = vec2(1.0,1.5) * scale;
       vec2 digitSpacing = vec2(1.1,1.6) * scale;
 
