@@ -391,6 +391,24 @@ export async function updateLeadStatus(
 }
 
 // ============================================
+// BULK UPDATE LEAD STATUS
+// ============================================
+
+export async function bulkUpdateLeadStatus(
+  leadIds: string[],
+  status: 'new' | 'contacted' | 'converted'
+) {
+  const { data, error } = await supabase
+    .from('leads')
+    .update({ status })
+    .in('id', leadIds)
+    .select();
+  
+  if (error) throw error;
+  return data as Lead[];
+}
+
+// ============================================
 // LEAD DETAIL - UPDATE ADMIN NOTES
 // ============================================
 
@@ -529,6 +547,9 @@ export async function getMatchingCompanies(leadId: string) {
   if (error) throw error;
   return data as Company[];
 }
+
+// Alias for getMatchingCompanies for compatibility
+export const getMatchingCompaniesForLead = getMatchingCompanies;
 
 export async function assignLeadToCompanies(
   leadId: string,

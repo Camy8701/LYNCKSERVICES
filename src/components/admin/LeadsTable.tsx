@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import type { LeadWithService } from '@/lib/database';
 import { useLanguage } from '@/contexts/LanguageContext';
+import BulkActionsBar from './BulkActionsBar';
 
 interface LeadsTableProps {
   leads: LeadWithService[];
   currentPage: number;
   totalPages: number;
   totalCount: number;
+  onUpdate?: () => void;
 }
 
 function formatDateTime(dateString: string): string {
@@ -50,9 +53,37 @@ ${lead.service_details}
   }
 }
 
-export default function LeadsTable({ leads, currentPage, totalPages, totalCount }: LeadsTableProps) {
+export default function LeadsTable({ leads, currentPage, totalPages, totalCount, onUpdate }: LeadsTableProps) {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
+
+  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setSelectedLeads(leads.map(lead => lead.id));
+    } else {
+      setSelectedLeads([]);
+    }
+  };
+
+  const handleSelectLead = (leadId: string) => {
+    setSelectedLeads(prev => 
+      prev.includes(leadId) 
+        ? prev.filter(id => id !== leadId)
+        : [...prev, leadId]
+    );
+  };
+
+  const handleClearSelection = () => {
+    setSelectedLeads([]);
+  };
+
+  const handleRefresh = () => {
+    setSelectedLeads([]);
+    if (onUpdate) onUpdate();
+  };
+
+  const selectedLeadObjects = leads.filter(lead => selectedLeads.includes(lead.id));
 
   if (leads.length === 0) {
     return (
@@ -70,11 +101,27 @@ export default function LeadsTable({ leads, currentPage, totalPages, totalCount 
 
   return (
     <>
+      {selectedLeads.length > 0 && (
+        <BulkActionsBar
+          selectedLeads={selectedLeadObjects}
+          onClearSelection={handleClearSelection}
+          onUpdate={handleRefresh}
+        />
+      )}
+      
       <div className="bg-card backdrop-blur-md border border-border rounded-2xl overflow-hidden mb-6">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-muted/30 border-b border-border">
               <tr>
+                <th className="w-12 py-3 px-4">
+                  <input
+                    type="checkbox"
+                    checked={selectedLeads.length === leads.length && leads.length > 0}
+                    onChange={handleSelectAll}
+                    className="w-4 h-4 rounded border-border text-primary focus:ring-2 focus:ring-primary/50 cursor-pointer"
+                  />
+                </th>
                 <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">ID</th>
                 <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Datum', 'Date')}</th>
                 <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase">{t('Name', 'Name')}</th>
@@ -87,7 +134,18 @@ export default function LeadsTable({ leads, currentPage, totalPages, totalCount 
             </thead>
             <tbody className="divide-y divide-border">
               {leads.map((lead) => (
-                <tr key={lead.id} className="hover:bg-muted/20 transition-colors">
+                <tr 
+                  key={lead.id} 
+                  className={`hover:bg-muted/20 transition-colors ${selectedLeads.includes(lead.id) ? 'bg-primary/5' : ''}`}
+                >
+                  <td className="py-4 px-4">
+                    <input
+                      type="checkbox"
+                      checked={selectedLeads.includes(lead.id)}
+                      onChange={() => handleSelectLead(lead.id)}
+                      className="w-4 h-4 rounded border-border text-primary focus:ring-2 focus:ring-primary/50 cursor-pointer"
+                    />
+                  </td>
                   <td className="py-4 px-4">
                     <span className="text-xs font-mono text-muted-foreground">
                       #{lead.id.slice(0, 8)}
