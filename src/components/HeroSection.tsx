@@ -3,7 +3,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useState } from "react";
 import { getServices, type Service } from "@/lib/database";
 import { getIconComponent } from "@/lib/serviceIcons";
-import AuroraClock from "@/components/AuroraClock";
 
 const HeroSection = () => {
   const { t, language } = useLanguage();
@@ -99,22 +98,19 @@ const HeroSection = () => {
 
         {/* Right Panel - Service Category Grid */}
         <div className="relative md:p-10 lg:p-14 pt-8 pr-8 pb-8 pl-8">
-          <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-gray-100/30 dark:bg-black/20 backdrop-blur-sm ring-gray-200 dark:ring-white/10 ring-1 rounded-3xl items-center justify-center p-8">
-            {/* Aurora Clock Background */}
-            <AuroraClock />
-            
-            {/* Service Cards Grid - positioned above clock */}
-            <div className="relative z-10 grid grid-cols-3 gap-4 w-full max-w-md">
+          <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm ring-gray-200 dark:ring-white/10 ring-1 rounded-3xl items-center justify-center p-8">
+            {/* Service Cards Grid */}
+            <div className="grid grid-cols-3 gap-4 w-full max-w-md">
               {services.slice(0, 6).map((service) => {
                 const IconComponent = getIconComponent(service.icon);
                 return (
                   <a
                     key={service.id}
                     href={`/service/${service.slug}`}
-                    className="group relative flex flex-col items-center justify-center bg-white/40 dark:bg-black/40 backdrop-blur-md border border-gray-300/50 dark:border-white/[0.15] rounded-xl p-6 hover:bg-white/60 dark:hover:bg-black/60 hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
+                    className="group relative flex flex-col items-center justify-center bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl p-6 hover:bg-white/[0.08] hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
                   >
-                    <IconComponent className="w-8 h-8 mb-3 text-primary drop-shadow-md" />
-                    <span className="text-xs text-center text-foreground font-medium drop-shadow-sm">
+                    <IconComponent className="w-8 h-8 mb-3 text-primary" />
+                    <span className="text-xs text-center text-foreground font-medium">
                       {language === 'de' ? service.name : service.name_en}
                     </span>
                   </a>
