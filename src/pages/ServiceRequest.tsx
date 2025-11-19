@@ -7,6 +7,7 @@ import ServiceRequestForm from '@/components/ServiceRequestForm';
 import PageLayout from '@/components/PageLayout';
 import { Check, Info, Phone } from 'lucide-react';
 import type { Service, City } from '@/lib/database';
+import { SEO, ServiceSchema, BreadcrumbSchema } from '@/lib/seo';
 
 export default function ServiceRequest() {
   const { slug } = useParams<{ slug: string }>();
@@ -75,8 +76,37 @@ export default function ServiceRequest() {
   const serviceName = language === 'de' ? service.name : service.name_en;
   const serviceDescription = language === 'de' ? service.description : service.description_en;
 
+  const seoTitle = language === 'de' 
+    ? `${serviceName} in Deutschland | Angebote vergleichen | Lynck Services`
+    : `${serviceName} in Germany | Compare Quotes | Lynck Services`;
+  
+  const seoDescription = serviceDescription || (language === 'de'
+    ? `Finden Sie geprüfte Handwerker für ${serviceName}. Kostenlos bis zu 3 Angebote vergleichen. Schnell, einfach und unverbindlich.`
+    : `Find verified contractors for ${serviceName}. Compare up to 3 quotes for free. Fast, easy and non-binding.`);
+
   return (
     <PageLayout>
+      <>
+        <SEO
+          title={seoTitle}
+          description={seoDescription}
+          canonicalUrl={`/service/${service.slug}`}
+          ogType="website"
+        />
+        <ServiceSchema
+          service={{
+            name: serviceName,
+            description: seoDescription,
+            slug: service.slug
+          }}
+        />
+        <BreadcrumbSchema
+          items={[
+            { name: 'Home', url: '/' },
+            { name: serviceName, url: `/service/${service.slug}` }
+          ]}
+        />
+      </>
       <main className="flex-1 overflow-y-auto">
         {/* Breadcrumb */}
         <nav className="px-4 md:px-8 py-4">

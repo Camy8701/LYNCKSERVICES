@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Calendar, Clock, User, Share2, Facebook, Twitter, Linkedin, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { SEO, ArticleSchema, BreadcrumbSchema } from "@/lib/seo";
 
 interface BlogPostData {
   slug: string;
@@ -397,8 +398,43 @@ const BlogPost = () => {
     }
   };
 
+  const title = language === 'de' ? post.titleDe : post.titleEn;
+  const content = language === 'de' ? post.contentDe : post.contentEn;
+  const excerpt = content.substring(0, 160);
+  
+  // Convert German date format to ISO 8601 for schema
+  const isoDate = new Date(post.date.split('.').reverse().join('-')).toISOString();
+
   return (
     <PageLayout>
+      <>
+        <SEO
+          title={`${title} | Lynck Services Blog`}
+          description={excerpt}
+          canonicalUrl={`/blog/${post.slug}`}
+          ogImage={post.image}
+          ogType="article"
+          articlePublishedTime={isoDate}
+          articleModifiedTime={isoDate}
+        />
+        <ArticleSchema
+          article={{
+            title,
+            description: excerpt,
+            author: post.author,
+            datePublished: isoDate,
+            image: post.image,
+            slug: post.slug
+          }}
+        />
+        <BreadcrumbSchema
+          items={[
+            { name: 'Home', url: '/' },
+            { name: 'Blog', url: '/blog' },
+            { name: title, url: `/blog/${post.slug}` }
+          ]}
+        />
+      </>
       <article className="px-4 sm:px-6 lg:px-12 py-12">
         {/* Hero Image */}
         <div className="max-w-5xl mx-auto mb-8">
