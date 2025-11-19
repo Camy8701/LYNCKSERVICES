@@ -6,8 +6,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import LeadsFilters from '@/components/admin/LeadsFilters';
 import LeadsTable from '@/components/admin/LeadsTable';
 import type { LeadWithService, Service, City } from '@/lib/database';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const AdminLeads = () => {
+  const { t } = useLanguage();
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [leads, setLeads] = useState<LeadWithService[]>([]);
@@ -77,10 +79,10 @@ const AdminLeads = () => {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-instrument-serif text-foreground mb-2">
-            Alle Leads
+            {t('Alle Leads', 'All Leads')}
           </h1>
           <p className="text-muted-foreground">
-            {totalCount} Lead{totalCount !== 1 ? 's' : ''} insgesamt
+            {totalCount} {t('Lead', 'Lead')}{totalCount !== 1 ? 's' : ''} {t('insgesamt', 'total')}
           </p>
         </div>
 

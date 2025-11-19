@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { Service, City } from '@/lib/database';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LeadsFiltersProps {
   services: Service[];
@@ -10,6 +11,7 @@ interface LeadsFiltersProps {
 export default function LeadsFilters({ services, cities }: LeadsFiltersProps) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { t } = useLanguage();
 
   const [search, setSearch] = useState(searchParams.get('search') || '');
   const [service, setService] = useState(searchParams.get('service') || '');
@@ -41,14 +43,14 @@ export default function LeadsFilters({ services, cities }: LeadsFiltersProps) {
         {/* Search */}
         <div className="lg:col-span-2">
           <label className="block text-sm font-medium text-muted-foreground mb-2">
-            Suche
+            {t('Suche', 'Search')}
           </label>
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleFilter()}
-            placeholder="Name, Telefon, E-Mail..."
+            placeholder={t('Name, Telefon, E-Mail...', 'Name, Phone, Email...')}
             className="w-full bg-background border border-border rounded-lg px-4 py-2 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
           />
         </div>
@@ -56,14 +58,14 @@ export default function LeadsFilters({ services, cities }: LeadsFiltersProps) {
         {/* Service Filter */}
         <div>
           <label className="block text-sm font-medium text-muted-foreground mb-2">
-            Service
+            {t('Service', 'Service')}
           </label>
           <select
             value={service}
             onChange={(e) => setService(e.target.value)}
             className="w-full bg-background border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
           >
-            <option value="">Alle Services</option>
+            <option value="">{t('Alle Services', 'All Services')}</option>
             {services.map((s) => (
               <option key={s.id} value={s.id}>
                 {s.icon} {s.name}
@@ -75,14 +77,14 @@ export default function LeadsFilters({ services, cities }: LeadsFiltersProps) {
         {/* City Filter */}
         <div>
           <label className="block text-sm font-medium text-muted-foreground mb-2">
-            Stadt
+            {t('Stadt', 'City')}
           </label>
           <select
             value={city}
             onChange={(e) => setCity(e.target.value)}
             className="w-full bg-background border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
           >
-            <option value="">Alle Städte</option>
+            <option value="">{t('Alle Städte', 'All Cities')}</option>
             {cities.map((c) => (
               <option key={c.id} value={c.name}>
                 {c.name}
@@ -94,17 +96,17 @@ export default function LeadsFilters({ services, cities }: LeadsFiltersProps) {
         {/* Status Filter */}
         <div>
           <label className="block text-sm font-medium text-muted-foreground mb-2">
-            Status
+            {t('Status', 'Status')}
           </label>
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value)}
             className="w-full bg-background border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
           >
-            <option value="">Alle Status</option>
-            <option value="new">Neu</option>
-            <option value="contacted">Kontaktiert</option>
-            <option value="converted">Umgewandelt</option>
+            <option value="">{t('Alle Status', 'All Statuses')}</option>
+            <option value="new">{t('Neu', 'New')}</option>
+            <option value="contacted">{t('Kontaktiert', 'Contacted')}</option>
+            <option value="converted">{t('Umgewandelt', 'Converted')}</option>
           </select>
         </div>
       </div>
@@ -115,13 +117,13 @@ export default function LeadsFilters({ services, cities }: LeadsFiltersProps) {
           onClick={handleFilter}
           className="flex-1 md:flex-none px-6 py-2 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg transition-all"
         >
-          Filter anwenden
+          {t('Filter anwenden', 'Apply Filter')}
         </button>
         <button
           onClick={handleReset}
           className="flex-1 md:flex-none px-6 py-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-lg transition-all"
         >
-          Zurücksetzen
+          {t('Zurücksetzen', 'Reset')}
         </button>
       </div>
     </div>
