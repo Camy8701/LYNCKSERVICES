@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AdminLayout from '@/components/AdminLayout';
 import { getDashboardStats, getRecentLeadsForDashboard, type LeadWithService } from '@/lib/database';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Helper function to calculate percentage change
 function calculateChange(current: number, previous: number): string {
@@ -43,6 +44,7 @@ type DashboardStats = {
 };
 
 const AdminDashboard = () => {
+  const { t } = useLanguage();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [recentLeads, setRecentLeads] = useState<LeadWithService[]>([]);
   const [loading, setLoading] = useState(true);
