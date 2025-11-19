@@ -279,3 +279,147 @@ export async function getRecentLeadsForDashboard(limit: number = 10) {
   if (error) throw error;
   return data as LeadWithService[];
 }
+
+// ============================================
+// LEADS MANAGEMENT - LIST WITH FILTERS
+// ============================================
+
+interface LeadsFilterOptions {
+  search?: string;
+  service_id?: string;
+  city?: string;
+  status?: string;
+  dateFrom?: string;
+  dateTo?: string;
+  page?: number;
+  pageSize?: number;
+}
+
+export async function getLeadsWithFilters(filters: LeadsFilterOptions = {}) {
+  const {
+    search,
+    service_id,
+    city,
+    status,
+    dateFrom,
+    dateTo,
+    page = 1,
+    pageSize = 25,
+  } = filters;
+  
+  let query = supabase
+    .from('leads')
+    .select(`
+      *,
+      service:services(name, name_en, icon, slug)
+    `, { count: 'exact' });
+  
+  // Apply filters
+  if (search) {
+    query = query.or(`name.ilike.%${search}%,phone.ilike.%${search}%,email.ilike.%${search}%`);
+  }
+  
+  if (service_id) {
+    query = query.eq('service_id', service_id);
+  }
+  
+  if (city) {
+    query = query.eq('city', city);
+  }
+  
+  if (status) {
+    query = query.eq('status', status);
+  }
+  
+  if (dateFrom) {
+    query = query.gte('created_at', dateFrom);
+  }
+  
+  if (dateTo) {
+    query = query.lte('created_at', dateTo);
+  }
+  
+  // Pagination
+  const start = (page - 1) * pageSize;
+  query = query
+    .order('created_at', { ascending: false })
+    .range(start, start + pageSize - 1);
+  
+  const { data, error, count } = await query;
+  
+  if (error) throw error;
+  
+  return {
+    leads: data as LeadWithService[],
+    totalCount: count || 0,
+    page,
+    pageSize,
+    totalPages: Math.ceil((count || 0) / pageSize),
+  };
+}
+
+// ============================================
+// LEAD DETAIL - UPDATE STATUS
+// ============================================
+
+export async function updateLeadStatus(
+  leadId: string, 
+  status: 'new' | 'contacted' | 'converted'
+) {
+  const { data, error } = await supabase
+    .from('leads')
+    .update({ status })
+    .eq('id', leadId)
+    .select()
+    .single();
+  
+  if (error) throw error;
+  return data as Lead;
+}
+
+// ============================================
+// LEAD DETAIL - UPDATE ADMIN NOTES
+// ============================================
+
+export async function updateLeadNotes(leadId: string, notes: string) {
+  const { data, error } = await supabase
+    .from('leads')
+    .update({ admin_notes: notes })
+    .eq('id', leadId)
+    .select()
+    .single();
+  
+  if (error) throw error;
+  return data as Lead;
+}
+
+// ============================================
+// LEAD ASSIGNMENTS - GET FOR LEAD
+// ============================================
+
+export async function getLeadAssignments(leadId: string) {
+  const { data, error } = await supabase
+    .from('lead_assignments')
+    .select(`
+      *,
+      company:companies(name, phone, email, whatsapp)
+    `)
+    .eq('lead_id', leadId)
+    .order('assigned_at', { ascending: false });
+  
+  if (error) throw error;
+  return data;
+}
+
+// ============================================
+// DELETE LEAD
+// ============================================
+
+export async function deleteLead(leadId: string) {
+  const { error } = await supabase
+    .from('leads')
+    .delete()
+    .eq('id', leadId);
+  
+  if (error) throw error;
+}
