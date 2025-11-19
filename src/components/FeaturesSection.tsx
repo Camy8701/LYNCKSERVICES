@@ -81,10 +81,10 @@ const FeaturesSection = () => {
                   <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                     {language === 'de' ? service.description : service.description_en}
                   </p>
-                  <a
-                    href={`/${service.slug}`}
-                    className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                  >
+              <a
+                href={`/service/${service.slug}`}
+                className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              >
                     {t("Angebot anfordern", "Request Quote")}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </a>

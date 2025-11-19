@@ -123,6 +123,23 @@ export async function createLead(leadData: Omit<Lead, 'id' | 'created_at' | 'sta
   return data as Lead;
 }
 
+export async function getLeadById(id: string) {
+  const { data, error } = await supabase
+    .from('leads')
+    .select(`
+      *,
+      service:services(*)
+    `)
+    .eq('id', id)
+    .single();
+  
+  if (error) {
+    console.error('Error fetching lead:', error);
+    throw error;
+  }
+  return data as LeadWithService;
+}
+
 // ============================================
 // WEBHOOK TRIGGER (for Zapier/n8n)
 // ============================================
