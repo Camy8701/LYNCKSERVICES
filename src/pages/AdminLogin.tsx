@@ -61,7 +61,7 @@ const AdminLogin = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                placeholder="info@lynckservices.de"
+                placeholder="admin@example.com"
                 className="w-full bg-white/[0.03] dark:bg-white/[0.03] border border-white/[0.06] rounded-lg px-4 py-3 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
               />
             </div>
