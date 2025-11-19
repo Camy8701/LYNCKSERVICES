@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { createLead, triggerWebhook } from '@/lib/database';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -102,27 +102,29 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
     setError(null);
     
     try {
-      // Create lead in database
-      const lead = await createLead({
-        name: formData.name.trim(),
-        phone: formData.phone.replace(/\s/g, ''),
-        email: formData.email.trim() || null,
-        city: formData.city,
-        plz: formData.plz,
-        service_id: service.id,
-        service_details: formData.service_details.trim(),
-        timeline: formData.timeline
+      // Call edge function for server-side validation and secure lead creation
+      const { data, error: functionError } = await supabase.functions.invoke('create-lead', {
+        body: {
+          name: formData.name.trim(),
+          phone: formData.phone.replace(/\s/g, ''),
+          email: formData.email.trim() || null,
+          city: formData.city,
+          plz: formData.plz,
+          service_id: service.id,
+          service_details: formData.service_details.trim(),
+          timeline: formData.timeline
+        }
       });
-      
-      console.log('Lead created:', lead.id);
-      
-      // Trigger webhook (fire-and-forget)
-      triggerWebhook(lead).catch(err => {
-        console.error('Webhook failed, but lead was created:', err);
-      });
+
+      if (functionError) {
+        console.error('Edge function error:', functionError);
+        throw new Error(functionError.message || 'Failed to submit form');
+      }
+
+      console.log('Lead created successfully:', data.lead_id);
       
       // Redirect to thank you page
-      navigate(`/danke?lead_id=${lead.id}`);
+      navigate(`/danke?lead_id=${data.lead_id}`);
       
     } catch (err) {
       console.error('Error creating lead:', err);
