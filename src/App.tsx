@@ -13,6 +13,8 @@ import Terms from "./pages/Terms";
 import Impressum from "./pages/Impressum";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import ServiceRequest from "./pages/ServiceRequest";
+import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +36,8 @@ const App = () => (
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/service/:slug" element={<ServiceRequest />} />
+            <Route path="/danke" element={<ThankYou />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
