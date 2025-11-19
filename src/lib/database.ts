@@ -178,3 +178,104 @@ export async function triggerWebhook(leadData: Lead) {
     // Don't throw error - webhook failure shouldn't break lead creation
   }
 }
+
+// ============================================
+// ADMIN DASHBOARD STATISTICS
+// ============================================
+
+export async function getDashboardStats() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  const thisWeekStart = new Date(today);
+  thisWeekStart.setDate(today.getDate() - today.getDay()); // Sunday
+  
+  const lastWeekStart = new Date(thisWeekStart);
+  lastWeekStart.setDate(thisWeekStart.getDate() - 7);
+  
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+  
+  // Leads today
+  const { count: leadsToday } = await supabase
+    .from('leads')
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', today.toISOString());
+  
+  // Leads yesterday (for comparison)
+  const { count: leadsYesterday } = await supabase
+    .from('leads')
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', yesterday.toISOString())
+    .lt('created_at', today.toISOString());
+  
+  // Leads this week
+  const { count: leadsThisWeek } = await supabase
+    .from('leads')
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', thisWeekStart.toISOString());
+  
+  // Leads last week (for comparison)
+  const { count: leadsLastWeek } = await supabase
+    .from('leads')
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', lastWeekStart.toISOString())
+    .lt('created_at', thisWeekStart.toISOString());
+  
+  // Active companies
+  const { count: activeCompanies } = await supabase
+    .from('companies')
+    .select('*', { count: 'exact', head: true })
+    .eq('is_active', true);
+  
+  // Revenue this week (sum of lead assignments)
+  const { data: assignmentsThisWeek } = await supabase
+    .from('lead_assignments')
+    .select('amount_charged')
+    .gte('assigned_at', thisWeekStart.toISOString());
+  
+  const revenueThisWeek = assignmentsThisWeek?.reduce(
+    (sum, assignment) => sum + Number(assignment.amount_charged || 0),
+    0
+  ) || 0;
+  
+  // Revenue last week (for comparison)
+  const { data: assignmentsLastWeek } = await supabase
+    .from('lead_assignments')
+    .select('amount_charged')
+    .gte('assigned_at', lastWeekStart.toISOString())
+    .lt('assigned_at', thisWeekStart.toISOString());
+  
+  const revenueLastWeek = assignmentsLastWeek?.reduce(
+    (sum, assignment) => sum + Number(assignment.amount_charged || 0),
+    0
+  ) || 0;
+  
+  return {
+    leadsToday: leadsToday || 0,
+    leadsYesterday: leadsYesterday || 0,
+    leadsThisWeek: leadsThisWeek || 0,
+    leadsLastWeek: leadsLastWeek || 0,
+    activeCompanies: activeCompanies || 0,
+    revenueThisWeek,
+    revenueLastWeek,
+  };
+}
+
+// ============================================
+// RECENT LEADS (for dashboard table)
+// ============================================
+
+export async function getRecentLeadsForDashboard(limit: number = 10) {
+  const { data, error } = await supabase
+    .from('leads')
+    .select(`
+      *,
+      service:services(name, name_en, icon, slug)
+    `)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+  
+  if (error) throw error;
+  return data as LeadWithService[];
+}
