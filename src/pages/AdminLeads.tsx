@@ -58,6 +58,30 @@ const AdminLeads = () => {
     loadData();
   }, [searchParams]);
 
+  const handleUpdate = async () => {
+    setLoading(true);
+    try {
+      const filters = {
+        search: searchParams.get('search') || undefined,
+        service_id: searchParams.get('service') || undefined,
+        city: searchParams.get('city') || undefined,
+        status: searchParams.get('status') || undefined,
+        page: searchParams.get('page') ? parseInt(searchParams.get('page')!) : 1,
+        pageSize: 25,
+      };
+
+      const result = await getLeadsWithFilters(filters);
+      setLeads(result.leads);
+      setTotalCount(result.totalCount);
+      setCurrentPage(result.page);
+      setTotalPages(result.totalPages);
+    } catch (error) {
+      console.error('Error loading leads:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (loading) {
     return (
       <AdminLayout>
@@ -98,6 +122,7 @@ const AdminLeads = () => {
           currentPage={currentPage}
           totalPages={totalPages}
           totalCount={totalCount}
+          onUpdate={handleUpdate}
         />
       </div>
     </AdminLayout>
