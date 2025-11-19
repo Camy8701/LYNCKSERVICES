@@ -5,6 +5,7 @@ import { getLeadById } from '@/lib/database';
 import PageLayout from '@/components/PageLayout';
 import { CheckCircle2, Home, ArrowRight, Phone } from 'lucide-react';
 import type { LeadWithService } from '@/lib/database';
+import { SEO } from '@/lib/seo';
 
 export default function ThankYou() {
   const [searchParams] = useSearchParams();
@@ -32,6 +33,12 @@ export default function ThankYou() {
 
   return (
     <PageLayout>
+      <SEO
+        title={t('Vielen Dank für Ihre Anfrage!', 'Thank you for your request!')}
+        description={t('Ihre Anfrage wurde erfolgreich übermittelt', 'Your request has been successfully submitted')}
+        canonicalUrl="/danke"
+        noindex={true}
+      />
       <main className="flex-1 overflow-y-auto">
         <div className="min-h-screen flex items-center justify-center px-4 py-16">
           <div className="max-w-2xl w-full">
