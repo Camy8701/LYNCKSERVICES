@@ -104,10 +104,10 @@ const AdminDashboard = () => {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-instrument-serif text-foreground mb-2">
-            Dashboard
+            {t('Dashboard', 'Dashboard')}
           </h1>
           <p className="text-muted-foreground">
-            Übersicht über Ihre Leads und Aktivitäten
+            {t('Übersicht über Ihre Leads und Aktivitäten', 'Overview of your leads and activities')}
           </p>
         </div>
         
@@ -116,7 +116,7 @@ const AdminDashboard = () => {
           {/* Leads Today */}
           <div className="bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-2xl p-6 hover:bg-white/[0.08] transition-all">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-muted-foreground text-sm font-medium">Leads Heute</div>
+              <div className="text-muted-foreground text-sm font-medium">{t('Leads Heute', 'Leads Today')}</div>
               <span className="text-2xl">📋</span>
             </div>
             <div className="text-3xl font-bold text-foreground mb-2">
@@ -125,14 +125,14 @@ const AdminDashboard = () => {
             <div className={`text-xs font-medium ${
               stats.leadsToday >= stats.leadsYesterday ? 'text-primary' : 'text-destructive'
             }`}>
-              {todayChange} vs. gestern
+              {todayChange} {t('vs. gestern', 'vs. yesterday')}
             </div>
           </div>
           
           {/* Leads This Week */}
           <div className="bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-2xl p-6 hover:bg-white/[0.08] transition-all">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-muted-foreground text-sm font-medium">Leads diese Woche</div>
+              <div className="text-muted-foreground text-sm font-medium">{t('Leads diese Woche', 'Leads This Week')}</div>
               <span className="text-2xl">📊</span>
             </div>
             <div className="text-3xl font-bold text-foreground mb-2">
@@ -141,14 +141,14 @@ const AdminDashboard = () => {
             <div className={`text-xs font-medium ${
               stats.leadsThisWeek >= stats.leadsLastWeek ? 'text-primary' : 'text-destructive'
             }`}>
-              {weekChange} vs. letzte Woche
+              {weekChange} {t('vs. letzte Woche', 'vs. last week')}
             </div>
           </div>
           
           {/* Revenue This Week */}
           <div className="bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-2xl p-6 hover:bg-white/[0.08] transition-all">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-muted-foreground text-sm font-medium">Umsatz (Woche)</div>
+              <div className="text-muted-foreground text-sm font-medium">{t('Umsatz (Woche)', 'Revenue (Week)')}</div>
               <span className="text-2xl">💰</span>
             </div>
             <div className="text-3xl font-bold text-foreground mb-2">
@@ -157,14 +157,14 @@ const AdminDashboard = () => {
             <div className={`text-xs font-medium ${
               stats.revenueThisWeek >= stats.revenueLastWeek ? 'text-primary' : 'text-destructive'
             }`}>
-              {revenueChange} vs. letzte Woche
+              {revenueChange} {t('vs. letzte Woche', 'vs. last week')}
             </div>
           </div>
           
           {/* Active Companies */}
           <div className="bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-2xl p-6 hover:bg-white/[0.08] transition-all">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-muted-foreground text-sm font-medium">Aktive Unternehmen</div>
+              <div className="text-muted-foreground text-sm font-medium">{t('Aktive Unternehmen', 'Active Companies')}</div>
               <span className="text-2xl">🏢</span>
             </div>
             <div className="text-3xl font-bold text-foreground mb-2">
@@ -174,7 +174,7 @@ const AdminDashboard = () => {
               to="/admin/companies"
               className="text-xs font-medium text-primary hover:text-primary/80 transition-colors"
             >
-              → Unternehmen verwalten
+              → {t('Unternehmen verwalten', 'Manage Companies')}
             </Link>
           </div>
         </div>
@@ -184,17 +184,17 @@ const AdminDashboard = () => {
           <div className="p-6 border-b border-white/[0.06] flex items-center justify-between">
             <div>
               <h2 className="text-xl font-semibold text-foreground mb-1">
-                Letzte Leads
+                {t('Letzte Leads', 'Recent Leads')}
               </h2>
               <p className="text-sm text-muted-foreground">
-                Die {recentLeads.length} neuesten Anfragen
+                {t(`Die ${recentLeads.length} neuesten Anfragen`, `The ${recentLeads.length} most recent requests`)}
               </p>
             </div>
             <Link 
               to="/admin/leads"
               className="text-sm text-primary hover:text-primary/80 font-medium transition-colors flex items-center gap-2"
             >
-              Alle Leads anzeigen
+              {t('Alle Leads anzeigen', 'View All Leads')}
               <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -206,16 +206,16 @@ const AdminDashboard = () => {
             <div className="p-12 text-center">
               <div className="text-5xl mb-4">📭</div>
               <h3 className="text-lg font-semibold text-foreground mb-2">
-                Noch keine Leads
+                {t('Noch keine Leads', 'No Leads Yet')}
               </h3>
               <p className="text-muted-foreground mb-6">
-                Sobald Kunden Anfragen stellen, erscheinen sie hier
+                {t('Sobald Kunden Anfragen stellen, erscheinen sie hier', 'As soon as customers submit requests, they will appear here')}
               </p>
               <Link
                 to="/"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg transition-all"
               >
-                Zur Website
+                {t('Zur Website', 'To Website')}
                 <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
@@ -228,13 +228,13 @@ const AdminDashboard = () => {
                 <thead className="bg-white/[0.02] border-b border-white/[0.06]">
                   <tr>
                     <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">ID</th>
-                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">Zeit</th>
-                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">Name</th>
-                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">Telefon</th>
-                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">Service</th>
-                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">Stadt</th>
-                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">Status</th>
-                    <th className="text-right py-3 px-6 text-xs font-medium text-muted-foreground uppercase">Aktionen</th>
+                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">{t('Zeit', 'Time')}</th>
+                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">{t('Name', 'Name')}</th>
+                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">{t('Telefon', 'Phone')}</th>
+                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">{t('Service', 'Service')}</th>
+                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">{t('Stadt', 'City')}</th>
+                    <th className="text-left py-3 px-6 text-xs font-medium text-muted-foreground uppercase">{t('Status', 'Status')}</th>
+                    <th className="text-right py-3 px-6 text-xs font-medium text-muted-foreground uppercase">{t('Aktionen', 'Actions')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/[0.06]">
@@ -300,7 +300,11 @@ const AdminDashboard = () => {
                             ? 'bg-primary/10 text-primary border border-primary/20'
                             : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
                         }`}>
-                          {lead.status === 'new' ? 'Neu' : lead.status === 'contacted' ? 'Kontaktiert' : 'Umgewandelt'}
+                          {lead.status === 'new' 
+                            ? t('Neu', 'New') 
+                            : lead.status === 'contacted' 
+                            ? t('Kontaktiert', 'Contacted') 
+                            : t('Umgewandelt', 'Converted')}
                         </span>
                       </td>
                       
@@ -310,7 +314,7 @@ const AdminDashboard = () => {
                           to={`/admin/leads/${lead.id}`}
                           className="inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80 font-medium transition-colors"
                         >
-                          Details
+                          {t('Details', 'Details')}
                           <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                           </svg>
@@ -331,17 +335,17 @@ const AdminDashboard = () => {
               <div className="text-3xl">⚠️</div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-amber-400 mb-2">
-                  Keine aktiven Unternehmen
+                  {t('Keine aktiven Unternehmen', 'No Active Companies')}
                 </h3>
                 <p className="text-sm text-foreground/80 mb-4">
-                  Sie haben noch keine Unternehmen hinzugefügt. Fügen Sie Handwerker hinzu, 
-                  um Leads zuweisen zu können.
+                  {t('Sie haben noch keine Unternehmen hinzugefügt. Fügen Sie Handwerker hinzu, um Leads zuweisen zu können.', 
+                     'You have not added any companies yet. Add contractors to be able to assign leads.')}
                 </p>
                 <Link
                   to="/admin/companies"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-black font-medium rounded-lg transition-all text-sm"
                 >
-                  Erstes Unternehmen hinzufügen
+                  {t('Erstes Unternehmen hinzufügen', 'Add First Company')}
                   <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
