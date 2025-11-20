@@ -38,10 +38,12 @@ const Navigation = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-8">
-          <div className="relative">
+          <div 
+            className="relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
             <button
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
               className="text-sm text-foreground font-medium hover:text-primary transition-colors duration-300 flex items-center gap-1"
             >
               {t("Dienstleistungen", "Services")}
@@ -49,8 +51,6 @@ const Navigation = () => {
             </button>
             {servicesOpen && (
               <div
-                onMouseEnter={() => setServicesOpen(true)}
-                onMouseLeave={() => setServicesOpen(false)}
                 className="absolute top-full left-0 mt-2 w-64 bg-background/95 backdrop-blur-md border border-border rounded-xl shadow-lg z-[100] py-2"
               >
                 {services.map((service) => (
