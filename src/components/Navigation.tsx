@@ -86,16 +86,17 @@ const Navigation = () => {
           <SearchBar />
         </div>
 
+        {/* Desktop Language & Theme */}
         <button
           onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
-          className="hidden md:flex px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-white/[0.03] border border-white/[0.06] rounded-lg transition-colors duration-300"
+          className="hidden lg:flex px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-white/[0.03] border border-white/[0.06] rounded-lg transition-colors duration-300"
         >
           {language === 'de' ? 'EN' : 'DE'}
         </button>
 
         <button
           onClick={toggleTheme}
-          className="hidden md:flex p-2 hover:bg-white/10 rounded-lg transition-colors duration-300 group"
+          className="hidden lg:flex p-2 hover:bg-white/10 rounded-lg transition-colors duration-300 group"
         >
           {theme === "dark" ? (
             <Moon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
@@ -104,14 +105,33 @@ const Navigation = () => {
           )}
         </button>
 
-        {/* Mobile Menu */}
-        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-          <SheetTrigger asChild>
-            <button className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors duration-300">
-              <Menu className="w-6 h-6 text-foreground" />
-            </button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background/95 backdrop-blur-md border-border">
+        {/* Mobile Language & Theme & Menu */}
+        <div className="flex lg:hidden items-center gap-2">
+          <button
+            onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
+            className="px-2.5 py-1.5 text-xs font-medium text-foreground hover:text-primary bg-white/[0.03] border border-white/[0.06] rounded-lg transition-colors duration-300"
+          >
+            {language === 'de' ? 'EN' : 'DE'}
+          </button>
+
+          <button
+            onClick={toggleTheme}
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors duration-300"
+          >
+            {theme === "dark" ? (
+              <Moon className="w-5 h-5 text-foreground" />
+            ) : (
+              <Sun className="w-5 h-5 text-foreground" />
+            )}
+          </button>
+
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <button className="p-2 hover:bg-white/10 rounded-lg transition-colors duration-300">
+                <Menu className="w-6 h-6 text-foreground" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background/95 backdrop-blur-md border-border">
             <div className="flex flex-col gap-6 mt-8">
               {/* Mobile Search */}
               <div className="px-2">
@@ -163,34 +183,10 @@ const Navigation = () => {
                 </a>
               </div>
 
-              {/* Settings */}
-              <div className="flex items-center gap-3 border-t border-border pt-4">
-                <button
-                  onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
-                  className="flex-1 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground bg-white/[0.03] border border-white/[0.06] rounded-lg transition-colors duration-300"
-                >
-                  {language === 'de' ? 'English' : 'Deutsch'}
-                </button>
-                <button
-                  onClick={toggleTheme}
-                  className="flex-1 px-3 py-2 flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground bg-white/[0.03] border border-white/[0.06] rounded-lg transition-colors duration-300"
-                >
-                  {theme === "dark" ? (
-                    <>
-                      <Moon className="w-4 h-4" />
-                      <span>{t("Dunkel", "Dark")}</span>
-                    </>
-                  ) : (
-                    <>
-                      <Sun className="w-4 h-4" />
-                      <span>{t("Hell", "Light")}</span>
-                    </>
-                  )}
-                </button>
-              </div>
             </div>
           </SheetContent>
         </Sheet>
+        </div>
       </div>
     </nav>
   );
