@@ -1,7 +1,8 @@
-import { Search, Moon, Sun, ChevronDown, Menu, X } from "lucide-react";
+import { Moon, Sun, ChevronDown, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { SearchBar } from "./SearchBar";
 
 const Navigation = () => {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -81,13 +82,8 @@ const Navigation = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="relative hidden lg:block">
-          <input
-            type="text"
-            placeholder={t("Service oder Stadt suchen...", "Search service or city...")}
-            className="bg-white/[0.03] border border-white/[0.06] rounded-lg px-4 py-2 pl-10 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 w-96 transition-all duration-300"
-          />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
+        <div className="hidden lg:block w-96">
+          <SearchBar />
         </div>
 
         <button
@@ -117,6 +113,11 @@ const Navigation = () => {
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background/95 backdrop-blur-md border-border">
             <div className="flex flex-col gap-6 mt-8">
+              {/* Mobile Search */}
+              <div className="px-2">
+                <SearchBar />
+              </div>
+
               {/* Services Section */}
               <div className="space-y-3">
                 <h3 className="text-sm font-semibold text-foreground px-2">
