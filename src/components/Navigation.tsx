@@ -1,10 +1,12 @@
-import { Search, Moon, Sun, ChevronDown } from "lucide-react";
+import { Search, Moon, Sun, ChevronDown, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Navigation = () => {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
@@ -90,14 +92,14 @@ const Navigation = () => {
 
         <button
           onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
-          className="px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-white/[0.03] border border-white/[0.06] rounded-lg transition-colors duration-300"
+          className="hidden md:flex px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-white/[0.03] border border-white/[0.06] rounded-lg transition-colors duration-300"
         >
           {language === 'de' ? 'EN' : 'DE'}
         </button>
 
         <button
           onClick={toggleTheme}
-          className="p-2 hover:bg-white/10 rounded-lg transition-colors duration-300 group"
+          className="hidden md:flex p-2 hover:bg-white/10 rounded-lg transition-colors duration-300 group"
         >
           {theme === "dark" ? (
             <Moon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
@@ -105,6 +107,89 @@ const Navigation = () => {
             <Sun className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
           )}
         </button>
+
+        {/* Mobile Menu */}
+        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <SheetTrigger asChild>
+            <button className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors duration-300">
+              <Menu className="w-6 h-6 text-foreground" />
+            </button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background/95 backdrop-blur-md border-border">
+            <div className="flex flex-col gap-6 mt-8">
+              {/* Services Section */}
+              <div className="space-y-3">
+                <h3 className="text-sm font-semibold text-foreground px-2">
+                  {t("Dienstleistungen", "Services")}
+                </h3>
+                <div className="space-y-1">
+                  {services.map((service) => (
+                    <a
+                      key={service.slug}
+                      href={`/service/${service.slug}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-3 px-2 py-2.5 text-sm text-foreground hover:bg-accent hover:text-primary rounded-lg transition-colors duration-300"
+                    >
+                      <span className="text-lg">{service.icon}</span>
+                      <span>{service.name}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Other Navigation Items */}
+              <div className="space-y-1 border-t border-border pt-4">
+                <a
+                  href="/#how-it-works"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-2 py-2.5 text-sm text-foreground hover:bg-accent hover:text-primary rounded-lg transition-colors duration-300"
+                >
+                  {t("So funktioniert's", "How It Works")}
+                </a>
+                <a
+                  href="/blog"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-2 py-2.5 text-sm text-foreground hover:bg-accent hover:text-primary rounded-lg transition-colors duration-300"
+                >
+                  Blog
+                </a>
+                <a
+                  href="/for-businesses"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-2 py-2.5 text-sm text-foreground hover:bg-accent hover:text-primary rounded-lg transition-colors duration-300"
+                >
+                  {t("Für Unternehmen", "For Businesses")}
+                </a>
+              </div>
+
+              {/* Settings */}
+              <div className="flex items-center gap-3 border-t border-border pt-4">
+                <button
+                  onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
+                  className="flex-1 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground bg-white/[0.03] border border-white/[0.06] rounded-lg transition-colors duration-300"
+                >
+                  {language === 'de' ? 'English' : 'Deutsch'}
+                </button>
+                <button
+                  onClick={toggleTheme}
+                  className="flex-1 px-3 py-2 flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground bg-white/[0.03] border border-white/[0.06] rounded-lg transition-colors duration-300"
+                >
+                  {theme === "dark" ? (
+                    <>
+                      <Moon className="w-4 h-4" />
+                      <span>{t("Dunkel", "Dark")}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sun className="w-4 h-4" />
+                      <span>{t("Hell", "Light")}</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </nav>
   );
