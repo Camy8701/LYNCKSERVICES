@@ -45,9 +45,14 @@ export default function ServiceRequest() {
     loadData();
   }, [slug]);
 
+  const breadcrumbItems = service ? [
+    { label: t("Dienstleistungen", "Services"), href: "/#services" },
+    { label: language === 'de' ? service.name : service.name_en, href: `/service/${service.slug}` }
+  ] : undefined;
+
   if (loading) {
     return (
-      <PageLayout>
+      <PageLayout breadcrumbItems={breadcrumbItems}>
         <div className="flex items-center justify-center min-h-screen">
           <div className="animate-pulse text-gray-400">Loading...</div>
         </div>
@@ -85,7 +90,7 @@ export default function ServiceRequest() {
     : `Find verified contractors for ${serviceName}. Compare up to 3 quotes for free. Fast, easy and non-binding.`);
 
   return (
-    <PageLayout>
+    <PageLayout breadcrumbItems={breadcrumbItems}>
       <>
         <SEO
           title={seoTitle}
@@ -108,17 +113,6 @@ export default function ServiceRequest() {
         />
       </>
       <main className="flex-1 overflow-y-auto">
-        {/* Breadcrumb */}
-        <nav className="px-4 md:px-8 py-4">
-          <div className="text-sm text-muted-foreground">
-            <Link to="/" className="hover:text-primary transition-colors">
-              {t('Home', 'Home')}
-            </Link>
-            <span className="mx-2">/</span>
-            <span className="text-foreground">{serviceName}</span>
-          </div>
-        </nav>
-
         {/* Main Content - 2 Column Layout */}
         <div className="px-4 md:px-8 py-8 pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
