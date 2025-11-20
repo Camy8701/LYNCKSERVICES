@@ -56,7 +56,7 @@ const Navigation = () => {
                 {services.map((service) => (
                   <a
                     key={service.slug}
-                    href={`/${service.slug}`}
+                    href={`/service/${service.slug}`}
                     className="flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-accent hover:text-primary transition-colors duration-300"
                   >
                     <span className="text-lg">{service.icon}</span>
