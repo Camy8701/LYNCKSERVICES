@@ -405,8 +405,13 @@ const BlogPost = () => {
   // Convert German date format to ISO 8601 for schema
   const isoDate = new Date(post.date.split('.').reverse().join('-')).toISOString();
 
+  const breadcrumbItems = [
+    { label: "Blog", href: "/blog" },
+    { label: title, href: `/blog/${post.slug}` }
+  ];
+
   return (
-    <PageLayout>
+    <PageLayout breadcrumbItems={breadcrumbItems}>
       <>
         <SEO
           title={`${title} | Lynck Services Blog`}
