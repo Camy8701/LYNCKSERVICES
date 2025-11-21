@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { HelmetProvider } from "react-helmet-async";
+import CookieConsent from "./components/CookieConsent";
 import Index from "./pages/Index";
 import ForBusinesses from "./pages/ForBusinesses";
 import About from "./pages/About";
@@ -12,6 +13,7 @@ import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Impressum from "./pages/Impressum";
+import Cookies from "./pages/Cookies";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import ServiceRequest from "./pages/ServiceRequest";
@@ -35,6 +37,7 @@ const App = () => (
         <LanguageProvider>
           <Toaster />
           <Sonner />
+          <CookieConsent />
           <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
@@ -44,6 +47,7 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/impressum" element={<Impressum />} />
+            <Route path="/cookies" element={<Cookies />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/service/:slug" element={<ServiceRequest />} />
