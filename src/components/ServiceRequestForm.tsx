@@ -185,7 +185,7 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
           type="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          placeholder="max@example.com"
+          placeholder="ihre.email@beispiel.de"
           className={errors.email ? 'border-destructive' : ''}
         />
         {errors.email && <p className="mt-1 text-sm text-destructive">{errors.email}</p>}

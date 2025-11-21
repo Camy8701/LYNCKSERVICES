@@ -64,11 +64,11 @@ const ForBusinesses = () => {
                 {t("Interessiert?", "Interested?")}
               </p>
               <a 
-                href="mailto:partner@lynckservices.de"
+                href="mailto:info@lynckservices.de"
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
               >
                 <Mail className="w-5 h-5" />
-                partner@lynckservices.de
+                info@lynckservices.de
               </a>
             </div>
           </div>

@@ -23,7 +23,7 @@ const Footer = () => {
     { nameDe: "Datenschutz", nameEn: "Privacy Policy", slug: "/privacy" },
     { nameDe: "AGB", nameEn: "Terms & Conditions", slug: "/terms" },
     { nameDe: "Impressum", nameEn: "Legal Notice", slug: "/impressum" },
-    { nameDe: "Cookie-Einstellungen", nameEn: "Cookie Settings", slug: "#cookies" }
+    { nameDe: "Cookie-Richtlinie", nameEn: "Cookie Policy", slug: "/cookies" }
   ];
 
   return (
