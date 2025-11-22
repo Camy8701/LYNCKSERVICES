@@ -164,26 +164,26 @@ All colors MUST be HSL.
   @keyframes smoke {
     0% {
       opacity: 0;
-      transform: translateY(0) scale(0.5);
+      transform: translateY(0) scale(0.8);
     }
-    50% {
-      opacity: 0.6;
+    30% {
+      opacity: 0.9;
     }
     100% {
       opacity: 0;
-      transform: translateY(-40px) scale(1.2);
+      transform: translateY(-60px) scale(2);
     }
   }
 
   .animate-smoke {
-    animation: smoke 3s ease-out infinite;
+    animation: smoke 2.5s ease-out infinite;
   }
 
   .animate-smoke-delay-1 {
-    animation: smoke 3s ease-out 1s infinite;
+    animation: smoke 2.5s ease-out 0.8s infinite;
   }
 
   .animate-smoke-delay-2 {
-    animation: smoke 3s ease-out 2s infinite;
+    animation: smoke 2.5s ease-out 1.6s infinite;
   }
 }
