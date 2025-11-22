@@ -118,7 +118,12 @@ const HeroSection = () => {
               </svg>
               
               {/* Chimney */}
-              <div className="absolute top-[15%] right-[35%] w-4 md:w-5 lg:w-6 h-10 md:h-12 lg:h-14 bg-primary rounded-sm shadow-lg"></div>
+              <div className="absolute top-[15%] right-[35%] w-4 md:w-5 lg:w-6 h-10 md:h-12 lg:h-14 bg-primary rounded-sm shadow-lg">
+                {/* Smoke particles */}
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-gray-400/40 rounded-full blur-sm animate-smoke"></div>
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-gray-400/40 rounded-full blur-sm animate-smoke-delay-1"></div>
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-gray-400/40 rounded-full blur-sm animate-smoke-delay-2"></div>
+              </div>
             </div>
             
             {/* House Body */}
