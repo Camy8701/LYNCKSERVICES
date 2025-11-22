@@ -119,15 +119,20 @@ const HeroSection = () => {
               
               {/* Chimney */}
               <div className="absolute top-[15%] right-[35%] w-4 md:w-5 lg:w-6 h-10 md:h-12 lg:h-14 bg-primary rounded-sm shadow-lg">
-                {/* Smoke particles */}
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-gray-400/40 rounded-full blur-sm animate-smoke"></div>
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-gray-400/40 rounded-full blur-sm animate-smoke-delay-1"></div>
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-gray-400/40 rounded-full blur-sm animate-smoke-delay-2"></div>
+                {/* Smoke particles - more visible */}
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke"></div>
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke-delay-1"></div>
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke-delay-2"></div>
               </div>
             </div>
             
             {/* House Body */}
-            <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm ring-gray-200 dark:ring-white/10 ring-1 rounded-b-3xl items-center justify-center p-8">
+            <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm ring-gray-200 dark:ring-white/10 ring-1 rounded-b-3xl items-center justify-center p-8"
+              style={{
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                backgroundSize: '30px 30px'
+              }}
+            >
               {/* Service Cards Grid */}
               <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-md">
               {services.slice(0, 6).map((service) => {
