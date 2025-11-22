@@ -98,37 +98,33 @@ const HeroSection = () => {
 
         {/* Right Panel - Service Category Grid */}
         <div className="relative md:p-10 lg:p-14 pt-8 pr-8 pb-8 pl-8">
-          {/* Decorative Roof */}
-          <svg 
-            className="absolute -top-8 left-1/2 -translate-x-1/2 z-10 w-[calc(100%-4rem)] md:w-[calc(100%-5rem)] lg:w-[calc(100%-7rem)]" 
-            viewBox="0 0 400 80" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-          >
-            {/* Roof triangle */}
-            <path 
-              d="M-10 80 L200 10 L410 80" 
-              stroke="hsl(var(--primary))" 
-              strokeWidth="4" 
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            {/* Chimney */}
-            <rect 
-              x="215" 
-              y="20" 
-              width="20" 
-              height="35" 
-              fill="hsl(var(--primary))"
-              rx="2"
-            />
-          </svg>
-          
-          <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm ring-gray-200 dark:ring-white/10 ring-1 rounded-3xl items-center justify-center p-8">
-            {/* Service Cards Grid */}
-            <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-md">
+          <div className="relative">
+            {/* House Roof */}
+            <div className="relative -mb-1">
+              <svg 
+                className="w-full h-24 md:h-28 lg:h-32" 
+                viewBox="0 0 400 100" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none"
+              >
+                {/* Roof triangle - filled */}
+                <path 
+                  d="M0 100 L200 5 L400 100 Z" 
+                  fill="hsl(var(--primary))"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="2"
+                />
+              </svg>
+              
+              {/* Chimney */}
+              <div className="absolute top-[15%] right-[35%] w-4 md:w-5 lg:w-6 h-10 md:h-12 lg:h-14 bg-primary rounded-sm shadow-lg"></div>
+            </div>
+            
+            {/* House Body */}
+            <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm ring-gray-200 dark:ring-white/10 ring-1 rounded-b-3xl items-center justify-center p-8">
+              {/* Service Cards Grid */}
+              <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-md">
               {services.slice(0, 6).map((service) => {
                 const IconComponent = getIconComponent(service.icon);
                 return (
@@ -144,6 +140,7 @@ const HeroSection = () => {
                   </a>
                 );
               })}
+              </div>
             </div>
           </div>
         </div>
