@@ -98,6 +98,34 @@ const HeroSection = () => {
 
         {/* Right Panel - Service Category Grid */}
         <div className="relative md:p-10 lg:p-14 pt-8 pr-8 pb-8 pl-8">
+          {/* Decorative Roof */}
+          <svg 
+            className="absolute -top-8 left-1/2 -translate-x-1/2 z-10 w-[calc(100%-4rem)] md:w-[calc(100%-5rem)] lg:w-[calc(100%-7rem)]" 
+            viewBox="0 0 400 80" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+          >
+            {/* Roof triangle */}
+            <path 
+              d="M-10 80 L200 10 L410 80" 
+              stroke="hsl(var(--primary))" 
+              strokeWidth="4" 
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            {/* Chimney */}
+            <rect 
+              x="215" 
+              y="20" 
+              width="20" 
+              height="35" 
+              fill="hsl(var(--primary))"
+              rx="2"
+            />
+          </svg>
+          
           <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm ring-gray-200 dark:ring-white/10 ring-1 rounded-3xl items-center justify-center p-8">
             {/* Service Cards Grid */}
             <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-md">
