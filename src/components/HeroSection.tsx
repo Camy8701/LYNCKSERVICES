@@ -1,57 +1,12 @@
 import { ArrowRight, Check } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { getServices, type Service } from "@/lib/database";
 import { getIconComponent } from "@/lib/serviceIcons";
 
 const HeroSection = () => {
   const { t, language } = useLanguage();
   const [services, setServices] = useState<Service[]>([]);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
-
-  const quotes = [
-    {
-      de: "Ihr Zuhause verdient Experten, denen es genauso am Herzen liegt wie Ihnen",
-      en: "Your Home Deserves Experts Who Care As Much As You Do"
-    },
-    {
-      de: "Jedes großartige Zuhause hat ein Team dahinter – Wir helfen Ihnen, Ihres aufzubauen",
-      en: "Every Great Home Has a Team Behind It—We'll Help You Build Yours"
-    },
-    {
-      de: "Warten Sie nicht, bis das Leck zur Flut wird – Verbinden Sie sich mit vertrauenswürdigen Experten, bevor kleine Probleme zu großen Ausgaben werden",
-      en: "Don't Wait for the Leak to Become a Flood—Connect With Trusted Experts Before Small Problems Become Big Expenses"
-    },
-    {
-      de: "Der beste Zeitpunkt, sich um Ihr Zuhause zu kümmern, war gestern. Der zweitbeste ist jetzt.",
-      en: "The Best Time to Care for Your Home Was Yesterday. The Second Best Time Is Right Now."
-    },
-    {
-      de: "Vom Fundament bis zum Dach erzählt jede Ecke Ihres Zuhauses eine Geschichte – Sorgen Sie dafür, dass es eine Geschichte von Stolz ist, nicht von Vernachlässigung",
-      en: "From Foundation to Rooftop, Every Corner of Your Home Tells a Story—Make Sure It's One of Pride, Not Neglect"
-    },
-    {
-      de: "Vertrauen wird nicht gegeben, es wird verdient – Deshalb verbinden wir Sie nur mit verifizierten Fachleuten, die Ihr Zuhause wie ihr eigenes behandeln",
-      en: "Trust Isn't Given, It's Earned—That's Why We Only Connect You With Verified Professionals Who Treat Your Home Like Their Own"
-    },
-    {
-      de: "Ein gut gepflegtes Zuhause ist keine Ausgabe – Es ist eine Investition in Komfort, Sicherheit und Seelenfrieden",
-      en: "A Well-Maintained Home Isn't an Expense—It's an Investment in Comfort, Safety, and Peace of Mind"
-    }
-  ];
-
-  const handleHouseClick = () => {
-    if (isFlipped) {
-      // If showing quote, flip back to house
-      setIsFlipped(false);
-    } else {
-      // If showing house, flip to next quote
-      setCurrentQuoteIndex((prev) => (prev + 1) % quotes.length);
-      setIsFlipped(true);
-    }
-  };
 
   useEffect(() => {
     async function loadServices() {
@@ -62,7 +17,7 @@ const HeroSection = () => {
         console.error('Error loading services:', error);
       }
     }
-
+    
     loadServices();
   }, []);
 
@@ -73,10 +28,10 @@ const HeroSection = () => {
         <div className="relative md:p-10 lg:p-14 pt-6 pr-6 pb-6 pl-6">
           <div className="mt-10 md:mt-14">
             <h1 className="mt-4 text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground font-serif font-normal">
-              {t("Geprüfte Handwerker", "Verified Craftsmen")}
+              {t("Finden Sie geprüfte", "Find Trusted")}
             </h1>
             <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-muted-foreground font-serif font-normal">
-              {t("in Hessen & NRW", "in Hesse & NRW")}
+              {t("Handwerker", "Home Services")}
             </h2>
             <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-muted-foreground font-serif font-normal">
               {t("in Ihrer Nähe", "in Your Area")}
@@ -85,8 +40,8 @@ const HeroSection = () => {
             <div className="mt-6 flex items-center gap-3">
               <span className="text-sm text-muted-foreground">
                 {t(
-                  "20 Städte • Frankfurt • Köln • Düsseldorf • Kostenloser Vergleich",
-                  "20 Cities • Frankfurt • Cologne • Düsseldorf • Free Comparison"
+                  "Kostenlos Angebote vergleichen • Geprüfte Fachleute • Schnelle Antwort",
+                  "Compare quotes for free • Verified professionals • Fast response"
                 )}
               </span>
             </div>
@@ -141,85 +96,60 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Right Panel - House with Service Cards */}
-        <div className="relative md:p-10 lg:p-14 pt-8 pr-8 pb-8 pl-8" style={{ perspective: '1800px' }}>
-          {/* Flip Card Container */}
-          <div
-            className="relative w-full cursor-pointer transition-all duration-700 ease-in-out"
-            onClick={handleHouseClick}
-            style={{
-              transformStyle: 'preserve-3d',
-              transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-              minHeight: '624px'
-            }}
-          >
-            {/* Front - House with Services */}
-            <div
-              className="absolute inset-0 w-full h-full"
-              style={{
-                backfaceVisibility: 'hidden',
-                WebkitBackfaceVisibility: 'hidden'
-              }}
-            >
-              <div className="relative w-full h-full flex flex-col items-center justify-start">
-                {/* Minimalistic Roof - Line style */}
-                <div className="relative w-full mb-0 h-40">
-                  {/* Roof lines - Two diagonal lines forming triangle outline - Extended 20% beyond corners, 200% thicker */}
-                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 576 168" preserveAspectRatio="none" style={{ filter: 'drop-shadow(0 2px 4px rgba(16, 185, 129, 0.4))' }}>
-                    {/* Left roof line - extends 20% beyond (48px on each side of original 480px width) */}
-                    <line x1="-48" y1="168" x2="288" y2="0" stroke="rgba(16, 185, 129, 0.9)" strokeWidth="6" />
-                    {/* Right roof line - extends 20% beyond */}
-                    <line x1="288" y1="0" x2="624" y2="168" stroke="rgba(16, 185, 129, 0.9)" strokeWidth="6" />
-                    {/* Chimney integrated with roof - scaled proportionally (20% larger) */}
-                    <rect x="420" y="48" width="14.4" height="60" fill="rgba(16, 185, 129, 0.9)" stroke="rgba(16, 185, 129, 0.9)" strokeWidth="2.4" rx="1.2" />
-                    {/* Chimney cap - scaled proportionally */}
-                    <rect x="415.2" y="43.2" width="24" height="9.6" fill="rgba(16, 185, 129, 0.9)" stroke="rgba(16, 185, 129, 0.9)" strokeWidth="2.4" rx="1.2" />
-                  </svg>
-                </div>
-
-                {/* House Body with Service Cards - 20% larger */}
-                <div className="relative w-full max-w-xl bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm ring-primary/20 ring-2 rounded-b-2xl p-7 -mt-1 animate-glow-pulse">
-                  {/* Service Cards Grid - scaled 20% larger */}
-                  <div className="grid grid-cols-3 gap-4">
-                    {services.slice(0, 6).map((service) => {
-                      const IconComponent = getIconComponent(service.icon);
-                      return (
-                        <Link
-                          key={service.id}
-                          to={`/services/${service.slug}`}
-                          onClick={(e) => e.stopPropagation()}
-                          className="group relative flex flex-col items-center justify-center bg-white/[0.05] dark:bg-white/[0.05] backdrop-blur-sm border border-primary/20 rounded-xl p-5 hover:bg-primary/10 hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 z-20"
-                        >
-                          <IconComponent className="w-8 h-8 mb-2 text-primary" />
-                          <span className="text-xs text-center text-foreground font-medium leading-tight">
-                            {language === 'de' ? service.name : service.name_en}
-                          </span>
-                        </Link>
-                      );
-                    })}
-                  </div>
-
-                  {/* Door at bottom - scaled 20% larger */}
-                  <div className="mt-5 mx-auto w-20 h-24 bg-primary/60 border-2 border-primary rounded-t-lg relative">
-                    <div className="absolute right-2 top-12 w-2 h-2 bg-foreground/50 rounded-full"></div>
-                  </div>
-                </div>
+        {/* Right Panel - Service Category Grid */}
+        <div className="relative md:p-10 lg:p-14 pt-8 pr-8 pb-8 pl-8">
+          <div className="relative">
+            {/* House Roof */}
+            <div className="relative -mb-1">
+              <svg 
+                className="w-full h-24 md:h-28 lg:h-32" 
+                viewBox="0 0 400 100" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none"
+              >
+                {/* Roof triangle - filled */}
+                <path 
+                  d="M0 100 L200 5 L400 100 Z" 
+                  fill="hsl(var(--primary))"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="2"
+                />
+              </svg>
+              
+              {/* Chimney */}
+              <div className="absolute top-[15%] right-[35%] w-4 md:w-5 lg:w-6 h-10 md:h-12 lg:h-14 bg-primary rounded-sm shadow-lg">
+                {/* Smoke particles - more visible */}
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke"></div>
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke-delay-1"></div>
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke-delay-2"></div>
               </div>
             </div>
-
-            {/* Back - Quote - scaled 20% larger */}
-            <div
-              className="absolute inset-0 w-full h-full"
+            
+            {/* House Body */}
+            <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm ring-gray-200 dark:ring-white/10 ring-1 rounded-b-3xl items-center justify-center p-8"
               style={{
-                backfaceVisibility: 'hidden',
-                WebkitBackfaceVisibility: 'hidden',
-                transform: 'rotateY(180deg)'
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                backgroundSize: '30px 30px'
               }}
             >
-              <div className="relative w-full h-full flex items-center justify-center p-10 bg-primary/10 backdrop-blur-md border-2 border-primary rounded-3xl animate-glow-pulse">
-                <p className="text-xl md:text-2xl text-foreground font-semibold text-center leading-relaxed">
-                  "{language === 'de' ? quotes[currentQuoteIndex].de : quotes[currentQuoteIndex].en}"
-                </p>
+              {/* Service Cards Grid */}
+              <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-md">
+              {services.slice(0, 6).map((service) => {
+                const IconComponent = getIconComponent(service.icon);
+                return (
+                  <a
+                    key={service.id}
+                    href={`/service/${service.slug}`}
+                    className="group relative flex flex-col items-center justify-center bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl p-3 md:p-6 hover:bg-white/[0.08] hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
+                  >
+                    <IconComponent className="w-6 h-6 md:w-8 md:h-8 mb-2 md:mb-3 text-primary flex-shrink-0" />
+                    <span className="text-[10px] md:text-xs text-center text-foreground font-medium leading-tight break-words">
+                      {language === 'de' ? service.name : service.name_en}
+                    </span>
+                  </a>
+                );
+              })}
               </div>
             </div>
           </div>

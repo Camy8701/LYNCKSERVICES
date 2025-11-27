@@ -1,43 +1,26 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
+import Sidebar from "@/components/Sidebar";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import AdCarousel from "@/components/ads/AdCarousel";
-import AdSidebar from "@/components/ads/AdSidebar";
-import { getActiveAds, type Ad } from "@/lib/ads";
+import Breadcrumb from "@/components/Breadcrumb";
+
+interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
 
 interface PageLayoutProps {
   children: ReactNode;
-  hideAds?: boolean;
+  breadcrumbItems?: BreadcrumbItem[];
 }
 
-const PageLayout = ({ children, hideAds = false }: PageLayoutProps) => {
-  const [ads, setAds] = useState<Ad[]>([]);
-
-  useEffect(() => {
-    if (hideAds) return;
-
-    async function loadAds() {
-      try {
-        const activeAds = await getActiveAds();
-        setAds(activeAds);
-      } catch (error) {
-        console.error('Error loading ads:', error);
-      }
-    }
-
-    loadAds();
-  }, [hideAds]);
-
+const PageLayout = ({ children, breadcrumbItems }: PageLayoutProps) => {
   return (
     <div className="flex min-h-screen bg-background">
-      {/* Desktop Ad Sidebar - Always visible */}
-      {!hideAds && <AdSidebar ads={ads} />}
-
-      <main className={`flex-1 overflow-y-auto ${!hideAds ? 'lg:ml-[280px]' : ''}`}>
-        {/* Mobile Ad Carousel */}
-        {ads.length > 0 && !hideAds && <AdCarousel ads={ads} />}
-
+      <Sidebar />
+      <main className="flex-1 overflow-y-auto">
         <Navigation />
+        <Breadcrumb customItems={breadcrumbItems} />
         {children}
         <Footer />
       </main>
