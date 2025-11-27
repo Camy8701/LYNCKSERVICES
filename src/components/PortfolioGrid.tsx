@@ -21,18 +21,18 @@ const howItWorksSteps = [
   {
     number: "3",
     icon: MessageSquare,
-    titleDe: "Angebote erhalten",
-    titleEn: "Receive Quotes",
-    descriptionDe: "Bis zu 3 geprüfte Fachleute melden sich innerhalb von 24 Stunden bei Ihnen.",
-    descriptionEn: "Up to 3 verified professionals will contact you within 24 hours."
+    titleDe: "Kontaktaufnahme",
+    titleEn: "Receive Contact",
+    descriptionDe: "Geprüfte Fachleute werden Sie kontaktieren, sobald sie Ihre Anfrage erhalten.",
+    descriptionEn: "Verified professionals will contact you as soon as they receive your request."
   },
   {
     number: "4",
     icon: CheckCircle2,
-    titleDe: "Vergleichen & beauftragen",
-    titleEn: "Compare & Hire",
-    descriptionDe: "Vergleichen Sie Angebote, Bewertungen und Verfügbarkeit. Wählen Sie das beste Angebot.",
-    descriptionEn: "Compare quotes, reviews and availability. Choose the best offer."
+    titleDe: "Projekt beauftragen",
+    titleEn: "Hire & Start",
+    descriptionDe: "Besprechen Sie die Details mit dem Fachmann und beauftragen Sie Ihr Projekt.",
+    descriptionEn: "Discuss the details with the professional and start your project."
   }
 ];
 

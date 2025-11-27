@@ -43,14 +43,19 @@ export type Lead = {
   name: string;
   phone: string;
   email: string | null;
+  state: string | null;
   city: string;
-  plz: string;
+  plz: string | null;
   service_id: string;
   service_details: string;
   timeline: 'sofort' | 'diese_woche' | 'diesen_monat' | 'flexibel';
   status: 'new' | 'contacted' | 'converted';
   source: string;
   admin_notes: string | null;
+  property_ownership: 'owner' | 'renter' | null;
+  property_type: 'single_family' | 'apartment' | 'multi_family' | 'commercial' | null;
+  decision_maker: 'yes' | 'no' | null;
+  property_age: 'before_1980' | '1980_2000' | '2000_2010' | 'after_2010' | 'not_sure' | null;
 };
 
 export type LeadWithService = Lead & {
@@ -620,4 +625,255 @@ export async function updateService(id: string, updates: Partial<Service>) {
 
 export async function toggleServiceActive(id: string, is_active: boolean) {
   return updateService(id, { is_active });
+}
+
+// ============================================
+// ANALYTICS DATA
+// ============================================
+
+export type LeadTrendData = {
+  date: string;
+  count: number;
+};
+
+export type ServiceConversionData = {
+  name: string;
+  total: number;
+  converted: number;
+  rate: number;
+};
+
+export type CityPerformanceData = {
+  city: string;
+  leads: number;
+  revenue: number;
+};
+
+export type RevenueData = {
+  date: string;
+  revenue: number;
+};
+
+// Get leads trend over last 30 days
+export async function getLeadsTrend(days: number = 30): Promise<LeadTrendData[]> {
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - days);
+  startDate.setHours(0, 0, 0, 0);
+
+  const { data, error } = await supabase
+    .from('leads')
+    .select('created_at')
+    .gte('created_at', startDate.toISOString())
+    .order('created_at', { ascending: true });
+
+  if (error) throw error;
+
+  // Group by date
+  const grouped: Record<string, number> = {};
+
+  // Initialize all dates with 0
+  for (let i = 0; i < days; i++) {
+    const date = new Date(startDate);
+    date.setDate(startDate.getDate() + i);
+    const key = date.toISOString().split('T')[0];
+    grouped[key] = 0;
+  }
+
+  // Count leads per day
+  data?.forEach((lead) => {
+    const date = new Date(lead.created_at).toISOString().split('T')[0];
+    if (grouped[date] !== undefined) {
+      grouped[date]++;
+    }
+  });
+
+  return Object.entries(grouped).map(([date, count]) => ({
+    date,
+    count,
+  }));
+}
+
+// Get conversion rates by service
+export async function getConversionByService(): Promise<ServiceConversionData[]> {
+  const { data: leads, error: leadsError } = await supabase
+    .from('leads')
+    .select(`
+      status,
+      service:services(name)
+    `);
+
+  if (leadsError) throw leadsError;
+
+  // Group by service
+  const serviceStats: Record<string, { total: number; converted: number }> = {};
+
+  leads?.forEach((lead: any) => {
+    const serviceName = lead.service?.name || 'Unknown';
+    if (!serviceStats[serviceName]) {
+      serviceStats[serviceName] = { total: 0, converted: 0 };
+    }
+    serviceStats[serviceName].total++;
+    if (lead.status === 'converted') {
+      serviceStats[serviceName].converted++;
+    }
+  });
+
+  return Object.entries(serviceStats).map(([name, stats]) => ({
+    name,
+    total: stats.total,
+    converted: stats.converted,
+    rate: stats.total > 0 ? Math.round((stats.converted / stats.total) * 100) : 0,
+  })).sort((a, b) => b.total - a.total);
+}
+
+// Get revenue trend over last 30 days
+export async function getRevenueTrend(days: number = 30): Promise<RevenueData[]> {
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - days);
+  startDate.setHours(0, 0, 0, 0);
+
+  const { data, error } = await supabase
+    .from('lead_assignments')
+    .select('assigned_at, amount_charged')
+    .gte('assigned_at', startDate.toISOString())
+    .order('assigned_at', { ascending: true });
+
+  if (error) throw error;
+
+  // Group by date
+  const grouped: Record<string, number> = {};
+
+  // Initialize all dates with 0
+  for (let i = 0; i < days; i++) {
+    const date = new Date(startDate);
+    date.setDate(startDate.getDate() + i);
+    const key = date.toISOString().split('T')[0];
+    grouped[key] = 0;
+  }
+
+  // Sum revenue per day
+  data?.forEach((assignment) => {
+    const date = new Date(assignment.assigned_at).toISOString().split('T')[0];
+    if (grouped[date] !== undefined) {
+      grouped[date] += Number(assignment.amount_charged) || 0;
+    }
+  });
+
+  return Object.entries(grouped).map(([date, revenue]) => ({
+    date,
+    revenue,
+  }));
+}
+
+// Get top performing cities
+export async function getTopCities(limit: number = 10): Promise<CityPerformanceData[]> {
+  // Get all leads with their assignments
+  const { data: leads, error: leadsError } = await supabase
+    .from('leads')
+    .select('city');
+
+  if (leadsError) throw leadsError;
+
+  const { data: assignments, error: assignmentsError } = await supabase
+    .from('lead_assignments')
+    .select(`
+      amount_charged,
+      lead:leads(city)
+    `);
+
+  if (assignmentsError) throw assignmentsError;
+
+  // Count leads per city
+  const cityLeads: Record<string, number> = {};
+  leads?.forEach((lead) => {
+    if (!cityLeads[lead.city]) {
+      cityLeads[lead.city] = 0;
+    }
+    cityLeads[lead.city]++;
+  });
+
+  // Sum revenue per city
+  const cityRevenue: Record<string, number> = {};
+  assignments?.forEach((assignment: any) => {
+    const city = assignment.lead?.city;
+    if (city) {
+      if (!cityRevenue[city]) {
+        cityRevenue[city] = 0;
+      }
+      cityRevenue[city] += Number(assignment.amount_charged) || 0;
+    }
+  });
+
+  // Combine and sort
+  const cities = Object.keys({ ...cityLeads, ...cityRevenue });
+  return cities
+    .map((city) => ({
+      city,
+      leads: cityLeads[city] || 0,
+      revenue: cityRevenue[city] || 0,
+    }))
+    .sort((a, b) => b.leads - a.leads)
+    .slice(0, limit);
+}
+
+// Get analytics summary
+export async function getAnalyticsSummary() {
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+  const sixtyDaysAgo = new Date();
+  sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
+
+  // Total leads last 30 days
+  const { count: leadsLast30 } = await supabase
+    .from('leads')
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', thirtyDaysAgo.toISOString());
+
+  // Total leads previous 30 days (for comparison)
+  const { count: leadsPrevious30 } = await supabase
+    .from('leads')
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', sixtyDaysAgo.toISOString())
+    .lt('created_at', thirtyDaysAgo.toISOString());
+
+  // Converted leads last 30 days
+  const { count: convertedLast30 } = await supabase
+    .from('leads')
+    .select('*', { count: 'exact', head: true })
+    .eq('status', 'converted')
+    .gte('created_at', thirtyDaysAgo.toISOString());
+
+  // Revenue last 30 days
+  const { data: revenueData } = await supabase
+    .from('lead_assignments')
+    .select('amount_charged')
+    .gte('assigned_at', thirtyDaysAgo.toISOString());
+
+  const revenueLast30 = revenueData?.reduce(
+    (sum, a) => sum + Number(a.amount_charged || 0),
+    0
+  ) || 0;
+
+  // Revenue previous 30 days
+  const { data: revenuePrevData } = await supabase
+    .from('lead_assignments')
+    .select('amount_charged')
+    .gte('assigned_at', sixtyDaysAgo.toISOString())
+    .lt('assigned_at', thirtyDaysAgo.toISOString());
+
+  const revenuePrevious30 = revenuePrevData?.reduce(
+    (sum, a) => sum + Number(a.amount_charged || 0),
+    0
+  ) || 0;
+
+  return {
+    leadsLast30: leadsLast30 || 0,
+    leadsPrevious30: leadsPrevious30 || 0,
+    leadsChange: leadsPrevious30 ? Math.round(((leadsLast30! - leadsPrevious30) / leadsPrevious30) * 100) : 0,
+    conversionRate: leadsLast30 ? Math.round((convertedLast30! / leadsLast30) * 100) : 0,
+    revenueLast30,
+    revenuePrevious30,
+    revenueChange: revenuePrevious30 ? Math.round(((revenueLast30 - revenuePrevious30) / revenuePrevious30) * 100) : 0,
+  };
 }

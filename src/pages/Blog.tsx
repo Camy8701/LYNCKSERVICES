@@ -7,58 +7,58 @@ const Blog = () => {
 
   const blogPosts = [
     {
-      image: "https://images.unsplash.com/photo-1607400201889-565b1ee75f8e?auto=format&fit=crop&w=800&q=80",
-      titleDe: "Was kostet eine neue Heizung 2025?",
-      titleEn: "What Does a New Heating System Cost in 2025?",
-      excerptDe: "Durchschnittliche Kosten und Fördermöglichkeiten für moderne Heizungsanlagen...",
-      excerptEn: "Average costs and funding opportunities for modern heating systems...",
-      date: language === 'de' ? "15. November 2025" : "November 15, 2025",
-      slug: "heizung-kosten-2025"
+      image: "/blog-heating.jpg",
+      titleDe: "Heizungsmodernisierung 2025: Förderungen und Zuschüsse nutzen",
+      titleEn: "Heating System Modernization 2025: Utilize Subsidies and Grants",
+      excerptDe: "BEG-Förderung bis zu 70% für Wärmepumpen. Erfahren Sie, wie Sie staatliche Zuschüsse für Ihre Heizungssanierung optimal nutzen und bis zu 25.000€ sparen können.",
+      excerptEn: "BEG funding up to 70% for heat pumps. Learn how to optimize government subsidies for your heating renovation and save up to €25,000.",
+      date: language === 'de' ? "20. November 2024" : "November 20, 2024",
+      slug: "heizungsmodernisierung-foerderung-2025"
     },
     {
-      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80",
-      titleDe: "Solar Förderung 2025: Alle Programme im Überblick",
-      titleEn: "Solar Funding 2025: All Programs at a Glance",
-      excerptDe: "KfW, BAFA und regionale Förderungen für Solaranlagen im Detail erklärt...",
-      excerptEn: "KfW, BAFA and regional funding for solar systems explained in detail...",
-      date: language === 'de' ? "10. November 2025" : "November 10, 2025",
-      slug: "solar-foerderung-2025"
+      image: "/blog-solar.jpg",
+      titleDe: "Photovoltaik für Eigenheimbesitzer: Lohnt sich die Investition?",
+      titleEn: "Photovoltaics for Homeowners: Is the Investment Worth It?",
+      excerptDe: "Aktuelle Einspeisevergütung, Eigenverbrauch optimieren und steuerliche Vorteile. Amortisation in 8-12 Jahren bei durchschnittlichen Einfamilienhäusern in Deutschland.",
+      excerptEn: "Current feed-in tariff, optimize self-consumption and tax benefits. Payback in 8-12 years for average single-family homes in Germany.",
+      date: language === 'de' ? "15. November 2024" : "November 15, 2024",
+      slug: "photovoltaik-eigenheim-2024"
     },
     {
-      image: "https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?auto=format&fit=crop&w=800&q=80",
-      titleDe: "Dach sanieren: Wann lohnt sich eine Sanierung?",
-      titleEn: "Roof Renovation: When Is It Worth It?",
-      excerptDe: "7 Anzeichen, dass Ihr Dach saniert werden sollte und was Sie beachten müssen...",
-      excerptEn: "7 signs that your roof should be renovated and what you need to consider...",
-      date: language === 'de' ? "5. November 2025" : "November 5, 2025",
-      slug: "dach-sanierung-wann"
+      image: "/blog-roofing.jpg",
+      titleDe: "Dachsanierung: Diese 5 Warnsignale sollten Sie kennen",
+      titleEn: "Roof Renovation: These 5 Warning Signs You Should Know",
+      excerptDe: "Feuchte Decken, fehlende Ziegel oder hohe Heizkosten? Diese Anzeichen deuten auf dringenden Sanierungsbedarf hin. Inklusive Kostenübersicht für typische Einfamilienhäuser.",
+      excerptEn: "Damp ceilings, missing tiles or high heating costs? These signs indicate urgent renovation needs. Including cost overview for typical single-family homes.",
+      date: language === 'de' ? "10. November 2024" : "November 10, 2024",
+      slug: "dachsanierung-warnsignale"
     },
     {
-      image: "https://images.unsplash.com/photo-1585128903992-ae6ba42ca694?auto=format&fit=crop&w=800&q=80",
-      titleDe: "Elektriker beauftragen: Das sollten Sie wissen",
-      titleEn: "Hiring an Electrician: What You Should Know",
-      excerptDe: "Wichtige Tipps zur Auswahl des richtigen Elektrikers für Ihr Projekt...",
-      excerptEn: "Important tips for choosing the right electrician for your project...",
-      date: language === 'de' ? "1. November 2025" : "November 1, 2025",
-      slug: "elektriker-beauftragen"
+      image: "/blog-electrician.jpg",
+      titleDe: "Elektroinstallation modernisieren: Wann ist es Zeit für eine Sanierung?",
+      titleEn: "Modernize Electrical Installation: When Is It Time for Renovation?",
+      excerptDe: "Altbauten mit veralteter Elektrik bergen Risiken. FI-Schutzschalter nachrüsten, Leitungen erneuern: Was bei der Elektrosanierung beachtet werden muss und was es kostet.",
+      excerptEn: "Old buildings with outdated electrics pose risks. Retrofitting RCD circuit breakers, renewing cables: What to consider during electrical renovation and costs.",
+      date: language === 'de' ? "5. November 2024" : "November 5, 2024",
+      slug: "elektroinstallation-modernisieren"
     },
     {
-      image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80",
-      titleDe: "Badezimmer renovieren: Kosten und Planung",
-      titleEn: "Bathroom Renovation: Costs and Planning",
-      excerptDe: "Kompletter Leitfaden für die Planung und Durchführung Ihrer Badrenovierung...",
-      excerptEn: "Complete guide to planning and executing your bathroom renovation...",
-      date: language === 'de' ? "28. Oktober 2025" : "October 28, 2025",
-      slug: "badezimmer-renovieren"
+      image: "/blog-renovation.jpg",
+      titleDe: "Altbausanierung: Förderung, Kosten und Zeitplan",
+      titleEn: "Old Building Renovation: Funding, Costs and Timeline",
+      excerptDe: "KfW-Programm 261 für energetische Sanierung nutzen. Schritt-für-Schritt Anleitung für die Sanierung von Altbauten inkl. typischer Kostenpunkte und Förderhöhen.",
+      excerptEn: "Use KfW program 261 for energy-efficient renovation. Step-by-step guide for renovating old buildings including typical cost points and funding amounts.",
+      date: language === 'de' ? "1. November 2024" : "November 1, 2024",
+      slug: "altbausanierung-foerderung"
     },
     {
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80",
-      titleDe: "Smart Home Installation: Möglichkeiten und Kosten",
-      titleEn: "Smart Home Installation: Options and Costs",
-      excerptDe: "Alles über Smart Home Systeme, Installation und was Sie investieren müssen...",
-      excerptEn: "Everything about smart home systems, installation and what you need to invest...",
-      date: language === 'de' ? "25. Oktober 2025" : "October 25, 2025",
-      slug: "smart-home-installation"
+      image: "/blog-plumbing.png",
+      titleDe: "Sanitär erneuern: Von der Planung bis zur Umsetzung",
+      titleEn: "Renew Plumbing: From Planning to Implementation",
+      excerptDe: "Badsanierung, Rohrerneuerung oder Heizungsanbindung: Worauf Eigentümer achten müssen. Materialwahl, Normen und durchschnittliche Kosten für Standard-Bäder.",
+      excerptEn: "Bathroom renovation, pipe renewal or heating connection: What owners need to consider. Material selection, standards and average costs for standard bathrooms.",
+      date: language === 'de' ? "28. Oktober 2024" : "October 28, 2024",
+      slug: "sanitaer-erneuern"
     }
   ];
 

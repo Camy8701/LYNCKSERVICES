@@ -1,17 +1,18 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getServices, type Service } from "@/lib/database";
 import { getIconComponent } from "@/lib/serviceIcons";
 
-// Service images mapping
+// Service images mapping - Local professional images
 const serviceImages: Record<string, string> = {
-  heizung: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?auto=format&fit=crop&w=800&q=80",
-  solar: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80",
-  dachdecker: "https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?auto=format&fit=crop&w=800&q=80",
-  klempner: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=800&q=80",
-  elektriker: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=800&q=80",
-  renovierung: "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=800&q=80",
+  heizung: "/heating-hvac.jpg",
+  solar: "/solar-panel.jpg",
+  dachdecker: "/roofing.jpg",
+  klempner: "/plumbing-sanitary.png",
+  elektriker: "/electrician.jpg",
+  renovierung: "/general-renovation.jpg",
 };
 
 const FeaturesSection = () => {
@@ -58,11 +59,12 @@ const FeaturesSection = () => {
             {services.map((service) => {
               const IconComponent = getIconComponent(service.icon);
               const image = serviceImages[service.slug] || serviceImages.renovierung;
-              
+
               return (
-                <div
+                <Link
                   key={service.id}
-                  className="relative group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2"
+                  to={`/services/${service.slug}`}
+                  className="relative group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 block"
                 >
                   <div
                     className="aspect-[4/3] overflow-hidden relative bg-cover bg-center rounded-2xl mb-6"
@@ -81,14 +83,11 @@ const FeaturesSection = () => {
                   <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                     {language === 'de' ? service.description : service.description_en}
                   </p>
-              <a
-                href={`/service/${service.slug}`}
-                className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-              >
-                    {t("Angebot anfordern", "Request Quote")}
+                  <span className="inline-flex items-center text-sm font-medium text-primary group-hover:text-primary/80 transition-colors">
+                    {t("Mehr erfahren", "Learn more")}
                     <ArrowRight className="ml-2 w-4 h-4" />
-                  </a>
-                </div>
+                  </span>
+                </Link>
               );
             })}
           </div>

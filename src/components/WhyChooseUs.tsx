@@ -23,8 +23,8 @@ const WhyChooseUs = () => {
       icon: Zap,
       titleDe: "Schnelle Antworten",
       titleEn: "Fast Responses",
-      descriptionDe: "Durchschnittlich erhalten Sie Angebote innerhalb von 24 Stunden. Bei Notfällen oft innerhalb weniger Stunden.",
-      descriptionEn: "On average you receive quotes within 24 hours. In emergencies often within a few hours."
+      descriptionDe: "Sie erhalten Angebote, sobald Ihre Anfrage eingegangen ist. Unsere geprüften Fachleute antworten schnell und zuverlässig.",
+      descriptionEn: "You receive quotes as soon as your request is received. Our verified professionals respond quickly and reliably."
     }
   ];
 

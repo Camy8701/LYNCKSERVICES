@@ -1,4 +1,4 @@
-import { Search, Moon, Sun, ChevronDown } from "lucide-react";
+import { Search, Moon, Sun, ChevronDown, Home } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -32,37 +32,41 @@ const Navigation = () => {
   return (
     <nav className="flex items-center justify-between px-6 md:px-12 lg:px-16 py-4 mt-8 mb-4 mx-4 md:mx-6 lg:mx-8 glass-card rounded-2xl relative z-50">
       <div className="flex items-center gap-12">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-lg"></div>
+        <a href="/" className="flex items-center gap-2 group">
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20 group-hover:shadow-primary/30 transition-all duration-300">
+            <Home className="w-4 h-4 text-primary-foreground" />
+          </div>
           <span className="text-lg font-semibold text-foreground tracking-tight">Lynck Services</span>
-        </div>
+        </a>
 
         <div className="hidden md:flex items-center gap-8">
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
             <button
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
-              className="text-sm text-foreground font-medium hover:text-primary transition-colors duration-300 flex items-center gap-1"
+              className="text-sm text-foreground font-medium hover:text-primary transition-colors duration-300 flex items-center gap-1 py-2"
             >
               {t("Dienstleistungen", "Services")}
-              <ChevronDown className="w-3 h-3" />
+              <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
             </button>
             {servicesOpen && (
               <div
-                onMouseEnter={() => setServicesOpen(true)}
-                onMouseLeave={() => setServicesOpen(false)}
-                className="absolute top-full left-0 mt-2 w-64 bg-background/95 backdrop-blur-md border border-border rounded-xl shadow-lg z-[100] py-2"
+                className="absolute top-full left-0 pt-1 w-64 z-[100]"
               >
-                {services.map((service) => (
-                  <a
-                    key={service.slug}
-                    href={`/${service.slug}`}
-                    className="flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-accent hover:text-primary transition-colors duration-300"
-                  >
-                    <span className="text-lg">{service.icon}</span>
-                    <span>{service.name}</span>
-                  </a>
-                ))}
+                <div className="bg-background border border-border rounded-xl shadow-xl py-2">
+                  {services.map((service) => (
+                    <a
+                      key={service.slug}
+                      href={`/services/${service.slug}`}
+                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-primary/10 hover:text-foreground transition-colors duration-200"
+                    >
+                      <span className="text-lg">{service.icon}</span>
+                      <span>{service.name}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -74,6 +78,12 @@ const Navigation = () => {
           </a>
           <a href="/for-businesses" className="text-sm text-muted-foreground font-medium hover:text-foreground transition-colors duration-300">
             {t("Für Unternehmen", "For Businesses")}
+          </a>
+          <a
+            href="/advertise"
+            className="text-sm font-medium text-primary hover:text-primary/80 transition-colors duration-300 flex items-center gap-1"
+          >
+            {t("Werben", "Advertise")}
           </a>
         </div>
       </div>

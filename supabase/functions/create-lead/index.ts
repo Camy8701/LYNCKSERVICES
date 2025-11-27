@@ -42,20 +42,54 @@ function validateLead(data: any) {
     errors.push('Phone number contains invalid characters');
   }
 
-  // Email validation (optional)
-  if (data.email && typeof data.email === 'string') {
-    if (data.email.length > MAX_EMAIL_LENGTH) {
-      errors.push(`Email must be less than ${MAX_EMAIL_LENGTH} characters`);
-    } else if (!EMAIL_REGEX.test(data.email)) {
-      errors.push('Invalid email format');
+  // Email validation (required)
+  if (!data.email || typeof data.email !== 'string') {
+    errors.push('Email is required');
+  } else if (data.email.trim().length === 0) {
+    errors.push('Email cannot be empty');
+  } else if (data.email.length > MAX_EMAIL_LENGTH) {
+    errors.push(`Email must be less than ${MAX_EMAIL_LENGTH} characters`);
+  } else if (!EMAIL_REGEX.test(data.email)) {
+    errors.push('Invalid email format');
+  }
+
+  // Property ownership validation (required, must be owner)
+  if (!data.property_ownership || typeof data.property_ownership !== 'string') {
+    errors.push('Property ownership status is required');
+  } else if (data.property_ownership !== 'owner' && data.property_ownership !== 'renter') {
+    errors.push('Invalid property ownership value');
+  } else if (data.property_ownership === 'renter') {
+    errors.push('Only property owners can request this service');
+  }
+
+  // Property type validation (required)
+  if (!data.property_type || typeof data.property_type !== 'string') {
+    errors.push('Property type is required');
+  } else if (!['single_family', 'apartment', 'multi_family', 'commercial'].includes(data.property_type)) {
+    errors.push('Invalid property type');
+  }
+
+  // Property age validation (optional)
+  if (data.property_age && typeof data.property_age === 'string') {
+    if (!['before_1980', '1980_2000', '2000_2010', 'after_2010', 'not_sure'].includes(data.property_age)) {
+      errors.push('Invalid property age');
     }
   }
 
-  // PLZ validation
-  if (!data.plz || typeof data.plz !== 'string') {
-    errors.push('PLZ is required');
-  } else if (!PLZ_REGEX.test(data.plz)) {
-    errors.push('PLZ must be a 5-digit number');
+  // Decision maker validation (required, must be yes)
+  if (!data.decision_maker || typeof data.decision_maker !== 'string') {
+    errors.push('Decision maker status is required');
+  } else if (data.decision_maker !== 'yes' && data.decision_maker !== 'no') {
+    errors.push('Invalid decision maker value');
+  } else if (data.decision_maker === 'no') {
+    errors.push('Only decision makers can request quotes');
+  }
+
+  // State validation (required)
+  if (!data.state || typeof data.state !== 'string') {
+    errors.push('State is required');
+  } else if (!['hesse', 'nrw'].includes(data.state)) {
+    errors.push('Invalid state');
   }
 
   // City validation
@@ -65,6 +99,13 @@ function validateLead(data: any) {
     errors.push('City cannot be empty');
   } else if (data.city.length > MAX_CITY_LENGTH) {
     errors.push(`City must be less than ${MAX_CITY_LENGTH} characters`);
+  }
+
+  // PLZ validation (optional)
+  if (data.plz && typeof data.plz === 'string') {
+    if (!PLZ_REGEX.test(data.plz)) {
+      errors.push('PLZ must be a 5-digit number');
+    }
   }
 
   // Service details validation
@@ -119,12 +160,17 @@ serve(async (req) => {
     const sanitizedData = {
       name: leadData.name.trim(),
       phone: leadData.phone.trim(),
-      email: leadData.email ? leadData.email.trim() : null,
-      plz: leadData.plz.trim(),
+      email: leadData.email.trim(),
+      state: leadData.state,
       city: leadData.city.trim(),
+      plz: leadData.plz ? leadData.plz.trim() : null,
       service_details: leadData.service_details.trim(),
       timeline: leadData.timeline.trim(),
       service_id: leadData.service_id || null,
+      property_ownership: leadData.property_ownership,
+      property_type: leadData.property_type,
+      decision_maker: leadData.decision_maker,
+      property_age: leadData.property_age || null,
       source: 'website',
       status: 'new'
     };

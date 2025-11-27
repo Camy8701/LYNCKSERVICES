@@ -23,11 +23,46 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
     name: '',
     phone: '',
     email: '',
+    state: '',
     city: '',
     plz: '',
     service_details: '',
-    timeline: 'diese_woche' as const
+    timeline: 'diese_woche' as const,
+    property_ownership: '',
+    property_type: '',
+    decision_maker: '',
+    property_age: ''
   });
+
+  // Cities by state
+  const citiesByState: Record<string, string[]> = {
+    hesse: [
+      'Frankfurt am Main',
+      'Wiesbaden',
+      'Kassel',
+      'Darmstadt',
+      'Offenbach am Main',
+      'Hanau',
+      'Gießen',
+      'Marburg',
+      'Fulda',
+      'Rüsselsheim am Main'
+    ],
+    nrw: [
+      'Köln',
+      'Aachen',
+      'Düsseldorf',
+      'Dortmund',
+      'Essen',
+      'Duisburg',
+      'Bochum',
+      'Wuppertal',
+      'Bonn',
+      'Münster'
+    ]
+  };
+
+  const availableCities = formData.state ? citiesByState[formData.state] || [] : [];
   
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [gdprConsent, setGdprConsent] = useState(false);
@@ -50,20 +85,63 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
       );
     }
     
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = t(
         'Bitte geben Sie eine gültige E-Mail-Adresse ein',
         'Please enter a valid email address'
       );
     }
+
+    if (!formData.property_ownership) {
+      newErrors.property_ownership = t(
+        'Bitte wählen Sie Ihren Eigentumsstatus aus',
+        'Please select your ownership status'
+      );
+    }
+
+    if (formData.property_ownership === 'renter') {
+      newErrors.property_ownership = t(
+        'Dieses Angebot ist nur für Immobilieneigentümer verfügbar',
+        'This service is only available for property owners'
+      );
+    }
+
+    if (!formData.property_type) {
+      newErrors.property_type = t(
+        'Bitte wählen Sie Ihren Immobilientyp aus',
+        'Please select your property type'
+      );
+    }
+
+    if (!formData.decision_maker) {
+      newErrors.decision_maker = t(
+        'Bitte wählen Sie aus, ob Sie Entscheidungsträger sind',
+        'Please select if you are the decision maker'
+      );
+    }
+
+    if (formData.decision_maker === 'no') {
+      newErrors.decision_maker = t(
+        'Der Entscheidungsträger muss das Angebot anfordern',
+        'The decision maker must request the quote'
+      );
+    }
     
-    if (!/^[0-9]{5}$/.test(formData.plz)) {
+    // PLZ is now optional
+    if (formData.plz && !/^[0-9]{5}$/.test(formData.plz)) {
       newErrors.plz = t(
         'PLZ muss genau 5 Ziffern haben',
         'Postal code must be exactly 5 digits'
       );
     }
-    
+
+    if (!formData.state) {
+      newErrors.state = t(
+        'Bitte wählen Sie ein Bundesland aus',
+        'Please select a state'
+      );
+    }
+
     if (!formData.city) {
       newErrors.city = t(
         'Bitte wählen Sie eine Stadt aus',
@@ -107,12 +185,17 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
         body: {
           name: formData.name.trim(),
           phone: formData.phone.replace(/\s/g, ''),
-          email: formData.email.trim() || null,
+          email: formData.email.trim(),
+          state: formData.state,
           city: formData.city,
-          plz: formData.plz,
+          plz: formData.plz || null,
           service_id: service.id,
           service_details: formData.service_details.trim(),
-          timeline: formData.timeline
+          timeline: formData.timeline,
+          property_ownership: formData.property_ownership,
+          property_type: formData.property_type,
+          decision_maker: formData.decision_maker,
+          property_age: formData.property_age || null
         }
       });
 
@@ -176,10 +259,10 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
         {errors.phone && <p className="mt-1 text-sm text-destructive">{errors.phone}</p>}
       </div>
       
-      {/* Email Field (Optional) */}
+      {/* Email Field (Mandatory) */}
       <div>
         <label className="block text-sm font-medium text-foreground mb-2">
-          {t('E-Mail', 'Email')} <span className="text-muted-foreground text-xs">({t('optional', 'optional')})</span>
+          {t('E-Mail', 'Email')} <span className="text-destructive">*</span>
         </label>
         <Input
           type="email"
@@ -191,44 +274,223 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
         {errors.email && <p className="mt-1 text-sm text-destructive">{errors.email}</p>}
       </div>
       
-      {/* PLZ and City Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* PLZ */}
-        <div>
-          <label className="block text-sm font-medium text-foreground mb-2">
-            {t('Postleitzahl', 'Postal code')} <span className="text-destructive">*</span>
+      {/* Property Ownership - QUALIFYING QUESTION */}
+      <div>
+        <label className="block text-sm font-medium text-foreground mb-3">
+          {t('Sind Sie Eigentümer der Immobilie?', 'Are you the property owner?')} <span className="text-destructive">*</span>
+        </label>
+        <div className="space-y-3">
+          <label className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-all ${
+            formData.property_ownership === 'owner'
+              ? 'border-primary bg-primary/5'
+              : 'border-input hover:border-primary/50'
+          }`}>
+            <input
+              type="radio"
+              name="property_ownership"
+              value="owner"
+              checked={formData.property_ownership === 'owner'}
+              onChange={(e) => setFormData({ ...formData, property_ownership: e.target.value })}
+              className="w-4 h-4 text-primary focus:ring-2 focus:ring-ring"
+            />
+            <div className="flex-1">
+              <span className="text-sm font-medium text-foreground">
+                {t('Ja, ich bin Eigentümer', 'Yes, I am the owner')}
+              </span>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {t('Ich besitze die Immobilie', 'I own the property')}
+              </p>
+            </div>
           </label>
-          <Input
-            type="text"
-            pattern="[0-9]*"
-            maxLength={5}
-            value={formData.plz}
-            onChange={(e) => setFormData({ ...formData, plz: e.target.value.replace(/\D/g, '') })}
-            placeholder="10115"
-            className={errors.plz ? 'border-destructive' : ''}
-          />
-          {errors.plz && <p className="mt-1 text-sm text-destructive">{errors.plz}</p>}
-        </div>
-        
-        {/* City */}
-        <div>
-          <label className="block text-sm font-medium text-foreground mb-2">
-            {t('Stadt', 'City')} <span className="text-destructive">*</span>
+
+          <label className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-all ${
+            formData.property_ownership === 'renter'
+              ? 'border-destructive bg-destructive/5'
+              : 'border-input hover:border-input/50'
+          }`}>
+            <input
+              type="radio"
+              name="property_ownership"
+              value="renter"
+              checked={formData.property_ownership === 'renter'}
+              onChange={(e) => setFormData({ ...formData, property_ownership: e.target.value })}
+              className="w-4 h-4 text-primary focus:ring-2 focus:ring-ring"
+            />
+            <div className="flex-1">
+              <span className="text-sm font-medium text-foreground">
+                {t('Nein, ich bin Mieter', 'No, I am a renter/tenant')}
+              </span>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {t('Ich miete die Immobilie', 'I rent the property')}
+              </p>
+            </div>
           </label>
-          <select
-            value={formData.city}
-            onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-            className={`w-full h-10 rounded-md border ${errors.city ? 'border-destructive' : 'border-input'} bg-background px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`}
-          >
-            <option value="">{t('Stadt auswählen...', 'Select city...')}</option>
-            {cities.map((city) => (
-              <option key={city.id} value={city.name}>
-                {city.name}
-              </option>
-            ))}
-          </select>
-          {errors.city && <p className="mt-1 text-sm text-destructive">{errors.city}</p>}
         </div>
+        {errors.property_ownership && (
+          <div className="mt-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
+            <p className="text-sm text-destructive">{errors.property_ownership}</p>
+          </div>
+        )}
+      </div>
+
+      {/* Property Type - QUALIFYING QUESTION */}
+      <div>
+        <label className="block text-sm font-medium text-foreground mb-2">
+          {t('Art der Immobilie', 'Property type')} <span className="text-destructive">*</span>
+        </label>
+        <select
+          value={formData.property_type}
+          onChange={(e) => setFormData({ ...formData, property_type: e.target.value })}
+          className={`w-full h-10 rounded-md border ${errors.property_type ? 'border-destructive' : 'border-input'} bg-background px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`}
+        >
+          <option value="">{t('Immobilientyp auswählen...', 'Select property type...')}</option>
+          <option value="single_family">{t('Einfamilienhaus', 'Single-family house')}</option>
+          <option value="apartment">{t('Eigentumswohnung', 'Apartment/Condo')}</option>
+          <option value="multi_family">{t('Mehrfamilienhaus', 'Multi-family house')}</option>
+          <option value="commercial">{t('Gewerbeimmobilie', 'Commercial property')}</option>
+        </select>
+        {errors.property_type && <p className="mt-1 text-sm text-destructive">{errors.property_type}</p>}
+      </div>
+
+      {/* Property Age - OPTIONAL (helps contractors estimate) */}
+      <div>
+        <label className="block text-sm font-medium text-foreground mb-2">
+          {t('Alter der Immobilie', 'Property age')} <span className="text-muted-foreground text-xs">({t('optional', 'optional')})</span>
+        </label>
+        <select
+          value={formData.property_age}
+          onChange={(e) => setFormData({ ...formData, property_age: e.target.value })}
+          className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          <option value="">{t('Baujahr auswählen...', 'Select construction year...')}</option>
+          <option value="before_1980">{t('Vor 1980', 'Before 1980')}</option>
+          <option value="1980_2000">{t('1980 - 2000', '1980 - 2000')}</option>
+          <option value="2000_2010">{t('2000 - 2010', '2000 - 2010')}</option>
+          <option value="after_2010">{t('Nach 2010', 'After 2010')}</option>
+          <option value="not_sure">{t('Weiß nicht', 'Not sure')}</option>
+        </select>
+        <p className="mt-1 text-xs text-muted-foreground">
+          {t('Hilft uns, passende Fachleute zu finden', 'Helps us find suitable professionals')}
+        </p>
+      </div>
+
+      {/* Decision Maker - QUALIFYING QUESTION */}
+      <div>
+        <label className="block text-sm font-medium text-foreground mb-3">
+          {t('Sind Sie der Entscheidungsträger für dieses Projekt?', 'Are you the decision maker for this project?')} <span className="text-destructive">*</span>
+        </label>
+        <div className="space-y-3">
+          <label className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-all ${
+            formData.decision_maker === 'yes'
+              ? 'border-primary bg-primary/5'
+              : 'border-input hover:border-primary/50'
+          }`}>
+            <input
+              type="radio"
+              name="decision_maker"
+              value="yes"
+              checked={formData.decision_maker === 'yes'}
+              onChange={(e) => setFormData({ ...formData, decision_maker: e.target.value })}
+              className="w-4 h-4 text-primary focus:ring-2 focus:ring-ring"
+            />
+            <div className="flex-1">
+              <span className="text-sm font-medium text-foreground">
+                {t('Ja, ich entscheide', 'Yes, I decide')}
+              </span>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {t('Ich kann dieses Projekt beauftragen', 'I can hire for this project')}
+              </p>
+            </div>
+          </label>
+
+          <label className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-all ${
+            formData.decision_maker === 'no'
+              ? 'border-destructive bg-destructive/5'
+              : 'border-input hover:border-input/50'
+          }`}>
+            <input
+              type="radio"
+              name="decision_maker"
+              value="no"
+              checked={formData.decision_maker === 'no'}
+              onChange={(e) => setFormData({ ...formData, decision_maker: e.target.value })}
+              className="w-4 h-4 text-primary focus:ring-2 focus:ring-ring"
+            />
+            <div className="flex-1">
+              <span className="text-sm font-medium text-foreground">
+                {t('Nein, jemand anderes entscheidet', 'No, someone else decides')}
+              </span>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {t('Ich muss Zustimmung einholen', 'I need to get approval')}
+              </p>
+            </div>
+          </label>
+        </div>
+        {errors.decision_maker && (
+          <div className="mt-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
+            <p className="text-sm text-destructive">{errors.decision_maker}</p>
+          </div>
+        )}
+      </div>
+
+      {/* State Selection */}
+      <div>
+        <label className="block text-sm font-medium text-foreground mb-2">
+          {t('Bundesland', 'State')} <span className="text-destructive">*</span>
+        </label>
+        <select
+          value={formData.state}
+          onChange={(e) => setFormData({ ...formData, state: e.target.value, city: '' })}
+          className={`w-full h-10 rounded-md border ${errors.state ? 'border-destructive' : 'border-input'} bg-background px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`}
+        >
+          <option value="">{t('Bundesland auswählen...', 'Select state...')}</option>
+          <option value="hesse">{t('Hessen', 'Hesse')}</option>
+          <option value="nrw">{t('Nordrhein-Westfalen', 'North Rhine-Westphalia')}</option>
+        </select>
+        {errors.state && <p className="mt-1 text-sm text-destructive">{errors.state}</p>}
+      </div>
+
+      {/* City Selection */}
+      <div>
+        <label className="block text-sm font-medium text-foreground mb-2">
+          {t('Stadt', 'City')} <span className="text-destructive">*</span>
+        </label>
+        <select
+          value={formData.city}
+          onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+          disabled={!formData.state}
+          className={`w-full h-10 rounded-md border ${errors.city ? 'border-destructive' : 'border-input'} bg-background px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed`}
+        >
+          <option value="">{t('Stadt auswählen...', 'Select city...')}</option>
+          {availableCities.map((city) => (
+            <option key={city} value={city}>
+              {city}
+            </option>
+          ))}
+        </select>
+        {errors.city && <p className="mt-1 text-sm text-destructive">{errors.city}</p>}
+        {!formData.state && (
+          <p className="mt-1 text-xs text-muted-foreground">
+            {t('Bitte wählen Sie zuerst ein Bundesland', 'Please select a state first')}
+          </p>
+        )}
+      </div>
+
+      {/* PLZ (Optional) */}
+      <div>
+        <label className="block text-sm font-medium text-foreground mb-2">
+          {t('Postleitzahl', 'Postal code')} <span className="text-muted-foreground text-xs">({t('optional', 'optional')})</span>
+        </label>
+        <Input
+          type="text"
+          pattern="[0-9]*"
+          maxLength={5}
+          value={formData.plz}
+          onChange={(e) => setFormData({ ...formData, plz: e.target.value.replace(/\D/g, '') })}
+          placeholder="60311"
+          className={errors.plz ? 'border-destructive' : ''}
+        />
+        {errors.plz && <p className="mt-1 text-sm text-destructive">{errors.plz}</p>}
       </div>
       
       {/* Service Details Textarea */}

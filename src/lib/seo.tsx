@@ -69,22 +69,66 @@ export function SEO({
 export function OrganizationSchema() {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "LocalBusiness",
     "name": "Lynck Services",
+    "image": "https://lynckservices.lovable.app/favicon.png",
     "url": "https://lynckservices.lovable.app",
     "logo": "https://lynckservices.lovable.app/favicon.png",
-    "description": "Vergleichen Sie kostenlos Angebote von geprüften Handwerkern in Deutschland. Heizung, Solar, Dach, Klempner, Elektriker und mehr.",
+    "description": "Vergleichen Sie kostenlos Angebote von geprüften Handwerkern in Hessen und Nordrhein-Westfalen. Heizung, Solar, Dach, Klempner, Elektriker und mehr.",
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "DE"
+      "addressCountry": "DE",
+      "addressRegion": "Hessen"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 50.1109,
+      "longitude": 8.6821
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+49-30-1234-5678",
+      "telephone": "+49-69-123456",
       "contactType": "Customer Service",
-      "areaServed": "DE",
-      "availableLanguage": ["German", "English"]
+      "areaServed": ["DE-HE", "DE-NW"],
+      "availableLanguage": ["de", "en"],
+      "contactOption": "TollFree"
     },
+    "areaServed": [
+      {
+        "@type": "State",
+        "name": "Hessen",
+        "containedInPlace": { "@type": "Country", "name": "Deutschland" }
+      },
+      {
+        "@type": "State",
+        "name": "Nordrhein-Westfalen",
+        "containedInPlace": { "@type": "Country", "name": "Deutschland" }
+      }
+    ],
+    "serviceArea": [
+      { "@type": "City", "name": "Frankfurt am Main" },
+      { "@type": "City", "name": "Wiesbaden" },
+      { "@type": "City", "name": "Kassel" },
+      { "@type": "City", "name": "Darmstadt" },
+      { "@type": "City", "name": "Offenbach am Main" },
+      { "@type": "City", "name": "Hanau" },
+      { "@type": "City", "name": "Gießen" },
+      { "@type": "City", "name": "Marburg" },
+      { "@type": "City", "name": "Fulda" },
+      { "@type": "City", "name": "Rüsselsheim am Main" },
+      { "@type": "City", "name": "Köln" },
+      { "@type": "City", "name": "Düsseldorf" },
+      { "@type": "City", "name": "Dortmund" },
+      { "@type": "City", "name": "Essen" },
+      { "@type": "City", "name": "Duisburg" },
+      { "@type": "City", "name": "Bochum" },
+      { "@type": "City", "name": "Wuppertal" },
+      { "@type": "City", "name": "Bonn" },
+      { "@type": "City", "name": "Münster" },
+      { "@type": "City", "name": "Aachen" }
+    ],
+    "priceRange": "€€",
+    "openingHours": "Mo-Fr 08:00-18:00",
     "sameAs": []
   };
 
@@ -112,18 +156,37 @@ export function ServiceSchema({ service }: {
     "description": service.description,
     "provider": {
       "@type": "Organization",
-      "name": "Lynck Services"
+      "name": "Lynck Services",
+      "url": "https://lynckservices.lovable.app"
     },
-    "areaServed": {
-      "@type": "Country",
-      "name": "Germany"
+    "areaServed": [
+      {
+        "@type": "State",
+        "name": "Hessen",
+        "containedInPlace": {
+          "@type": "Country",
+          "name": "Germany"
+        }
+      },
+      {
+        "@type": "State",
+        "name": "North Rhine-Westphalia",
+        "containedInPlace": {
+          "@type": "Country",
+          "name": "Germany"
+        }
+      }
+    ],
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "availableLanguage": ["de", "en"]
     },
-    "url": `https://lynckservices.lovable.app/service/${service.slug}`,
+    "url": `https://lynckservices.lovable.app/services/${service.slug}`,
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "EUR",
-      "description": "Kostenlose Angebotsvergleiche"
+      "description": "Kostenlose Angebotsvergleiche von geprüften Fachleuten in Hessen und Nordrhein-Westfalen"
     }
   };
 
@@ -190,6 +253,31 @@ export function BreadcrumbSchema({ items }: { items: { name: string; url: string
       "position": index + 1,
       "name": item.name,
       "item": `https://lynckservices.lovable.app${item.url}`
+    }))
+  };
+
+  return (
+    <Helmet>
+      <script type="application/ld+json">
+        {JSON.stringify(schema)}
+      </script>
+    </Helmet>
+  );
+}
+
+export function FAQSchema({ faqs }: {
+  faqs: Array<{ question: string; answer: string }>
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
     }))
   };
 

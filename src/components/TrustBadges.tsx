@@ -6,20 +6,20 @@ const TrustBadges = () => {
 
   const badges = [
     {
-      textDe: "500+ Geprüfte Handwerker",
-      textEn: "500+ Verified Contractors"
+      textDe: "Geprüfte Fachleute in Ihrer Nähe",
+      textEn: "Verified Professionals In Your Area"
     },
     {
       textDe: "Kostenlos & unverbindlich",
       textEn: "Free & non-binding"
     },
     {
-      textDe: "Bis zu 3 Angebote vergleichen",
-      textEn: "Compare up to 3 quotes"
+      textDe: "Direkte Kontaktaufnahme",
+      textEn: "Direct professional contact"
     },
     {
-      textDe: "Durchschnittliche Antwortzeit: 24h",
-      textEn: "Average response time: 24h"
+      textDe: "Schnelle Rückmeldung",
+      textEn: "Fast response"
     }
   ];
 

@@ -22,8 +22,8 @@ const SecurityBadges = () => {
     },
     {
       icon: Users,
-      textDe: "500+ Handwerker",
-      textEn: "500+ Contractors"
+      textDe: "Geprüfte Fachleute in Ihrer Nähe",
+      textEn: "Verified Professionals In Your Area"
     }
   ];
 

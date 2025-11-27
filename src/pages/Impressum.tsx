@@ -48,7 +48,7 @@ const Impressum = () => {
                 {t("Kontakt:", "Contact:")}
               </h3>
               <div className="space-y-2 text-muted-foreground">
-                <p>E-Mail: kontakt@lynckservices.de</p>
+                <p>E-Mail: info@lynckservices.de</p>
                 <p>{t("Telefon:", "Phone:")} +49 30 1234 5678</p>
               </div>
             </div>

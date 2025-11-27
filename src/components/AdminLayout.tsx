@@ -50,8 +50,10 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   const navigation = [
     { name: t('Dashboard', 'Dashboard'), href: '/admin', icon: '📊' },
     { name: t('Leads', 'Leads'), href: '/admin/leads', icon: '📋' },
+    { name: t('Analytics', 'Analytics'), href: '/admin/analytics', icon: '📈' },
     { name: t('Unternehmen', 'Companies'), href: '/admin/companies', icon: '🏢' },
     { name: t('Services', 'Services'), href: '/admin/services', icon: '🔧' },
+    { name: t('Werbeanzeigen', 'Ads'), href: '/admin/ads', icon: '📣' },
   ];
 
     return (

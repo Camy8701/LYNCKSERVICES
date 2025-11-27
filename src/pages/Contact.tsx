@@ -40,8 +40,8 @@ const Contact = () => {
                 <Mail className="w-5 h-5 text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">{t("E-Mail", "Email")}</p>
-                  <a href="mailto:kontakt@lynckservices.de" className="text-foreground hover:text-primary transition-colors">
-                    kontakt@lynckservices.de
+                  <a href="mailto:info@lynckservices.de" className="text-foreground hover:text-primary transition-colors">
+                    info@lynckservices.de
                   </a>
                 </div>
               </div>

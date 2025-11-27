@@ -16,6 +16,7 @@ const Footer = () => {
     { nameDe: "Über uns", nameEn: "About Us", slug: "/about" },
     { nameDe: "Blog", nameEn: "Blog", slug: "/blog" },
     { nameDe: "Für Unternehmen", nameEn: "For Businesses", slug: "/for-businesses" },
+    { nameDe: "Werbung", nameEn: "Advertise", slug: "/advertise" },
     { nameDe: "Kontakt", nameEn: "Contact", slug: "/contact" }
   ];
 

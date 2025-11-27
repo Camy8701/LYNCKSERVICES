@@ -14,7 +14,7 @@ import Terms from "./pages/Terms";
 import Impressum from "./pages/Impressum";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import ServiceRequest from "./pages/ServiceRequest";
+import ServiceDetail from "./pages/ServiceDetail";
 import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
@@ -24,6 +24,11 @@ import AdminLeadDetail from "./pages/AdminLeadDetail";
 import AdminCompanies from "./pages/AdminCompanies";
 import AdminCompanyForm from "./pages/AdminCompanyForm";
 import AdminServices from "./pages/AdminServices";
+import AdminAds from "./pages/AdminAds";
+import AdminAdDetail from "./pages/AdminAdDetail";
+import AdminAnalytics from "./pages/AdminAnalytics";
+import Advertise from "./pages/Advertise";
+import AdvertiseCreate from "./pages/AdvertiseCreate";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -46,7 +51,7 @@ const App = () => (
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/service/:slug" element={<ServiceRequest />} />
+            <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/danke" element={<ThankYou />} />
             
             {/* Admin Routes */}
@@ -57,7 +62,14 @@ const App = () => (
             <Route path="/admin/companies" element={<ProtectedRoute><AdminCompanies /></ProtectedRoute>} />
             <Route path="/admin/companies/:id" element={<ProtectedRoute><AdminCompanyForm /></ProtectedRoute>} />
             <Route path="/admin/services" element={<ProtectedRoute><AdminServices /></ProtectedRoute>} />
-            
+            <Route path="/admin/ads" element={<ProtectedRoute><AdminAds /></ProtectedRoute>} />
+            <Route path="/admin/ads/:id" element={<ProtectedRoute><AdminAdDetail /></ProtectedRoute>} />
+            <Route path="/admin/analytics" element={<ProtectedRoute><AdminAnalytics /></ProtectedRoute>} />
+
+            {/* Advertising Routes */}
+            <Route path="/advertise" element={<Advertise />} />
+            <Route path="/advertise/create" element={<AdvertiseCreate />} />
+
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
