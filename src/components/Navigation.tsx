@@ -41,31 +41,31 @@ const Navigation = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-8">
-          <div 
+          <div
             className="relative"
             onMouseEnter={() => setServicesOpen(true)}
             onMouseLeave={() => setServicesOpen(false)}
           >
             <button
-              className="text-sm text-foreground font-medium hover:text-primary transition-colors duration-300 flex items-center gap-1"
+              className="text-sm text-foreground font-medium hover:text-primary transition-colors duration-300 flex items-center gap-1 py-2"
             >
               {t("Dienstleistungen", "Services")}
-              <ChevronDown className="w-3 h-3" />
+              <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
             </button>
             {servicesOpen && (
-              <div
-                className="absolute top-full left-0 mt-2 w-64 bg-background/95 backdrop-blur-md border border-border rounded-xl shadow-lg z-[100] py-2"
-              >
-                {services.map((service) => (
-                  <a
-                    key={service.slug}
-                    href={`/service/${service.slug}`}
-                    className="flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-accent hover:text-primary transition-colors duration-300"
-                  >
-                    <span className="text-lg">{service.icon}</span>
-                    <span>{service.name}</span>
-                  </a>
-                ))}
+              <div className="absolute top-full left-0 pt-1 w-64 z-[100]">
+                <div className="bg-background border border-border rounded-xl shadow-xl py-2">
+                  {services.map((service) => (
+                    <a
+                      key={service.slug}
+                      href={`/services/${service.slug}`}
+                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-primary/10 hover:text-foreground transition-colors duration-200"
+                    >
+                      <span className="text-lg">{service.icon}</span>
+                      <span>{service.name}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -147,7 +147,7 @@ const Navigation = () => {
                   {services.map((service) => (
                     <a
                       key={service.slug}
-                      href={`/service/${service.slug}`}
+                      href={`/services/${service.slug}`}
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center gap-3 px-2 py-2.5 text-sm text-foreground hover:bg-accent hover:text-primary rounded-lg transition-colors duration-300"
                     >

@@ -80,7 +80,7 @@ export const SearchBar = () => {
   }, []);
 
   const handleServiceClick = (slug: string) => {
-    window.location.href = `/service/${slug}`;
+    window.location.href = `/services/${slug}`;
     setQuery("");
     setIsOpen(false);
   };
