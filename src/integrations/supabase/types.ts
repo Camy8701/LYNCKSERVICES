@@ -14,6 +14,207 @@ export type Database = {
   }
   public: {
     Tables: {
+      ad_clicks: {
+        Row: {
+          ad_id: string
+          clicked_at: string
+          device_type: string | null
+          id: string
+          ip_hash: string | null
+          referrer: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          ad_id: string
+          clicked_at?: string
+          device_type?: string | null
+          id?: string
+          ip_hash?: string | null
+          referrer?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          ad_id?: string
+          clicked_at?: string
+          device_type?: string | null
+          id?: string
+          ip_hash?: string | null
+          referrer?: string | null
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ad_clicks_ad_id_fkey"
+            columns: ["ad_id"]
+            isOneToOne: false
+            referencedRelation: "ads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ad_impressions: {
+        Row: {
+          ad_id: string
+          date: string
+          device_type: string | null
+          id: string
+          impression_count: number | null
+        }
+        Insert: {
+          ad_id: string
+          date?: string
+          device_type?: string | null
+          id?: string
+          impression_count?: number | null
+        }
+        Update: {
+          ad_id?: string
+          date?: string
+          device_type?: string | null
+          id?: string
+          impression_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ad_impressions_ad_id_fkey"
+            columns: ["ad_id"]
+            isOneToOne: false
+            referencedRelation: "ads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ad_waitlist: {
+        Row: {
+          company_name: string
+          converted_to_ad_id: string | null
+          created_at: string
+          email: string
+          id: string
+          industry: string | null
+          notified: boolean | null
+          notified_at: string | null
+          phone: string | null
+          preferred_duration: number | null
+        }
+        Insert: {
+          company_name: string
+          converted_to_ad_id?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          industry?: string | null
+          notified?: boolean | null
+          notified_at?: string | null
+          phone?: string | null
+          preferred_duration?: number | null
+        }
+        Update: {
+          company_name?: string
+          converted_to_ad_id?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          industry?: string | null
+          notified?: boolean | null
+          notified_at?: string | null
+          phone?: string | null
+          preferred_duration?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ad_waitlist_converted_to_ad_id_fkey"
+            columns: ["converted_to_ad_id"]
+            isOneToOne: false
+            referencedRelation: "ads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ads: {
+        Row: {
+          advertiser_email: string
+          advertiser_name: string
+          advertiser_phone: string | null
+          approved_at: string | null
+          approved_by: string | null
+          auto_renew: boolean | null
+          company_name: string
+          created_at: string
+          duration_months: number
+          expires_at: string | null
+          id: string
+          industry: string
+          logo_url: string
+          price_paid: number
+          rejection_reason: string | null
+          short_description: string | null
+          slot_position: number | null
+          starts_at: string | null
+          status: Database["public"]["Enums"]["ad_status"]
+          stripe_payment_id: string | null
+          stripe_subscription_id: string | null
+          target_all_cities: boolean | null
+          target_cities: string[] | null
+          updated_at: string
+          website_url: string
+        }
+        Insert: {
+          advertiser_email: string
+          advertiser_name: string
+          advertiser_phone?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          auto_renew?: boolean | null
+          company_name: string
+          created_at?: string
+          duration_months?: number
+          expires_at?: string | null
+          id?: string
+          industry: string
+          logo_url: string
+          price_paid: number
+          rejection_reason?: string | null
+          short_description?: string | null
+          slot_position?: number | null
+          starts_at?: string | null
+          status?: Database["public"]["Enums"]["ad_status"]
+          stripe_payment_id?: string | null
+          stripe_subscription_id?: string | null
+          target_all_cities?: boolean | null
+          target_cities?: string[] | null
+          updated_at?: string
+          website_url: string
+        }
+        Update: {
+          advertiser_email?: string
+          advertiser_name?: string
+          advertiser_phone?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          auto_renew?: boolean | null
+          company_name?: string
+          created_at?: string
+          duration_months?: number
+          expires_at?: string | null
+          id?: string
+          industry?: string
+          logo_url?: string
+          price_paid?: number
+          rejection_reason?: string | null
+          short_description?: string | null
+          slot_position?: number | null
+          starts_at?: string | null
+          status?: Database["public"]["Enums"]["ad_status"]
+          stripe_payment_id?: string | null
+          stripe_subscription_id?: string | null
+          target_all_cities?: boolean | null
+          target_cities?: string[] | null
+          updated_at?: string
+          website_url?: string
+        }
+        Relationships: []
+      }
       cities: {
         Row: {
           created_at: string | null
@@ -124,11 +325,15 @@ export type Database = {
           admin_notes: string | null
           city: string
           created_at: string | null
+          decision_maker: string | null
           email: string | null
           id: string
           name: string
           phone: string
           plz: string
+          property_age: string | null
+          property_ownership: string | null
+          property_type: string | null
           service_details: string
           service_id: string | null
           source: string | null
@@ -139,11 +344,15 @@ export type Database = {
           admin_notes?: string | null
           city: string
           created_at?: string | null
+          decision_maker?: string | null
           email?: string | null
           id?: string
           name: string
           phone: string
           plz: string
+          property_age?: string | null
+          property_ownership?: string | null
+          property_type?: string | null
           service_details: string
           service_id?: string | null
           source?: string | null
@@ -154,11 +363,15 @@ export type Database = {
           admin_notes?: string | null
           city?: string
           created_at?: string | null
+          decision_maker?: string | null
           email?: string | null
           id?: string
           name?: string
           phone?: string
           plz?: string
+          property_age?: string | null
+          property_ownership?: string | null
+          property_type?: string | null
           service_details?: string
           service_id?: string | null
           source?: string | null
@@ -240,6 +453,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_ad_analytics: {
+        Args: { p_ad_id: string }
+        Returns: {
+          ctr: number
+          total_clicks: number
+          total_impressions: number
+        }[]
+      }
+      get_available_ad_slots: { Args: never; Returns: number }
+      get_next_available_slot_date: { Args: never; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -247,8 +470,13 @@ export type Database = {
         }
         Returns: boolean
       }
+      increment_ad_impression: {
+        Args: { p_ad_id: string; p_device_type?: string }
+        Returns: undefined
+      }
     }
     Enums: {
+      ad_status: "pending" | "active" | "paused" | "rejected" | "expired"
       app_role: "admin" | "user"
     }
     CompositeTypes: {
@@ -377,6 +605,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      ad_status: ["pending", "active", "paused", "rejected", "expired"],
       app_role: ["admin", "user"],
     },
   },
