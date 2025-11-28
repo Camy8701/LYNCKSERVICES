@@ -25,7 +25,7 @@ const HeroSection = () => {
     <section 
       className="overflow-hidden glass-card rounded-3xl mb-20 mx-4 md:mx-6 lg:mx-8 relative"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/hero-house.png")`,
+        backgroundImage: `url("/hero-house.png")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
