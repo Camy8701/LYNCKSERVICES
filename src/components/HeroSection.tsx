@@ -22,17 +22,18 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="overflow-hidden glass-card rounded-3xl mb-20 mx-4 md:mx-6 lg:mx-8">
+    <section 
+      className="overflow-hidden glass-card rounded-3xl mb-20 mx-4 md:mx-6 lg:mx-8 relative"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/hero-house.png")`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
       <div className="grid grid-cols-1 md:grid-cols-2">
-        {/* Left Panel with Modern House Background */}
-        <div className="relative md:p-10 lg:p-14 pt-6 pr-6 pb-6 pl-6 overflow-hidden"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85&fm=webp")`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-        >
+        {/* Left Panel */}
+        <div className="relative md:p-10 lg:p-14 pt-6 pr-6 pb-6 pl-6 overflow-hidden">
           <div className="mt-10 md:mt-14 relative z-10">
             <h1 className="mt-4 text-5xl md:text-6xl lg:text-7xl tracking-tight text-white font-serif font-normal drop-shadow-lg">
               {t("Finden Sie geprüfte", "Find Trusted")}
@@ -134,12 +135,7 @@ const HeroSection = () => {
             </div>
 
             {/* House Body */}
-            <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm ring-gray-200 dark:ring-white/10 ring-1 rounded-b-3xl items-center justify-center p-8"
-              style={{
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                backgroundSize: '30px 30px'
-              }}
-            >
+            <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-black/40 backdrop-blur-sm ring-white/20 ring-1 rounded-b-3xl items-center justify-center p-8">
               {/* Service Cards Grid */}
               <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-md">
               {services.slice(0, 6).map((service) => {
@@ -148,10 +144,10 @@ const HeroSection = () => {
                   <a
                     key={service.id}
                     href={`/services/${service.slug}`}
-                    className="group relative flex flex-col items-center justify-center bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl p-3 md:p-6 hover:bg-white/[0.08] hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
+                    className="group relative flex flex-col items-center justify-center bg-white/[0.1] backdrop-blur-sm border border-white/[0.15] rounded-xl p-3 md:p-6 hover:bg-white/[0.2] hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
                   >
                     <IconComponent className="w-6 h-6 md:w-8 md:h-8 mb-2 md:mb-3 text-primary flex-shrink-0" />
-                    <span className="text-[10px] md:text-xs text-center text-foreground font-medium leading-tight break-words">
+                    <span className="text-[10px] md:text-xs text-center text-white font-medium leading-tight break-words">
                       {language === 'de' ? service.name : service.name_en}
                     </span>
                   </a>

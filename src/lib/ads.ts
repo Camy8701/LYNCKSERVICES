@@ -214,7 +214,7 @@ export async function joinWaitlist(input: {
 // ANALYTICS TRACKING
 // ============================================
 
-export async function trackImpression(adId: string, deviceType: 'mobile' | 'desktop' | 'tablet' = 'unknown'): Promise<void> {
+export async function trackImpression(adId: string, deviceType: 'mobile' | 'desktop' | 'tablet' = 'desktop'): Promise<void> {
   try {
     await supabase.rpc('increment_ad_impression', {
       p_ad_id: adId,
@@ -225,7 +225,7 @@ export async function trackImpression(adId: string, deviceType: 'mobile' | 'desk
   }
 }
 
-export async function trackClick(adId: string, deviceType: 'mobile' | 'desktop' | 'tablet' = 'unknown'): Promise<void> {
+export async function trackClick(adId: string, deviceType: 'mobile' | 'desktop' | 'tablet' = 'desktop'): Promise<void> {
   try {
     await supabase
       .from('ad_clicks')
