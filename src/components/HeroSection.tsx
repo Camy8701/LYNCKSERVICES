@@ -96,55 +96,30 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Right Panel - Service Category Grid */}
+        {/* Right Panel - Service Category Grid with Modern House Background */}
         <div className="relative md:p-10 lg:p-14 pt-8 pr-8 pb-8 pl-8">
           <div className="relative">
-            {/* House Roof */}
-            <div className="relative -mb-1">
-              <svg 
-                className="w-full h-24 md:h-28 lg:h-32" 
-                viewBox="0 0 400 100" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none"
-              >
-                {/* Roof triangle - filled */}
-                <path 
-                  d="M0 100 L200 5 L400 100 Z" 
-                  fill="hsl(var(--primary))"
-                  stroke="hsl(var(--primary))"
-                  strokeWidth="2"
-                />
-              </svg>
-              
-              {/* Chimney */}
-              <div className="absolute top-[15%] right-[35%] w-4 md:w-5 lg:w-6 h-10 md:h-12 lg:h-14 bg-primary rounded-sm shadow-lg">
-                {/* Smoke particles - more visible */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke"></div>
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke-delay-1"></div>
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke-delay-2"></div>
-              </div>
-            </div>
-            
-            {/* House Body */}
-            <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm ring-gray-200 dark:ring-white/10 ring-1 rounded-b-3xl items-center justify-center p-8"
+            {/* Modern House Background Container */}
+            <div className="relative overflow-hidden min-h-[520px] md:min-h-[600px] flex rounded-3xl items-center justify-center p-8"
               style={{
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                backgroundSize: '30px 30px'
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85&fm=webp")`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
               }}
             >
-              {/* Service Cards Grid */}
-              <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-md">
+              {/* Service Cards Grid - Overlaid on House Background */}
+              <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-md relative z-10">
               {services.slice(0, 6).map((service) => {
                 const IconComponent = getIconComponent(service.icon);
                 return (
                   <a
                     key={service.id}
                     href={`/services/${service.slug}`}
-                    className="group relative flex flex-col items-center justify-center bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl p-3 md:p-6 hover:bg-white/[0.08] hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
+                    className="group relative flex flex-col items-center justify-center bg-white/[0.15] backdrop-blur-md border border-white/[0.2] rounded-xl p-3 md:p-6 hover:bg-white/[0.25] hover:scale-105 hover:shadow-lg hover:shadow-primary/50 transition-all duration-300"
                   >
                     <IconComponent className="w-6 h-6 md:w-8 md:h-8 mb-2 md:mb-3 text-primary flex-shrink-0" />
-                    <span className="text-[10px] md:text-xs text-center text-foreground font-medium leading-tight break-words">
+                    <span className="text-[10px] md:text-xs text-center text-white font-semibold leading-tight break-words drop-shadow-lg">
                       {language === 'de' ? service.name : service.name_en}
                     </span>
                   </a>
