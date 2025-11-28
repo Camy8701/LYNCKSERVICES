@@ -11,12 +11,12 @@ import { SEO, ServiceSchema, BreadcrumbSchema } from '@/lib/seo';
 
 // Service images mapping - relevant, high-quality images for each service
 const serviceImages: Record<string, string> = {
-  heizung: "https://images.unsplash.com/photo-1581858707998-a2d1b2f79a21?auto=format&fit=crop&w=1200&q=90",
-  solar: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=1200&q=90",
-  dachdecker: "https://images.unsplash.com/photo-1565008576549-57569a49371d?auto=format&fit=crop&w=1200&q=90",
-  klempner: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1200&q=90",
-  elektriker: "https://images.unsplash.com/photo-1473186578172-c141e6798cf4?auto=format&fit=crop&w=1200&q=90",
-  renovierung: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=90",
+  heizung: "/heating-hvac.jpg",
+  solar: "/solar-panel.jpg",
+  dachdecker: "/roofing.jpg",
+  klempner: "/plumbing-sanitary.png",
+  elektriker: "/electrician.jpg",
+  renovierung: "/general-renovation.jpg",
 };
 
 // Comprehensive service details data
