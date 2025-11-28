@@ -35,18 +35,18 @@ const HeroSection = () => {
         {/* Left Panel */}
         <div className="relative md:p-10 lg:p-14 pt-6 pr-6 pb-6 pl-6 overflow-hidden">
           <div className="mt-10 md:mt-14 relative z-10">
-            <h1 className="mt-4 text-5xl md:text-6xl lg:text-7xl tracking-tight text-primary font-serif font-normal drop-shadow-lg">
+            <h1 className="mt-4 text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground font-serif font-normal drop-shadow-lg">
               {t("Finden Sie geprüfte", "Find Trusted")}
             </h1>
-            <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-primary font-serif font-normal drop-shadow-lg">
+            <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground font-serif font-normal drop-shadow-lg">
               {t("Handwerker", "Home Services")}
             </h2>
-            <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-primary font-serif font-normal drop-shadow-lg">
+            <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground font-serif font-normal drop-shadow-lg">
               {t("in Ihrer Nähe", "in Your Area")}
             </h2>
 
             <div className="mt-6 flex items-center gap-3">
-              <span className="text-sm text-primary">
+              <span className="text-sm text-foreground">
                 {t(
                   "Kostenlos Angebote vergleichen • Geprüfte Fachleute • Schnelle Antwort",
                   "Compare quotes for free • Verified professionals • Fast response"
@@ -114,10 +114,10 @@ const HeroSection = () => {
               <a
                 key={service.id}
                 href={`/services/${service.slug}`}
-                className="group relative flex flex-col items-center justify-center bg-white/[0.1] backdrop-blur-sm border border-white/[0.15] rounded-xl p-3 md:p-6 hover:bg-white/[0.2] hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
+                className="group relative flex flex-col items-center justify-center bg-white/30 backdrop-blur-sm border border-white/40 rounded-xl p-3 md:p-6 hover:bg-white/40 hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
               >
                 <IconComponent className="w-6 h-6 md:w-8 md:h-8 mb-2 md:mb-3 text-primary flex-shrink-0" />
-                <span className="text-[10px] md:text-xs text-center text-white font-medium leading-tight break-words">
+                <span className="text-[10px] md:text-xs text-center text-foreground font-semibold leading-tight break-words">
                   {language === 'de' ? service.name : service.name_en}
                 </span>
               </a>
