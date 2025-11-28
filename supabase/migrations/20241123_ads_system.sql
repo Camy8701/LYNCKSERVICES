@@ -211,13 +211,8 @@ CREATE POLICY "Anyone can create ads" ON ads
 -- Admins can do everything with ads
 CREATE POLICY "Admins can manage ads" ON ads
   FOR ALL
-  USING (
-    EXISTS (
-      SELECT 1 FROM auth.users
-      WHERE auth.users.id = auth.uid()
-      AND auth.users.email LIKE '%@lynckservices.com'
-    )
-  );
+  USING (public.has_role(auth.uid(), 'admin'))
+  WITH CHECK (public.has_role(auth.uid(), 'admin'));
 
 -- Anyone can record impressions
 CREATE POLICY "Anyone can record impressions" ON ad_impressions
@@ -227,13 +222,7 @@ CREATE POLICY "Anyone can record impressions" ON ad_impressions
 -- Admins can view impressions
 CREATE POLICY "Admins can view impressions" ON ad_impressions
   FOR SELECT
-  USING (
-    EXISTS (
-      SELECT 1 FROM auth.users
-      WHERE auth.users.id = auth.uid()
-      AND auth.users.email LIKE '%@lynckservices.com'
-    )
-  );
+  USING (public.has_role(auth.uid(), 'admin'));
 
 -- Anyone can record clicks
 CREATE POLICY "Anyone can record clicks" ON ad_clicks
@@ -243,13 +232,7 @@ CREATE POLICY "Anyone can record clicks" ON ad_clicks
 -- Admins can view clicks
 CREATE POLICY "Admins can view clicks" ON ad_clicks
   FOR SELECT
-  USING (
-    EXISTS (
-      SELECT 1 FROM auth.users
-      WHERE auth.users.id = auth.uid()
-      AND auth.users.email LIKE '%@lynckservices.com'
-    )
-  );
+  USING (public.has_role(auth.uid(), 'admin'));
 
 -- Anyone can join waitlist
 CREATE POLICY "Anyone can join waitlist" ON ad_waitlist
@@ -259,13 +242,8 @@ CREATE POLICY "Anyone can join waitlist" ON ad_waitlist
 -- Admins can manage waitlist
 CREATE POLICY "Admins can manage waitlist" ON ad_waitlist
   FOR ALL
-  USING (
-    EXISTS (
-      SELECT 1 FROM auth.users
-      WHERE auth.users.id = auth.uid()
-      AND auth.users.email LIKE '%@lynckservices.com'
-    )
-  );
+  USING (public.has_role(auth.uid(), 'admin'))
+  WITH CHECK (public.has_role(auth.uid(), 'admin'));
 
 -- ============================================
 -- TRIGGER FOR UPDATED_AT
