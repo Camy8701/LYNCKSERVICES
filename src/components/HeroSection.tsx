@@ -35,18 +35,18 @@ const HeroSection = () => {
         {/* Left Panel */}
         <div className="relative md:p-10 lg:p-14 pt-6 pr-6 pb-6 pl-6 overflow-hidden">
           <div className="mt-10 md:mt-14 relative z-10">
-            <h1 className="mt-4 text-5xl md:text-6xl lg:text-7xl tracking-tight text-white font-serif font-normal drop-shadow-lg">
+            <h1 className="mt-4 text-5xl md:text-6xl lg:text-7xl tracking-tight text-primary font-serif font-normal drop-shadow-lg">
               {t("Finden Sie geprüfte", "Find Trusted")}
             </h1>
-            <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-gray-200 font-serif font-normal drop-shadow-lg">
+            <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-primary font-serif font-normal drop-shadow-lg">
               {t("Handwerker", "Home Services")}
             </h2>
-            <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-gray-200 font-serif font-normal drop-shadow-lg">
+            <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-primary font-serif font-normal drop-shadow-lg">
               {t("in Ihrer Nähe", "in Your Area")}
             </h2>
 
             <div className="mt-6 flex items-center gap-3">
-              <span className="text-sm text-gray-300">
+              <span className="text-sm text-primary">
                 {t(
                   "Kostenlos Angebote vergleichen • Geprüfte Fachleute • Schnelle Antwort",
                   "Compare quotes for free • Verified professionals • Fast response"
@@ -105,56 +105,24 @@ const HeroSection = () => {
         </div>
 
         {/* Right Panel - Service Category Grid */}
-        <div className="relative md:p-10 lg:p-14 pt-8 pr-8 pb-8 pl-8">
-          <div className="relative">
-            {/* House Roof */}
-            <div className="relative -mb-1">
-              <svg
-                className="w-full h-24 md:h-28 lg:h-32"
-                viewBox="0 0 400 100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none"
+        <div className="relative md:p-10 lg:p-14 pt-8 pr-8 pb-8 pl-8 flex items-center justify-center">
+          {/* Service Cards Grid */}
+          <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-md">
+          {services.slice(0, 6).map((service) => {
+            const IconComponent = getIconComponent(service.icon);
+            return (
+              <a
+                key={service.id}
+                href={`/services/${service.slug}`}
+                className="group relative flex flex-col items-center justify-center bg-white/[0.1] backdrop-blur-sm border border-white/[0.15] rounded-xl p-3 md:p-6 hover:bg-white/[0.2] hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
               >
-                {/* Roof triangle - filled */}
-                <path
-                  d="M0 100 L200 5 L400 100 Z"
-                  fill="hsl(var(--primary))"
-                  stroke="hsl(var(--primary))"
-                  strokeWidth="2"
-                />
-              </svg>
-
-              {/* Chimney */}
-              <div className="absolute top-[15%] right-[35%] w-4 md:w-5 lg:w-6 h-10 md:h-12 lg:h-14 bg-primary rounded-sm shadow-lg">
-                {/* Smoke particles - more visible */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke"></div>
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke-delay-1"></div>
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-300/70 rounded-full blur-md animate-smoke-delay-2"></div>
-              </div>
-            </div>
-
-            {/* House Body */}
-            <div className="relative overflow-hidden min-h-[420px] md:min-h-[520px] flex bg-black/40 backdrop-blur-sm ring-white/20 ring-1 rounded-b-3xl items-center justify-center p-8">
-              {/* Service Cards Grid */}
-              <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-md">
-              {services.slice(0, 6).map((service) => {
-                const IconComponent = getIconComponent(service.icon);
-                return (
-                  <a
-                    key={service.id}
-                    href={`/services/${service.slug}`}
-                    className="group relative flex flex-col items-center justify-center bg-white/[0.1] backdrop-blur-sm border border-white/[0.15] rounded-xl p-3 md:p-6 hover:bg-white/[0.2] hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
-                  >
-                    <IconComponent className="w-6 h-6 md:w-8 md:h-8 mb-2 md:mb-3 text-primary flex-shrink-0" />
-                    <span className="text-[10px] md:text-xs text-center text-white font-medium leading-tight break-words">
-                      {language === 'de' ? service.name : service.name_en}
-                    </span>
-                  </a>
-                );
-              })}
-              </div>
-            </div>
+                <IconComponent className="w-6 h-6 md:w-8 md:h-8 mb-2 md:mb-3 text-primary flex-shrink-0" />
+                <span className="text-[10px] md:text-xs text-center text-white font-medium leading-tight break-words">
+                  {language === 'de' ? service.name : service.name_en}
+                </span>
+              </a>
+            );
+          })}
           </div>
         </div>
       </div>
