@@ -86,6 +86,14 @@ const Navigation = () => {
           <SearchBar />
         </div>
 
+        {/* Contact Us Button - Desktop */}
+        <a
+          href="/contact"
+          className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 rounded-lg transition-colors duration-300"
+        >
+          {t("Kontakt", "Contact Us")}
+        </a>
+
         {/* Desktop Language & Theme */}
         <button
           onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
@@ -180,6 +188,13 @@ const Navigation = () => {
                   className="block px-2 py-2.5 text-sm text-foreground hover:bg-accent hover:text-primary rounded-lg transition-colors duration-300"
                 >
                   {t("Für Unternehmen", "For Businesses")}
+                </a>
+                <a
+                  href="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-2 py-2.5 text-sm text-primary-foreground bg-primary hover:bg-primary/90 rounded-lg transition-colors duration-300 font-medium mt-4"
+                >
+                  {t("Kontakt", "Contact Us")}
                 </a>
               </div>
 

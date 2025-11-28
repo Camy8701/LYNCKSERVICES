@@ -388,6 +388,56 @@ export type Database = {
           },
         ]
       }
+      messages: {
+        Row: {
+          id: string
+          name: string
+          email: string
+          subject: string
+          message: string
+          status: string | null
+          created_at: string | null
+          updated_at: string | null
+          read_at: string | null
+          read_by: string | null
+          notes: string | null
+        }
+        Insert: {
+          id?: string
+          name: string
+          email: string
+          subject: string
+          message: string
+          status?: string | null
+          created_at?: string | null
+          updated_at?: string | null
+          read_at?: string | null
+          read_by?: string | null
+          notes?: string | null
+        }
+        Update: {
+          id?: string
+          name?: string
+          email?: string
+          subject?: string
+          message?: string
+          status?: string | null
+          created_at?: string | null
+          updated_at?: string | null
+          read_at?: string | null
+          read_by?: string | null
+          notes?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_read_by_fkey"
+            columns: ["read_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       services: {
         Row: {
           created_at: string | null

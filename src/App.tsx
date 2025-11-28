@@ -27,6 +27,7 @@ const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const AdminLeads = lazy(() => import("./pages/AdminLeads"));
 const AdminLeadDetail = lazy(() => import("./pages/AdminLeadDetail"));
+const AdminMessages = lazy(() => import("./pages/AdminMessages"));
 const AdminCompanies = lazy(() => import("./pages/AdminCompanies"));
 const AdminCompanyForm = lazy(() => import("./pages/AdminCompanyForm"));
 const AdminServices = lazy(() => import("./pages/AdminServices"));
@@ -77,6 +78,7 @@ const App = () => (
                 <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
                 <Route path="/admin/leads" element={<ProtectedRoute><AdminLeads /></ProtectedRoute>} />
                 <Route path="/admin/leads/:id" element={<ProtectedRoute><AdminLeadDetail /></ProtectedRoute>} />
+                <Route path="/admin/messages" element={<ProtectedRoute><AdminMessages /></ProtectedRoute>} />
                 <Route path="/admin/companies" element={<ProtectedRoute><AdminCompanies /></ProtectedRoute>} />
                 <Route path="/admin/companies/:id" element={<ProtectedRoute><AdminCompanyForm /></ProtectedRoute>} />
                 <Route path="/admin/services" element={<ProtectedRoute><AdminServices /></ProtectedRoute>} />

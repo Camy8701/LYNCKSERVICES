@@ -1,12 +1,14 @@
 import PageLayout from "@/components/PageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Mail, Phone, Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,16 +16,68 @@ const Contact = () => {
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: t("Nachricht gesendet", "Message sent"),
-      description: t(
-        "Wir melden uns so schnell wie möglich bei Ihnen.",
-        "We will get back to you as soon as possible."
-      )
-    });
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      // Save message to Supabase database
+      const { data, error } = await supabase
+        .from('messages')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            status: 'unread'
+          }
+        ])
+        .select();
+
+      if (error) {
+        throw error;
+      }
+
+      // Send email notification (using mailto as a fallback)
+      // In production, you would use an email service like Resend, SendGrid, or Supabase Edge Functions
+      const emailSubject = encodeURIComponent(`[Lynck Services] ${formData.subject}`);
+      const emailBody = encodeURIComponent(
+        `New contact form submission:\n\n` +
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Subject: ${formData.subject}\n\n` +
+        `Message:\n${formData.message}\n\n` +
+        `---\n` +
+        `Submitted at: ${new Date().toLocaleString()}`
+      );
+
+      // Open mailto link (will prompt user to send email in their email client)
+      // This is a temporary solution - replace with proper email service in production
+      window.location.href = `mailto:info@lynckservices.de?subject=${emailSubject}&body=${emailBody}`;
+
+      toast({
+        title: t("Nachricht gesendet", "Message sent"),
+        description: t(
+          "Wir melden uns so schnell wie möglich bei Ihnen.",
+          "We will get back to you as soon as possible."
+        )
+      });
+
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error('Error submitting message:', error);
+      toast({
+        title: t("Fehler", "Error"),
+        description: t(
+          "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.",
+          "Your message could not be sent. Please try again later."
+        ),
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -45,14 +99,13 @@ const Contact = () => {
                   </a>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary" />
-                <div>
-                  <p className="text-sm text-muted-foreground">{t("Telefon", "Phone")}</p>
-                  <a href="tel:+493012345678" className="text-foreground hover:text-primary transition-colors">
-                    +49 30 1234 5678
-                  </a>
-                </div>
+              <div className="mt-6">
+                <p className="text-sm text-muted-foreground mb-2">
+                  {t("Geschäftszeiten", "Business Hours")}
+                </p>
+                <p className="text-foreground">
+                  {t("Mo-Fr: 08:00-18:00", "Mon-Fri: 08:00-18:00")}
+                </p>
               </div>
             </div>
 
@@ -111,10 +164,11 @@ const Contact = () => {
               </div>
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium"
+                disabled={isSubmitting}
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-4 h-4" />
-                {t("Nachricht senden", "Send Message")}
+                {isSubmitting ? t("Wird gesendet...", "Sending...") : t("Nachricht senden", "Send Message")}
               </button>
             </form>
           </div>
