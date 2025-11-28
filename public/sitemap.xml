@@ -2,53 +2,53 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <!-- Homepage -->
   <url>
-    <loc>https://lynckservices.lovable.app/</loc>
+    <loc>https://lynckservices.com/</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.lovable.app/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.lovable.app/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.com/" />
   </url>
 
   <!-- Static Pages -->
   <url>
-    <loc>https://lynckservices.lovable.app/about</loc>
+    <loc>https://lynckservices.com/about</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/contact</loc>
+    <loc>https://lynckservices.com/contact</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/for-businesses</loc>
+    <loc>https://lynckservices.com/for-businesses</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/blog</loc>
+    <loc>https://lynckservices.com/blog</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/privacy</loc>
+    <loc>https://lynckservices.com/privacy</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/terms</loc>
+    <loc>https://lynckservices.com/terms</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/impressum</loc>
+    <loc>https://lynckservices.com/impressum</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -56,87 +56,87 @@
 
   <!-- Service Pages - High Priority for Germany SEO -->
   <url>
-    <loc>https://lynckservices.lovable.app/services/heizung</loc>
+    <loc>https://lynckservices.com/services/heizung</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.lovable.app/services/heizung" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.lovable.app/services/heizung" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.com/services/heizung" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.com/services/heizung" />
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/services/solar</loc>
+    <loc>https://lynckservices.com/services/solar</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.lovable.app/services/solar" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.lovable.app/services/solar" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.com/services/solar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.com/services/solar" />
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/services/dachdecker</loc>
+    <loc>https://lynckservices.com/services/dachdecker</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.lovable.app/services/dachdecker" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.lovable.app/services/dachdecker" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.com/services/dachdecker" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.com/services/dachdecker" />
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/services/klempner</loc>
+    <loc>https://lynckservices.com/services/klempner</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.lovable.app/services/klempner" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.lovable.app/services/klempner" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.com/services/klempner" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.com/services/klempner" />
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/services/elektriker</loc>
+    <loc>https://lynckservices.com/services/elektriker</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.lovable.app/services/elektriker" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.lovable.app/services/elektriker" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.com/services/elektriker" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.com/services/elektriker" />
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/services/renovierung</loc>
+    <loc>https://lynckservices.com/services/renovierung</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.lovable.app/services/renovierung" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.lovable.app/services/renovierung" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://lynckservices.com/services/renovierung" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lynckservices.com/services/renovierung" />
   </url>
   
   <!-- Blog Posts - German Content Optimized -->
   <url>
-    <loc>https://lynckservices.lovable.app/blog/heizung-kosten-2025</loc>
+    <loc>https://lynckservices.com/blog/heizung-kosten-2025</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/blog/solar-foerderung-2025</loc>
+    <loc>https://lynckservices.com/blog/solar-foerderung-2025</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/blog/handwerker-finden-tipps</loc>
+    <loc>https://lynckservices.com/blog/handwerker-finden-tipps</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/blog/dach-sanierung-kosten</loc>
+    <loc>https://lynckservices.com/blog/dach-sanierung-kosten</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/blog/waermepumpe-installation</loc>
+    <loc>https://lynckservices.com/blog/waermepumpe-installation</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lynckservices.lovable.app/blog/elektriker-notdienst</loc>
+    <loc>https://lynckservices.com/blog/elektriker-notdienst</loc>
     <lastmod>2024-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

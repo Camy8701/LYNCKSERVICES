@@ -8,7 +8,7 @@ Disallow: /api/
 Disallow: */thank-you$
 
 # Sitemap Location
-Sitemap: https://lynckservices.lovable.app/sitemap.xml
+Sitemap: https://lynckservices.com/sitemap.xml
 
 # Crawl-delay for bots (reduce server load)
 User-agent: *

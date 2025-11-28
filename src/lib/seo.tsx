@@ -15,13 +15,13 @@ export function SEO({
   title,
   description,
   canonicalUrl,
-  ogImage = 'https://lovable.dev/opengraph-image-p98pqg.png',
+  ogImage = 'https://lynckservices.com/og-image.png',
   ogType = 'website',
   articlePublishedTime,
   articleModifiedTime,
   noindex = false,
 }: SEOProps) {
-  const siteUrl = 'https://lynckservices.lovable.app';
+  const siteUrl = 'https://lynckservices.com';
   const fullUrl = `${siteUrl}${canonicalUrl}`;
 
   return (
@@ -71,9 +71,9 @@ export function OrganizationSchema() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Lynck Services",
-    "image": "https://lynckservices.lovable.app/favicon.png",
-    "url": "https://lynckservices.lovable.app",
-    "logo": "https://lynckservices.lovable.app/favicon.png",
+    "image": "https://lynckservices.com/favicon.png",
+    "url": "https://lynckservices.com",
+    "logo": "https://lynckservices.com/favicon.png",
     "description": "Vergleichen Sie kostenlos Angebote von geprüften Handwerkern in Hessen und Nordrhein-Westfalen. Heizung, Solar, Dach, Klempner, Elektriker und mehr.",
     "address": {
       "@type": "PostalAddress",
@@ -157,7 +157,7 @@ export function ServiceSchema({ service }: {
     "provider": {
       "@type": "Organization",
       "name": "Lynck Services",
-      "url": "https://lynckservices.lovable.app"
+      "url": "https://lynckservices.com"
     },
     "areaServed": [
       {
@@ -181,7 +181,7 @@ export function ServiceSchema({ service }: {
       "@type": "ServiceChannel",
       "availableLanguage": ["de", "en"]
     },
-    "url": `https://lynckservices.lovable.app/services/${service.slug}`,
+    "url": `https://lynckservices.com/services/${service.slug}`,
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -224,14 +224,14 @@ export function ArticleSchema({ article }: {
       "name": "Lynck Services",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://lynckservices.lovable.app/favicon.png"
+        "url": "https://lynckservices.com/favicon.png"
       }
     },
     "datePublished": article.datePublished,
     "dateModified": article.datePublished,
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://lynckservices.lovable.app/blog/${article.slug}`
+      "@id": `https://lynckservices.com/blog/${article.slug}`
     }
   };
 
@@ -252,7 +252,7 @@ export function BreadcrumbSchema({ items }: { items: { name: string; url: string
       "@type": "ListItem",
       "position": index + 1,
       "name": item.name,
-      "item": `https://lynckservices.lovable.app${item.url}`
+      "item": `https://lynckservices.com${item.url}`
     }))
   };
 

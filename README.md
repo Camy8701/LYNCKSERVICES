@@ -1,73 +1,138 @@
-# Welcome to your Lovable project
+# Lynck Services
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/41982aa2-ff65-4e01-b5d0-94bb42fef0cd
+Lynck Services is a professional marketplace connecting homeowners with verified contractors in Hessen and North Rhine-Westphalia, Germany. The platform offers free quote comparisons for services including heating, solar, roofing, plumbing, electrical work, and renovations.
 
-## How can I edit this code?
+**URL**: https://lynckservices.com
 
-There are several ways of editing your application.
+## Technologies Used
 
-**Use Lovable**
+This project is built with modern web technologies:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/41982aa2-ff65-4e01-b5d0-94bb42fef0cd) and start prompting.
+- **Vite** - Fast build tool and development server
+- **TypeScript** - Type-safe JavaScript
+- **React** - UI component library
+- **shadcn/ui** - Beautiful, accessible component system
+- **Tailwind CSS** - Utility-first CSS framework
+- **Supabase** - Backend and database
+- **React Router** - Client-side routing
+- **React Query** - Data fetching and caching
 
-Changes made via Lovable will be committed automatically to this repo.
+## Getting Started
 
-**Use your preferred IDE**
+### Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Node.js (v18 or higher)
+- npm or yarn package manager
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Install Node.js using [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) (recommended):
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Install Node.js
+nvm install 18
+nvm use 18
+```
+
+### Installation
+
+1. Clone the repository:
+```sh
 git clone <YOUR_GIT_URL>
+cd LYNCKSERVICES
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Install dependencies:
+```sh
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```sh
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The application will be available at `http://localhost:5173`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Available Scripts
 
-**Use GitHub Codespaces**
+- `npm run dev` - Start development server with hot reload
+- `npm run build` - Build for production
+- `npm run build:dev` - Build for development environment
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint to check code quality
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
+```
+LYNCKSERVICES/
+├── public/              # Static assets
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── pages/          # Page components
+│   ├── lib/            # Utilities and helpers
+│   ├── contexts/       # React contexts
+│   ├── integrations/   # Third-party integrations
+│   └── main.tsx        # Application entry point
+├── index.html          # HTML template
+├── vite.config.ts      # Vite configuration
+└── tailwind.config.ts  # Tailwind CSS configuration
+```
 
-This project is built with:
+## Features
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- 🔍 **Service Search** - Find contractors by service type and location
+- 📝 **Quote Requests** - Submit free quote requests to multiple contractors
+- ✅ **Verified Contractors** - All contractors are verified professionals
+- 🌍 **Multi-language** - German and English support
+- 📱 **Responsive Design** - Works on all devices
+- 🎯 **SEO Optimized** - Built for German local search
+- 🔒 **Secure** - Built with modern security practices
 
-## How can I deploy this project?
+## Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/41982aa2-ff65-4e01-b5d0-94bb42fef0cd) and click on Share -> Publish.
+### Build for Production
 
-## Can I connect a custom domain to my Lovable project?
+```sh
+npm run build
+```
 
-Yes, you can!
+The build output will be in the `dist/` directory.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Deploy to Hosting
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+You can deploy to any static hosting service:
+
+- **Vercel**: Connect your GitHub repository
+- **Netlify**: Connect your GitHub repository
+- **AWS S3 + CloudFront**: Upload `dist/` folder
+- **DigitalOcean App Platform**: Connect your GitHub repository
+
+## Environment Variables
+
+Create a `.env` file in the root directory (not included in git):
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+## Contributing
+
+1. Create a feature branch: `git checkout -b feature/your-feature`
+2. Make your changes
+3. Test thoroughly
+4. Commit: `git commit -m "Add your feature"`
+5. Push: `git push origin feature/your-feature`
+6. Create a Pull Request
+
+## License
+
+Copyright © 2024 Lynck Services. All rights reserved.
+
+## Support
+
+For support, please contact: support@lynckservices.com
