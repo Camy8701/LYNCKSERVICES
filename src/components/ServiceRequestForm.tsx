@@ -30,7 +30,6 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
     timeline: 'diese_woche' as const,
     property_ownership: '',
     property_type: '',
-    decision_maker: '',
     property_age: ''
   });
 
@@ -109,16 +108,8 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
       );
     }
 
-    if (!formData.decision_maker) {
-      newErrors.decision_maker = t(
-        'Bitte wählen Sie aus, ob Sie Entscheidungsträger sind',
-        'Please select if you are the decision maker'
-      );
-    }
+    // Decision maker question removed - property ownership is sufficient for qualification
 
-    // Removed blocking validation for non-decision makers - now accepts all submissions
-    // Lead quality scoring happens on backend instead
-    
     // PLZ is now optional
     if (formData.plz && !/^[0-9]{5}$/.test(formData.plz)) {
       newErrors.plz = t(
@@ -186,7 +177,6 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
           timeline: formData.timeline,
           property_ownership: formData.property_ownership,
           property_type: formData.property_type,
-          decision_maker: formData.decision_maker,
           property_age: formData.property_age || null
         }
       });
@@ -378,79 +368,6 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
         <p className="mt-1 text-xs text-muted-foreground">
           {t('Hilft uns, passende Fachleute zu finden', 'Helps us find suitable professionals')}
         </p>
-      </div>
-
-      {/* Decision Maker - QUALIFYING QUESTION */}
-      <div>
-        <label className="block text-sm font-medium text-foreground mb-3">
-          {t('Sind Sie der Entscheidungsträger für dieses Projekt?', 'Are you the decision maker for this project?')} <span className="text-destructive">*</span>
-        </label>
-        <div className="space-y-3">
-          <label className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-all ${
-            formData.decision_maker === 'yes'
-              ? 'border-primary bg-primary/5'
-              : 'border-input hover:border-primary/50'
-          }`}>
-            <input
-              type="radio"
-              name="decision_maker"
-              value="yes"
-              checked={formData.decision_maker === 'yes'}
-              onChange={(e) => setFormData({ ...formData, decision_maker: e.target.value })}
-              className="w-4 h-4 text-primary focus:ring-2 focus:ring-ring"
-            />
-            <div className="flex-1">
-              <span className="text-sm font-medium text-foreground">
-                {t('Ja, ich entscheide', 'Yes, I decide')}
-              </span>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                {t('Ich kann dieses Projekt beauftragen', 'I can hire for this project')}
-              </p>
-            </div>
-          </label>
-
-          <label className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-all ${
-            formData.decision_maker === 'no'
-              ? 'border-primary/50 bg-primary/5'
-              : 'border-input hover:border-primary/50'
-          }`}>
-            <input
-              type="radio"
-              name="decision_maker"
-              value="no"
-              checked={formData.decision_maker === 'no'}
-              onChange={(e) => setFormData({ ...formData, decision_maker: e.target.value })}
-              className="w-4 h-4 text-primary focus:ring-2 focus:ring-ring"
-            />
-            <div className="flex-1">
-              <span className="text-sm font-medium text-foreground">
-                {t('Nein, jemand anderes entscheidet', 'No, someone else decides')}
-              </span>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                {t('Ich muss Zustimmung einholen', 'I need to get approval')}
-              </p>
-            </div>
-          </label>
-        </div>
-        {errors.decision_maker && (
-          <div className="mt-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
-            <p className="text-sm text-destructive">{errors.decision_maker}</p>
-          </div>
-        )}
-        {/* Soft warning for non-decision makers - informational only, doesn't block submission */}
-        {formData.decision_maker === 'no' && (
-          <div className="mt-2 p-3 bg-primary/10 border border-primary/20 rounded-lg">
-            <p className="text-sm text-foreground font-medium">
-              💡 {t('Hinweis', 'Note')}
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">
-              {t(
-                'Handwerker kontaktieren Sie möglicherweise auch die entscheidende Person, um Details zu klären.',
-                'Contractors may also contact the decision maker to clarify details.'
-              )}
-            </p>
-          </div>
-        )}
       </div>
 
       {/* State Selection */}

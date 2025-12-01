@@ -53,14 +53,13 @@ function validateLead(data: any) {
     errors.push('Invalid email format');
   }
 
-  // Property ownership validation (required, must be owner)
+  // Property ownership validation (required, accepts both owner and renter)
   if (!data.property_ownership || typeof data.property_ownership !== 'string') {
     errors.push('Property ownership status is required');
   } else if (data.property_ownership !== 'owner' && data.property_ownership !== 'renter') {
     errors.push('Invalid property ownership value');
-  } else if (data.property_ownership === 'renter') {
-    errors.push('Only property owners can request this service');
   }
+  // Removed blocking validation for renters - now accepts all submissions with quality tagging
 
   // Property type validation (required)
   if (!data.property_type || typeof data.property_type !== 'string') {
@@ -76,14 +75,7 @@ function validateLead(data: any) {
     }
   }
 
-  // Decision maker validation (required, must be yes)
-  if (!data.decision_maker || typeof data.decision_maker !== 'string') {
-    errors.push('Decision maker status is required');
-  } else if (data.decision_maker !== 'yes' && data.decision_maker !== 'no') {
-    errors.push('Invalid decision maker value');
-  } else if (data.decision_maker === 'no') {
-    errors.push('Only decision makers can request quotes');
-  }
+  // Decision maker field removed - property ownership is sufficient for qualification
 
   // State validation (required)
   if (!data.state || typeof data.state !== 'string') {
@@ -169,7 +161,6 @@ serve(async (req) => {
       service_id: leadData.service_id || null,
       property_ownership: leadData.property_ownership,
       property_type: leadData.property_type,
-      decision_maker: leadData.decision_maker,
       property_age: leadData.property_age || null,
       source: 'website',
       status: 'new'
