@@ -68,12 +68,7 @@ function validateLead(data: any) {
     errors.push('Invalid property type');
   }
 
-  // Property age validation (optional)
-  if (data.property_age && typeof data.property_age === 'string') {
-    if (!['before_1980', '1980_2000', '2000_2010', 'after_2010', 'not_sure'].includes(data.property_age)) {
-      errors.push('Invalid property age');
-    }
-  }
+  // Property age field removed - not needed for initial qualification
 
   // Decision maker field removed - property ownership is sufficient for qualification
 
@@ -93,12 +88,7 @@ function validateLead(data: any) {
     errors.push(`City must be less than ${MAX_CITY_LENGTH} characters`);
   }
 
-  // PLZ validation (optional)
-  if (data.plz && typeof data.plz === 'string') {
-    if (!PLZ_REGEX.test(data.plz)) {
-      errors.push('PLZ must be a 5-digit number');
-    }
-  }
+  // PLZ field removed - city selection is sufficient for location
 
   // Service details validation
   if (!data.service_details || typeof data.service_details !== 'string') {
@@ -155,13 +145,11 @@ serve(async (req) => {
       email: leadData.email.trim(),
       state: leadData.state,
       city: leadData.city.trim(),
-      plz: leadData.plz ? leadData.plz.trim() : null,
       service_details: leadData.service_details.trim(),
       timeline: leadData.timeline.trim(),
       service_id: leadData.service_id || null,
       property_ownership: leadData.property_ownership,
       property_type: leadData.property_type,
-      property_age: leadData.property_age || null,
       source: 'website',
       status: 'new'
     };

@@ -25,12 +25,10 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
     email: '',
     state: '',
     city: '',
-    plz: '',
     service_details: '',
     timeline: 'diese_woche' as const,
     property_ownership: '',
-    property_type: '',
-    property_age: ''
+    property_type: ''
   });
 
   // Cities by state
@@ -109,14 +107,7 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
     }
 
     // Decision maker question removed - property ownership is sufficient for qualification
-
-    // PLZ is now optional
-    if (formData.plz && !/^[0-9]{5}$/.test(formData.plz)) {
-      newErrors.plz = t(
-        'PLZ muss genau 5 Ziffern haben',
-        'Postal code must be exactly 5 digits'
-      );
-    }
+    // PLZ removed - city selection is sufficient for location
 
     if (!formData.state) {
       newErrors.state = t(
@@ -171,13 +162,11 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
           email: formData.email.trim(),
           state: formData.state,
           city: formData.city,
-          plz: formData.plz || null,
           service_id: service.id,
           service_details: formData.service_details.trim(),
           timeline: formData.timeline,
           property_ownership: formData.property_ownership,
-          property_type: formData.property_type,
-          property_age: formData.property_age || null
+          property_type: formData.property_type
         }
       });
 
@@ -348,28 +337,6 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
         {errors.property_type && <p className="mt-1 text-sm text-destructive">{errors.property_type}</p>}
       </div>
 
-      {/* Property Age - OPTIONAL (helps contractors estimate) */}
-      <div>
-        <label className="block text-sm font-medium text-foreground mb-2">
-          {t('Alter der Immobilie', 'Property age')} <span className="text-muted-foreground text-xs">({t('optional', 'optional')})</span>
-        </label>
-        <select
-          value={formData.property_age}
-          onChange={(e) => setFormData({ ...formData, property_age: e.target.value })}
-          className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-        >
-          <option value="">{t('Baujahr auswählen...', 'Select construction year...')}</option>
-          <option value="before_1980">{t('Vor 1980', 'Before 1980')}</option>
-          <option value="1980_2000">{t('1980 - 2000', '1980 - 2000')}</option>
-          <option value="2000_2010">{t('2000 - 2010', '2000 - 2010')}</option>
-          <option value="after_2010">{t('Nach 2010', 'After 2010')}</option>
-          <option value="not_sure">{t('Weiß nicht', 'Not sure')}</option>
-        </select>
-        <p className="mt-1 text-xs text-muted-foreground">
-          {t('Hilft uns, passende Fachleute zu finden', 'Helps us find suitable professionals')}
-        </p>
-      </div>
-
       {/* State Selection */}
       <div>
         <label className="block text-sm font-medium text-foreground mb-2">
@@ -413,23 +380,6 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
         )}
       </div>
 
-      {/* PLZ (Optional) */}
-      <div>
-        <label className="block text-sm font-medium text-foreground mb-2">
-          {t('Postleitzahl', 'Postal code')} <span className="text-muted-foreground text-xs">({t('optional', 'optional')})</span>
-        </label>
-        <Input
-          type="text"
-          pattern="[0-9]*"
-          maxLength={5}
-          value={formData.plz}
-          onChange={(e) => setFormData({ ...formData, plz: e.target.value.replace(/\D/g, '') })}
-          placeholder="60311"
-          className={errors.plz ? 'border-destructive' : ''}
-        />
-        {errors.plz && <p className="mt-1 text-sm text-destructive">{errors.plz}</p>}
-      </div>
-      
       {/* Service Details Textarea */}
       <div>
         <label className="block text-sm font-medium text-foreground mb-2">
