@@ -99,12 +99,8 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
       );
     }
 
-    if (formData.property_ownership === 'renter') {
-      newErrors.property_ownership = t(
-        'Dieses Angebot ist nur für Immobilieneigentümer verfügbar',
-        'This service is only available for property owners'
-      );
-    }
+    // Removed blocking validation for renters - now accepts all submissions
+    // Lead quality scoring happens on backend instead
 
     if (!formData.property_type) {
       newErrors.property_type = t(
@@ -120,12 +116,8 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
       );
     }
 
-    if (formData.decision_maker === 'no') {
-      newErrors.decision_maker = t(
-        'Der Entscheidungsträger muss das Angebot anfordern',
-        'The decision maker must request the quote'
-      );
-    }
+    // Removed blocking validation for non-decision makers - now accepts all submissions
+    // Lead quality scoring happens on backend instead
     
     // PLZ is now optional
     if (formData.plz && !/^[0-9]{5}$/.test(formData.plz)) {
@@ -305,8 +297,8 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
 
           <label className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-all ${
             formData.property_ownership === 'renter'
-              ? 'border-destructive bg-destructive/5'
-              : 'border-input hover:border-input/50'
+              ? 'border-primary/50 bg-primary/5'
+              : 'border-input hover:border-primary/50'
           }`}>
             <input
               type="radio"
@@ -329,6 +321,20 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
         {errors.property_ownership && (
           <div className="mt-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
             <p className="text-sm text-destructive">{errors.property_ownership}</p>
+          </div>
+        )}
+        {/* Soft warning for renters - informational only, doesn't block submission */}
+        {formData.property_ownership === 'renter' && (
+          <div className="mt-2 p-3 bg-primary/10 border border-primary/20 rounded-lg">
+            <p className="text-sm text-foreground font-medium">
+              💡 {t('Hinweis für Mieter', 'Note for renters')}
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              {t(
+                'Bitte stellen Sie sicher, dass Sie die Genehmigung Ihres Vermieters für die gewünschten Arbeiten haben.',
+                'Please ensure you have your landlord\'s permission for the desired work.'
+              )}
+            </p>
           </div>
         )}
       </div>
@@ -405,8 +411,8 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
 
           <label className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-all ${
             formData.decision_maker === 'no'
-              ? 'border-destructive bg-destructive/5'
-              : 'border-input hover:border-input/50'
+              ? 'border-primary/50 bg-primary/5'
+              : 'border-input hover:border-primary/50'
           }`}>
             <input
               type="radio"
@@ -429,6 +435,20 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
         {errors.decision_maker && (
           <div className="mt-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
             <p className="text-sm text-destructive">{errors.decision_maker}</p>
+          </div>
+        )}
+        {/* Soft warning for non-decision makers - informational only, doesn't block submission */}
+        {formData.decision_maker === 'no' && (
+          <div className="mt-2 p-3 bg-primary/10 border border-primary/20 rounded-lg">
+            <p className="text-sm text-foreground font-medium">
+              💡 {t('Hinweis', 'Note')}
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              {t(
+                'Handwerker kontaktieren Sie möglicherweise auch die entscheidende Person, um Details zu klären.',
+                'Contractors may also contact the decision maker to clarify details.'
+              )}
+            </p>
           </div>
         )}
       </div>
