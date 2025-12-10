@@ -114,7 +114,7 @@ const HeroSection = () => {
               <a
                 key={service.id}
                 href={`/services/${service.slug}`}
-                className="group relative flex flex-col items-center justify-center bg-white/30 backdrop-blur-sm border border-white/40 rounded-xl p-3 md:p-6 hover:bg-white/40 hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
+                className="group relative flex flex-col items-center justify-center bg-white/30 backdrop-blur-sm border border-white/40 rounded-xl p-3 md:p-6 hover:bg-white/40 hover:scale-105 hover:shadow-lg hover:shadow-primary/36 transition-all duration-300"
               >
                 <IconComponent className="w-6 h-6 md:w-8 md:h-8 mb-2 md:mb-3 text-primary flex-shrink-0" />
                 <span className="text-[10px] md:text-xs text-center text-foreground font-semibold leading-tight break-words">

@@ -17,7 +17,7 @@ const ContactSection = () => {
           <div className="flex justify-center">
             <a
               href="/#services"
-              className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-lg font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:shadow-xl hover:shadow-primary/25"
+              className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-lg font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:shadow-xl hover:shadow-primary/30"
             >
               <Wrench className="w-5 h-5 stroke-[1.5] group-hover:scale-110 transition-transform duration-300" />
               {t("Angebot anfordern", "Request Quote")}

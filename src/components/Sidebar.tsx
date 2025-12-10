@@ -19,7 +19,7 @@ const Sidebar = () => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <a href="/" className="group relative flex items-center justify-center w-10 h-10 rounded-lg bg-primary shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300">
+            <a href="/" className="group relative flex items-center justify-center w-10 h-10 rounded-lg bg-primary shadow-lg shadow-primary/24 hover:shadow-primary/36 transition-all duration-300">
               <Home className="w-5 h-5 text-primary-foreground stroke-[1.5]" />
             </a>
           </TooltipTrigger>

@@ -140,8 +140,8 @@ All colors MUST be HSL.
                 0 20px 40px rgba(0, 0, 0, 0.4),
                 0 32px 64px rgba(0, 0, 0, 0.3),
                 0 0 0 1px rgba(255, 255, 255, 0.08) inset,
-                0 0 40px rgba(16, 185, 129, 0.3),
-                0 0 80px rgba(16, 185, 129, 0.15);
+                0 0 40px rgba(16, 185, 129, 0.36),
+                0 0 80px rgba(16, 185, 129, 0.18);
     transform: translateY(-4px);
   }
 
@@ -157,8 +157,8 @@ All colors MUST be HSL.
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15),
                 0 20px 40px rgba(0, 0, 0, 0.1),
                 0 32px 64px rgba(0, 0, 0, 0.08),
-                0 0 40px rgba(16, 185, 129, 0.2),
-                0 0 80px rgba(16, 185, 129, 0.1);
+                0 0 40px rgba(16, 185, 129, 0.24),
+                0 0 80px rgba(16, 185, 129, 0.12);
   }
 
   @keyframes smoke {
