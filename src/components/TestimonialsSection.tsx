@@ -21,8 +21,8 @@ const testimonials = [
     initials: "TM",
     color: "emerald",
     rating: 5,
-    textDe: "Innerhalb von 30 Minuten hatte ich 3 Angebote für meine Heizungsreparatur. Der Service war super schnell und völlig unkompliziert!",
-    textEn: "Within 30 minutes I had 3 quotes for my heating repair. The service was super fast and completely uncomplicated!",
+    textDe: "Innerhalb von 30 Minuten wurde ich von einem Spezialisten kontaktiert. Der Service war super schnell und völlig unkompliziert!",
+    textEn: "Within 30 minutes I was contacted by a specialist. The service was super fast and completely uncomplicated!",
     metricDe: "Heizung repariert in 2 Tagen",
     metricEn: "Heating repaired in 2 days",
     metricColor: "emerald"
@@ -73,8 +73,8 @@ const testimonials = [
     initials: "LS",
     color: "violet",
     rating: 5,
-    textDe: "Elektriker gesucht für Smart Home Installation. Alle 3 Angebote waren fair und professionell. Bin sehr zufrieden!",
-    textEn: "Looking for electrician for smart home installation. All 3 quotes were fair and professional. Very satisfied!",
+    textDe: "Elektriker gesucht für Smart Home Installation. Die Vermittlung war fair und professionell. Bin sehr zufrieden!",
+    textEn: "Looking for electrician for smart home installation. The referral was fair and professional. Very satisfied!",
     metricDe: "Smart Home Installation",
     metricEn: "Smart Home Installation",
     metricColor: "violet"

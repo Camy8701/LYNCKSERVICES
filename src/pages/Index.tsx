@@ -49,12 +49,12 @@ const Index = () => {
             answer: "In NRW sind wir in 10 Städten vertreten: Köln, Düsseldorf, Dortmund, Essen, Duisburg, Bochum, Wuppertal, Bonn, Münster und Aachen."
           },
           {
-            question: "Ist der Angebotsvergleich wirklich kostenlos?",
-            answer: "Ja, unser Service ist 100% kostenlos. Sie erhalten bis zu 3 Angebote von geprüften Handwerkern ohne jegliche Kosten oder Verpflichtungen. Sie zahlen nur, wenn Sie sich für einen Handwerker entscheiden."
+            question: "Ist der Service wirklich kostenlos?",
+            answer: "Ja, unser Service ist 100% kostenlos. Einer unserer Spezialisten wird Sie kontaktieren, um Ihre Anfrage zu besprechen und Sie mit den passenden Handwerkern zu verbinden - ohne jegliche Kosten oder Verpflichtungen."
           },
           {
-            question: "Wie schnell erhalte ich Angebote von Handwerkern?",
-            answer: "Sie erhalten Angebote, sobald Ihre Anfrage eingegangen ist. Unsere geprüften Fachleute antworten schnell und zuverlässig, oft innerhalb weniger Stunden."
+            question: "Wie schnell werde ich kontaktiert?",
+            answer: "Einer unserer Spezialisten wird Sie so schnell wie möglich kontaktieren, nachdem Ihre Anfrage eingegangen ist - in der Regel innerhalb weniger Stunden."
           },
           {
             question: "Welche Handwerker-Dienstleistungen werden angeboten?",

@@ -622,7 +622,7 @@ export default function ServiceDetail() {
                     {t('Jetzt kostenlos Angebot anfordern', 'Request Your Free Quote Now')}
                   </h2>
                   <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                    {t('Füllen Sie das Formular aus und erhalten Sie bis zu 3 Angebote von geprüften Fachleuten.', 'Fill out the form and receive up to 3 quotes from verified professionals.')}
+                    {t('Füllen Sie das Formular aus und einer unserer Spezialisten wird Sie so schnell wie möglich kontaktieren.', 'Fill out the form and one of our specialists will contact you as soon as possible.')}
                   </p>
                 </div>
 
