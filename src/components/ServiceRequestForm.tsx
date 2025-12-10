@@ -5,8 +5,9 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Loader2, ArrowRight } from 'lucide-react';
+import { Loader2, ArrowRight, Check } from 'lucide-react';
 import type { Service, City } from '@/lib/database';
+import { servicesData } from '@/data/servicesData';
 
 interface ServiceRequestFormProps {
   service: Service;
@@ -28,7 +29,9 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
     service_details: '',
     timeline: 'diese_woche' as const,
     property_ownership: '',
-    property_type: ''
+    property_type: '',
+    selected_service: service?.slug || '',
+    selected_subcategories: [] as string[]
   });
 
   // Cities by state
@@ -106,6 +109,13 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
       );
     }
 
+    if (!formData.selected_service) {
+      newErrors.selected_service = t(
+        'Bitte wählen Sie einen Service aus',
+        'Please select a service'
+      );
+    }
+
     // Decision maker question removed - property ownership is sufficient for qualification
     // PLZ removed - city selection is sufficient for location
 
@@ -154,6 +164,27 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
     setError(null);
     
     try {
+      // Build enriched service details with subcategories
+      const subcategoryNames = formData.selected_subcategories.length > 0
+        ? (() => {
+            const selectedServiceData = servicesData.find(s => s.slug === formData.selected_service);
+            if (selectedServiceData) {
+              return formData.selected_subcategories
+                .map(id => {
+                  const sub = selectedServiceData.subcategories.find(s => s.id === id);
+                  return sub ? (language === 'de' ? sub.nameDe : sub.nameEn) : null;
+                })
+                .filter(Boolean)
+                .join(', ');
+            }
+            return '';
+          })()
+        : '';
+
+      const enrichedDetails = subcategoryNames
+        ? `${formData.service_details.trim()}\n\nGewählte Dienste: ${subcategoryNames}`
+        : formData.service_details.trim();
+
       // Call edge function for server-side validation and secure lead creation
       const { data, error: functionError } = await supabase.functions.invoke('create-lead', {
         body: {
@@ -163,7 +194,7 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
           state: formData.state,
           city: formData.city,
           service_id: service.id,
-          service_details: formData.service_details.trim(),
+          service_details: enrichedDetails,
           timeline: formData.timeline,
           property_ownership: formData.property_ownership,
           property_type: formData.property_type
@@ -336,6 +367,84 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
         </select>
         {errors.property_type && <p className="mt-1 text-sm text-destructive">{errors.property_type}</p>}
       </div>
+
+      {/* Service Selection - NEW */}
+      <div>
+        <label className="block text-sm font-medium text-foreground mb-2">
+          {t('Service benötigt', 'Service Required')} <span className="text-destructive">*</span>
+        </label>
+        <select
+          value={formData.selected_service}
+          onChange={(e) => setFormData({ ...formData, selected_service: e.target.value, selected_subcategories: [] })}
+          className={`w-full h-10 rounded-md border ${errors.selected_service ? 'border-destructive' : 'border-input'} bg-background px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`}
+        >
+          <option value="">{t('Service auswählen...', 'Select service...')}</option>
+          {servicesData.map((svc) => (
+            <option key={svc.slug} value={svc.slug}>
+              {language === 'de' ? svc.nameDe : svc.nameEn}
+            </option>
+          ))}
+        </select>
+        {errors.selected_service && <p className="mt-1 text-sm text-destructive">{errors.selected_service}</p>}
+      </div>
+
+      {/* Conditional Subcategories - Multi-select - NEW */}
+      {formData.selected_service && (() => {
+        const selectedServiceData = servicesData.find(s => s.slug === formData.selected_service);
+        if (selectedServiceData && selectedServiceData.subcategories.length > 0) {
+          return (
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-3">
+                {t('Spezifischer Service', 'Specific Service')} {t('(Optional - mehrere wählbar)', '(Optional - multiple selections)')}
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {selectedServiceData.subcategories.map((subcategory) => {
+                  const isSelected = formData.selected_subcategories.includes(subcategory.id);
+                  return (
+                    <label
+                      key={subcategory.id}
+                      className={`flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition-all ${
+                        isSelected
+                          ? 'border-primary bg-primary/5'
+                          : 'border-input hover:border-primary/50'
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setFormData({
+                              ...formData,
+                              selected_subcategories: [...formData.selected_subcategories, subcategory.id]
+                            });
+                          } else {
+                            setFormData({
+                              ...formData,
+                              selected_subcategories: formData.selected_subcategories.filter(id => id !== subcategory.id)
+                            });
+                          }
+                        }}
+                        className="w-4 h-4 rounded text-primary focus:ring-2 focus:ring-ring"
+                      />
+                      <div className="flex-1">
+                        <span className="text-sm text-foreground">
+                          {language === 'de' ? subcategory.nameDe : subcategory.nameEn}
+                        </span>
+                      </div>
+                      {isSelected && <Check className="w-4 h-4 text-primary" />}
+                    </label>
+                  );
+                })}
+              </div>
+              <p className="mt-2 text-xs text-muted-foreground">
+                {t('Sie können mehrere Optionen auswählen', 'You can select multiple options')}
+              </p>
+            </div>
+          );
+        }
+        return null;
+      })()}
 
       {/* State Selection */}
       <div>

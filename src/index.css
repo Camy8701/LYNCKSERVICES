@@ -136,12 +136,13 @@ All colors MUST be HSL.
   }
 
   .glass-card:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5),
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                0 32px 64px rgba(0, 0, 0, 0.3),
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2),
+                0 20px 40px rgba(0, 0, 0, 0.15),
                 0 0 0 1px rgba(255, 255, 255, 0.08) inset,
-                0 0 40px rgba(16, 185, 129, 0.36),
-                0 0 80px rgba(16, 185, 129, 0.18);
+                0 0 25px rgba(16, 185, 129, 0.8),
+                0 0 50px rgba(16, 185, 129, 0.6),
+                0 0 75px rgba(16, 185, 129, 0.4),
+                0 0 100px rgba(16, 185, 129, 0.2);
     transform: translateY(-4px);
   }
 
@@ -154,11 +155,12 @@ All colors MUST be HSL.
   }
 
   .light .glass-card:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15),
-                0 20px 40px rgba(0, 0, 0, 0.1),
-                0 32px 64px rgba(0, 0, 0, 0.08),
-                0 0 40px rgba(16, 185, 129, 0.24),
-                0 0 80px rgba(16, 185, 129, 0.12);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1),
+                0 20px 40px rgba(0, 0, 0, 0.08),
+                0 0 25px rgba(16, 185, 129, 0.7),
+                0 0 50px rgba(16, 185, 129, 0.5),
+                0 0 75px rgba(16, 185, 129, 0.35),
+                0 0 100px rgba(16, 185, 129, 0.2);
   }
 
   @keyframes smoke {

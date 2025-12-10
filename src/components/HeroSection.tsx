@@ -1,25 +1,9 @@
 import { ArrowRight, Check } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useEffect, useState } from "react";
-import { getServices, type Service } from "@/lib/database";
-import { getIconComponent } from "@/lib/serviceIcons";
+import { servicesData } from "@/data/servicesData";
 
 const HeroSection = () => {
   const { t, language } = useLanguage();
-  const [services, setServices] = useState<Service[]>([]);
-
-  useEffect(() => {
-    async function loadServices() {
-      try {
-        const data = await getServices();
-        setServices(data);
-      } catch (error) {
-        console.error('Error loading services:', error);
-      }
-    }
-    
-    loadServices();
-  }, []);
 
   return (
     <section 
@@ -106,23 +90,31 @@ const HeroSection = () => {
 
         {/* Right Panel - Service Category Grid */}
         <div className="relative md:p-10 lg:p-14 pt-8 pr-8 pb-8 pl-8 flex items-center justify-center">
-          {/* Service Cards Grid */}
-          <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-md">
-          {services.slice(0, 6).map((service) => {
-            const IconComponent = getIconComponent(service.icon);
-            return (
+          {/* Service Cards Grid - 3x3 for 9 services */}
+          <div className="grid grid-cols-3 gap-2 md:gap-3 w-full max-w-lg">
+          {servicesData.map((service) => (
               <a
                 key={service.id}
                 href={`/services/${service.slug}`}
-                className="group relative flex flex-col items-center justify-center bg-white/30 backdrop-blur-sm border border-white/40 rounded-xl p-3 md:p-6 hover:bg-white/40 hover:scale-105 transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.6),0_0_40px_rgba(16,185,129,0.4),0_0_60px_rgba(16,185,129,0.2)]"
+                onClick={() => {
+                  // GTM Event Tracking
+                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                      event: 'service_click',
+                      service_name: language === 'de' ? service.nameDe : service.nameEn,
+                      service_slug: service.slug,
+                      click_location: 'hero_grid'
+                    });
+                  }
+                }}
+                className="group relative flex flex-col items-center justify-center bg-white/30 backdrop-blur-sm border border-white/40 rounded-xl p-2 md:p-4 hover:bg-white/40 hover:scale-105 transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.6),0_0_40px_rgba(16,185,129,0.4),0_0_60px_rgba(16,185,129,0.2)]"
               >
-                <IconComponent className="w-6 h-6 md:w-8 md:h-8 mb-2 md:mb-3 text-primary flex-shrink-0" />
-                <span className="text-[10px] md:text-xs text-center text-foreground font-semibold leading-tight break-words">
-                  {language === 'de' ? service.name : service.name_en}
+                <span className="text-2xl md:text-3xl mb-1 md:mb-2">{service.icon}</span>
+                <span className="text-[9px] md:text-[10px] text-center text-foreground font-semibold leading-tight break-words px-1">
+                  {language === 'de' ? service.nameDe : service.nameEn}
                 </span>
               </a>
-            );
-          })}
+            ))}
           </div>
         </div>
       </div>
