@@ -36,7 +36,7 @@ const Navigation = () => {
     <nav className="flex items-center justify-between px-6 md:px-12 lg:px-16 py-4 mt-8 mb-4 mx-4 md:mx-6 lg:mx-8 glass-card rounded-2xl relative z-50">
       <div className="flex items-center gap-12">
         <a href="/" className="flex items-center">
-          <img src="/logo.png" alt="Lynck Services" className="w-10 h-10 hover:scale-110 transition-transform duration-300" />
+          <img src="/logo.png" alt="Lynck Services" className="w-12 h-12 rounded-full object-cover hover:scale-110 transition-transform duration-300" />
         </a>
 
         <div className="hidden md:flex items-center gap-8">
