@@ -114,7 +114,7 @@ const HeroSection = () => {
               <a
                 key={service.id}
                 href={`/services/${service.slug}`}
-                className="group relative flex flex-col items-center justify-center bg-white/30 backdrop-blur-sm border border-white/40 rounded-xl p-3 md:p-6 hover:bg-white/40 hover:scale-105 hover:shadow-lg hover:shadow-primary/36 transition-all duration-300 overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-[3px] before:bg-primary before:opacity-0 before:transition-all before:duration-300 hover:before:opacity-100 hover:before:shadow-[0_0_15px_rgba(16,185,129,0.8),0_0_30px_rgba(16,185,129,0.4)]"
+                className="group relative flex flex-col items-center justify-center bg-white/30 backdrop-blur-sm border border-white/40 rounded-xl p-3 md:p-6 hover:bg-white/40 hover:scale-105 transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.6),0_0_40px_rgba(16,185,129,0.4),0_0_60px_rgba(16,185,129,0.2)]"
               >
                 <IconComponent className="w-6 h-6 md:w-8 md:h-8 mb-2 md:mb-3 text-primary flex-shrink-0" />
                 <span className="text-[10px] md:text-xs text-center text-foreground font-semibold leading-tight break-words">
