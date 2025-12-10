@@ -139,8 +139,8 @@ const Navigation = () => {
                 <Menu className="w-6 h-6 text-foreground" />
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background/95 backdrop-blur-md border-border">
-            <div className="flex flex-col gap-6 mt-8">
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background/95 backdrop-blur-md border-border overflow-y-auto">
+            <div className="flex flex-col gap-6 mt-8 pb-8">
               {/* Mobile Search */}
               <div className="px-2">
                 <SearchBar />
