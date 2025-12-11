@@ -4,12 +4,12 @@ const Footer = () => {
   const { t, language } = useLanguage();
 
   const serviceLinks = [
-    { nameDe: "Heizung & HVAC", nameEn: "Heating & HVAC", slug: "/heizung" },
-    { nameDe: "Solar & Photovoltaik", nameEn: "Solar & Photovoltaic", slug: "/solar" },
-    { nameDe: "Dachdecker", nameEn: "Roofing", slug: "/dachdecker" },
-    { nameDe: "Klempner & Sanitär", nameEn: "Plumbing & Sanitary", slug: "/klempner" },
-    { nameDe: "Elektriker", nameEn: "Electrician", slug: "/elektriker" },
-    { nameDe: "Allgemeine Renovierung", nameEn: "General Renovation", slug: "/renovierung" }
+    { nameDe: "Heizung & HVAC", nameEn: "Heating & HVAC", slug: "/services/heizung" },
+    { nameDe: "Solar & Photovoltaik", nameEn: "Solar & Photovoltaic", slug: "/services/solar" },
+    { nameDe: "Dachdecker", nameEn: "Roofing", slug: "/services/dachdecker" },
+    { nameDe: "Klempner & Sanitär", nameEn: "Plumbing & Sanitary", slug: "/services/klempner" },
+    { nameDe: "Elektriker", nameEn: "Electrician", slug: "/services/elektriker" },
+    { nameDe: "Allgemeine Renovierung", nameEn: "General Renovation", slug: "/services/renovierung" }
   ];
 
   const companyLinks = [

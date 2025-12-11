@@ -151,10 +151,10 @@ const TestimonialsSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-                {t("Geprüfte", "Verified")}
+                {t("Handverlesene", "Hand-picked")}
               </div>
               <div className="text-muted-foreground text-sm">
-                {t("Fachleute vor Ort", "Professionals In Your Area")}
+                {t("Fachleute unter den Besten", "Professionals Among the Best")}
               </div>
             </div>
             <div>

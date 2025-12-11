@@ -33,7 +33,7 @@ const Index = () => {
     <>
       <SEO
         title="Handwerker finden in Hessen & NRW | Lynck Services - Kostenloser Angebotsvergleich"
-        description="Finden Sie geprüfte Handwerker in Frankfurt, Köln, Düsseldorf & 17 weiteren Städten. Kostenloser Vergleich für Heizung, Solar, Dach, Klempner, Elektriker. Jetzt Angebot anfordern!"
+        description="Finden Sie handverlesene Handwerker unter den Besten in Hessen & Nordrhein-Westfalen. Kostenloser Vergleich für Heizung, Solar, Dach, Klempner, Elektriker. Jetzt Angebot anfordern!"
         canonicalUrl="/"
         ogType="website"
       />

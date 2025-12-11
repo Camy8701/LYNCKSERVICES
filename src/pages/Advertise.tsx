@@ -16,11 +16,11 @@ function FAQ({ question, answer }: { question: string; answer: string }) {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between text-left"
       >
-        <span className="text-white font-medium">{question}</span>
+        <span className="text-foreground font-medium">{question}</span>
         <span className={`text-primary transition-transform ${isOpen ? 'rotate-45' : ''}`}>+</span>
       </button>
       {isOpen && (
-        <p className="mt-3 text-gray-400 text-sm pr-8">{answer}</p>
+        <p className="mt-3 text-muted-foreground text-sm pr-8">{answer}</p>
       )}
     </div>
   );
@@ -49,13 +49,13 @@ function PricingCard({
           Beliebt
         </div>
       )}
-      <div className="text-white font-semibold mb-2">{duration}</div>
-      <div className="text-3xl font-bold text-white mb-1">{price}</div>
-      <div className="text-gray-400 text-sm mb-3">{pricePerMonth}</div>
+      <div className="text-foreground font-semibold mb-2">{duration}</div>
+      <div className="text-3xl font-bold text-foreground mb-1">{price}</div>
+      <div className="text-muted-foreground text-sm mb-3">{pricePerMonth}</div>
       {savings && (
         <div className="text-primary text-sm font-medium mb-4">{savings}</div>
       )}
-      <ul className="text-left text-sm text-gray-400 space-y-2">
+      <ul className="text-left text-sm text-muted-foreground space-y-2">
         {features.map((feature, i) => (
           <li key={i} className="flex items-center gap-2">
             <Check className="w-4 h-4 text-primary flex-shrink-0" />
@@ -149,10 +149,10 @@ export default function Advertise() {
             {slotsAreFull && (
               <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-2xl p-6 mb-12 text-center">
                 <AlertCircle className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
-                <h2 className="text-xl font-semibold text-white mb-2">
+                <h2 className="text-xl font-semibold text-foreground mb-2">
                   {t('Alle Werbeplätze sind belegt', 'All advertising slots are full')}
                 </h2>
-                <p className="text-gray-400 mb-4">
+                <p className="text-muted-foreground mb-4">
                   {nextAvailableDate && (
                     <>
                       {t('Der nächste Platz wird voraussichtlich am', 'The next slot will be available on')}{' '}
@@ -180,10 +180,10 @@ export default function Advertise() {
             <div className="grid md:grid-cols-3 gap-6 mb-12">
               <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6">
                 <Eye className="w-10 h-10 text-primary mb-4" />
-                <h3 className="text-white font-semibold mb-2">
+                <h3 className="text-foreground font-semibold mb-2">
                   {t('Hohe Sichtbarkeit', 'High Visibility')}
                 </h3>
-                <p className="text-gray-400 text-sm">
+                <p className="text-muted-foreground text-sm">
                   {t(
                     'Über 10.000 monatliche Besucher sehen Ihre Anzeige',
                     'Over 10,000 monthly visitors will see your ad'
@@ -193,10 +193,10 @@ export default function Advertise() {
 
               <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6">
                 <Target className="w-10 h-10 text-primary mb-4" />
-                <h3 className="text-white font-semibold mb-2">
+                <h3 className="text-foreground font-semibold mb-2">
                   {t('Zielgruppe', 'Target Audience')}
                 </h3>
-                <p className="text-gray-400 text-sm">
+                <p className="text-muted-foreground text-sm">
                   {t(
                     'Erreichen Sie Kunden, die aktiv nach Services suchen',
                     'Reach customers actively looking for services'
@@ -206,10 +206,10 @@ export default function Advertise() {
 
               <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6">
                 <Wallet className="w-10 h-10 text-primary mb-4" />
-                <h3 className="text-white font-semibold mb-2">
+                <h3 className="text-foreground font-semibold mb-2">
                   {t('Faire Preise', 'Fair Prices')}
                 </h3>
-                <p className="text-gray-400 text-sm">
+                <p className="text-muted-foreground text-sm">
                   {t(
                     'Ab €225/Monat bei Jahresbuchung, keine versteckten Kosten',
                     'From €225/month with annual booking, no hidden costs'
@@ -259,7 +259,7 @@ export default function Advertise() {
               </div>
 
               {!slotsAreFull && (
-                <p className="text-center text-gray-400 text-sm">
+                <p className="text-center text-muted-foreground text-sm">
                   <Clock className="w-4 h-4 inline mr-1" />
                   {t('Nur noch', 'Only')}{' '}
                   <strong className="text-primary">{availableSlots} {t('von', 'of')} {MAX_SLOTS}</strong>{' '}
@@ -279,7 +279,7 @@ export default function Advertise() {
                   <ArrowRight className="w-5 h-5" />
                 </Link>
 
-                <p className="text-gray-500 text-sm mt-4">
+                <p className="text-muted-foreground text-sm mt-4">
                   {t('Erstellen Sie Ihre Anzeige in unter 5 Minuten', 'Create your ad in under 5 minutes')}
                 </p>
               </div>
