@@ -1,25 +1,13 @@
 import PageLayout from "@/components/PageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useParams } from "react-router-dom";
-import { Calendar, Clock, User, Share2, Facebook, Twitter, Linkedin, ArrowRight } from "lucide-react";
+import { Calendar, Clock, User, Share2, Facebook, Twitter, Linkedin } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { SEO, ArticleSchema, BreadcrumbSchema } from "@/lib/seo";
+import { getBlogPostBySlug, getRelatedPosts } from "@/data/blogData";
 
-interface BlogPostData {
-  slug: string;
-  titleDe: string;
-  titleEn: string;
-  contentDe: string;
-  contentEn: string;
-  author: string;
-  date: string;
-  readTime: string;
-  image: string;
-  category: string;
-}
-
-const blogPosts: Record<string, BlogPostData> = {
+const oldBlogPosts: Record<string, any> = {
   "heizung-kosten-2025": {
     slug: "heizung-kosten-2025",
     titleDe: "Was kostet eine neue Heizung 2025?",
@@ -346,7 +334,7 @@ const BlogPost = () => {
   const { toast } = useToast();
   const [shareOpen, setShareOpen] = useState(false);
 
-  const post = slug ? blogPosts[slug] : null;
+  const post = slug ? getBlogPostBySlug(slug) : null;
 
   if (!post) {
     return (
@@ -365,9 +353,7 @@ const BlogPost = () => {
     );
   }
 
-  const relatedPosts = Object.values(blogPosts)
-    .filter(p => p.slug !== slug)
-    .slice(0, 3);
+  const relatedPosts = slug ? getRelatedPosts(slug, 3) : [];
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
@@ -400,10 +386,14 @@ const BlogPost = () => {
 
   const title = language === 'de' ? post.titleDe : post.titleEn;
   const content = language === 'de' ? post.contentDe : post.contentEn;
-  const excerpt = content.substring(0, 160);
-  
-  // Convert German date format to ISO 8601 for schema
-  const isoDate = new Date(post.date.split('.').reverse().join('-')).toISOString();
+  const excerpt = language === 'de' ? post.excerptDe : post.excerptEn;
+
+  // Convert ISO date to formatted date
+  const formattedDate = new Date(post.date).toLocaleDateString(
+    language === 'de' ? 'de-DE' : 'en-US',
+    { year: 'numeric', month: 'long', day: 'numeric' }
+  );
+  const isoDate = new Date(post.date).toISOString();
 
   const breadcrumbItems = [
     { label: "Blog", href: "/blog" },
@@ -461,7 +451,7 @@ const BlogPost = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                {post.date}
+                {formattedDate}
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
@@ -511,41 +501,85 @@ const BlogPost = () => {
 
             {/* Content */}
             <div className="prose prose-invert max-w-none">
-              {(language === 'de' ? post.contentDe : post.contentEn)
-                .split('\n\n')
-                .map((paragraph, index) => {
-                  if (paragraph.startsWith('## ')) {
-                    return (
-                      <h2 key={index} className="text-2xl md:text-3xl text-foreground font-serif font-normal mt-12 mb-4">
-                        {paragraph.replace('## ', '')}
-                      </h2>
-                    );
-                  }
-                  if (paragraph.startsWith('### ')) {
-                    return (
-                      <h3 key={index} className="text-xl md:text-2xl text-foreground font-serif font-normal mt-8 mb-3">
-                        {paragraph.replace('### ', '')}
-                      </h3>
-                    );
-                  }
-                  if (paragraph.startsWith('- ')) {
-                    const items = paragraph.split('\n');
-                    return (
-                      <ul key={index} className="list-disc list-inside space-y-2 mb-6">
-                        {items.map((item, i) => (
-                          <li key={i} className="text-foreground/90">
-                            {item.replace('- ', '')}
-                          </li>
-                        ))}
-                      </ul>
-                    );
-                  }
+              {content.split('\n\n').map((paragraph, index) => {
+                // Handle headings
+                if (paragraph.startsWith('## ')) {
                   return (
-                    <p key={index} className="text-foreground/90 leading-relaxed mb-6">
-                      {paragraph}
-                    </p>
+                    <h2 key={index} className="text-2xl md:text-3xl text-foreground font-serif font-normal mt-12 mb-4">
+                      {paragraph.replace('## ', '')}
+                    </h2>
                   );
-                })}
+                }
+                if (paragraph.startsWith('### ')) {
+                  return (
+                    <h3 key={index} className="text-xl md:text-2xl text-foreground font-serif font-normal mt-8 mb-3">
+                      {paragraph.replace('### ', '')}
+                    </h3>
+                  );
+                }
+                // Handle tables
+                if (paragraph.includes('|') && paragraph.includes('---')) {
+                  const rows = paragraph.split('\n');
+                  const headers = rows[0].split('|').filter(h => h.trim());
+                  const dataRows = rows.slice(2);
+
+                  return (
+                    <div key={index} className="overflow-x-auto mb-6">
+                      <table className="min-w-full border border-border rounded-lg">
+                        <thead className="bg-white/[0.03]">
+                          <tr>
+                            {headers.map((header, i) => (
+                              <th key={i} className="px-4 py-2 text-left text-foreground font-semibold border-b border-border">
+                                {header.trim()}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {dataRows.map((row, i) => {
+                            const cells = row.split('|').filter(c => c.trim());
+                            return (
+                              <tr key={i} className="border-b border-border/50">
+                                {cells.map((cell, j) => (
+                                  <td key={j} className="px-4 py-2 text-foreground/90">
+                                    {cell.trim()}
+                                  </td>
+                                ))}
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  );
+                }
+                // Handle lists
+                if (paragraph.startsWith('- ') || paragraph.startsWith('✅ ') || paragraph.startsWith('❌ ') || paragraph.startsWith('⃞ ')) {
+                  const items = paragraph.split('\n');
+                  return (
+                    <ul key={index} className="list-none space-y-2 mb-6">
+                      {items.map((item, i) => (
+                        <li key={i} className="text-foreground/90 flex items-start gap-2">
+                          <span className="mt-1">{item.startsWith('-') ? '•' : item[0]}</span>
+                          <span>{item.replace(/^[-✅❌⃞]\s*/, '')}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  );
+                }
+                // Handle horizontal rules
+                if (paragraph === '---') {
+                  return <hr key={index} className="my-8 border-border" />;
+                }
+                // Handle bold text
+                const formattedParagraph = paragraph
+                  .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-semibold">$1</strong>')
+                  .replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>');
+
+                return (
+                  <p key={index} className="text-foreground/90 leading-relaxed mb-6" dangerouslySetInnerHTML={{ __html: formattedParagraph }} />
+                );
+              })}
             </div>
           </div>
 
