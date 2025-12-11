@@ -175,7 +175,7 @@ export const servicesData: ServiceWithSubcategories[] = [
     icon: "thermometer",
     descriptionDe: "Luft-, Erd- und Wasserwärmepumpen, Brennstoffzelle/BHKW",
     descriptionEn: "Air, Ground and Water Heat Pumps, Fuel Cell/CHP",
-    imagePath: "/blog-heating.jpg",
+    imagePath: "/service-heat-pump.jpg",
     subcategories: [
       {
         id: "air-water-heat-pump",
@@ -282,7 +282,7 @@ export const servicesData: ServiceWithSubcategories[] = [
     icon: "snowflake",
     descriptionDe: "Wohnbereich, Büros, Industrie, Kühlzellen, Serverraumkühlung",
     descriptionEn: "Residential, Offices, Industrial, Cold Storage, Server Room Cooling",
-    imagePath: "/blog-heating.jpg", // Placeholder - will need new image
+    imagePath: "/service-air-conditioning.jpg",
     subcategories: [
       {
         id: "residential-ac",
@@ -321,7 +321,7 @@ export const servicesData: ServiceWithSubcategories[] = [
     icon: "clipboard",
     descriptionDe: "Energieberatung, Heizungscheck, Thermografie, Förderung",
     descriptionEn: "Energy Consulting, Heating Check, Thermography, Subsidies",
-    imagePath: "/blog-renovation.jpg", // Placeholder - will need new image
+    imagePath: "/service-consultation.jpg",
     subcategories: [
       {
         id: "energy-consulting",
