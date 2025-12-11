@@ -32,7 +32,7 @@ const Sidebar = () => {
         
         <Tooltip>
           <TooltipTrigger asChild>
-            <a href="/#services" className="group flex items-center justify-center w-10 h-10 rounded-lg hover:bg-sidebar-accent transition-all duration-300">
+            <a href="#services" className="group flex items-center justify-center w-10 h-10 rounded-lg hover:bg-sidebar-accent transition-all duration-300">
               <Wrench className="w-5 h-5 stroke-[1.5] text-sidebar-foreground hover:text-primary transition-colors" />
             </a>
           </TooltipTrigger>

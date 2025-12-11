@@ -84,9 +84,12 @@ const Contact = () => {
     <PageLayout>
       <div className="px-4 sm:px-6 lg:px-12 py-12">
         <div className="glass-card rounded-3xl p-8 lg:p-12 max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight text-foreground font-serif font-normal mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight text-foreground font-serif font-normal mb-2">
             {t("Kontakt", "Contact")}
           </h1>
+          <p className="text-lg text-muted-foreground mb-6">
+            {t("Kontaktieren Sie unser Support-Team", "Contact Our Support Team")}
+          </p>
 
           <div className="grid md:grid-cols-2 gap-8 mb-8">
             <div className="space-y-4">
@@ -120,7 +123,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
-                  className="w-full bg-white/[0.05] border-2 border-white/[0.15] rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
+                  className="w-full bg-white/[0.05] border-2 border-border rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
                   placeholder={t("Ihr Name", "Your name")}
                 />
               </div>
@@ -134,7 +137,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
-                  className="w-full bg-white/[0.05] border-2 border-white/[0.15] rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
+                  className="w-full bg-white/[0.05] border-2 border-border rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
                   placeholder={t("ihre@email.de", "your@email.com")}
                 />
               </div>
@@ -148,7 +151,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   required
-                  className="w-full bg-white/[0.05] border-2 border-white/[0.15] rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
+                  className="w-full bg-white/[0.05] border-2 border-border rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
                   placeholder={t("Betreff Ihrer Nachricht", "Subject of your message")}
                 />
               </div>

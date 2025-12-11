@@ -251,8 +251,8 @@ export const servicesData: ServiceWithSubcategories[] = [
     titleDe: "Solar & Photovoltaik",
     titleEn: "Solar & Photovoltaic",
     icon: "sun",
-    descriptionDe: "Förderung bis 70%, Installation, Beratung und Wartung von Solaranlagen",
-    descriptionEn: "Subsidies up to 70%, Installation, Consulting and Maintenance of Solar Systems",
+    descriptionDe: "Installation, Beratung und Wartung von Solaranlagen",
+    descriptionEn: "Installation, Consulting and Maintenance of Solar Systems",
     imagePath: "/blog-solar.jpg",
     subcategories: [
       {

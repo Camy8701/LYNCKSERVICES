@@ -7,8 +7,8 @@ const howItWorksSteps = [
     icon: ClipboardCheck,
     titleDe: "Service wählen",
     titleEn: "Choose Service",
-    descriptionDe: "Wählen Sie aus 6 Dienstleistungen: Heizung, Solar, Dachdecker, Klempner, Elektriker oder allgemeine Renovierung.",
-    descriptionEn: "Choose from 6 services: Heating, Solar, Roofing, Plumbing, Electrician or general renovation."
+    descriptionDe: "Wählen Sie aus 9 Dienstleistungen: Heizung, Solar, Dachdecker, Klempner, Elektriker, Wärmepumpe, Klimatechnik, Service & Beratung oder allgemeine Renovierung.",
+    descriptionEn: "Choose from 9 services: Heating, Solar, Roofing, Plumbing, Electrician, Heat Pump, Air Conditioning, Service & Consultation or general renovation."
   },
   {
     number: "2",

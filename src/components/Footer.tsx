@@ -9,6 +9,9 @@ const Footer = () => {
     { nameDe: "Dachdecker", nameEn: "Roofing", slug: "/services/dachdecker" },
     { nameDe: "Klempner & Sanitär", nameEn: "Plumbing & Sanitary", slug: "/services/klempner" },
     { nameDe: "Elektriker", nameEn: "Electrician", slug: "/services/elektriker" },
+    { nameDe: "Wärmepumpe", nameEn: "Heat Pump Systems", slug: "/services/waermepumpe" },
+    { nameDe: "Klimatechnik", nameEn: "Air Conditioning", slug: "/services/klimatechnik" },
+    { nameDe: "Service & Beratung", nameEn: "Service & Consultation", slug: "/services/service-beratung" },
     { nameDe: "Allgemeine Renovierung", nameEn: "General Renovation", slug: "/services/renovierung" }
   ];
 
