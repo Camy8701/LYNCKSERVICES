@@ -7,6 +7,7 @@ import ServiceRequestForm from '@/components/ServiceRequestForm';
 import { Check, ArrowRight, Clock, Shield, Users, Award } from 'lucide-react';
 import { SEO, BreadcrumbSchema } from '@/lib/seo';
 import { servicesData, getServiceBySlug } from '@/data/servicesData';
+import { getIconComponent } from '@/lib/serviceIcons';
 
 // Comprehensive service details data for all 9 services
 const serviceDetailsData: Record<string, {
@@ -687,6 +688,7 @@ export default function ServiceDetail() {
   const serviceDescription = language === 'de' ? service.descriptionDe : service.descriptionEn;
   const image = service.imagePath;
   const details = serviceDetailsData[service.slug] || serviceDetailsData.renovierung;
+  const IconComponent = getIconComponent(service.icon);
 
   const seoTitle = language === 'de'
     ? `${serviceName} in Hessen & NRW | Frankfurt • Köln • Düsseldorf | Lynck Services`
@@ -740,7 +742,7 @@ export default function ServiceDetail() {
           <div className="relative h-full flex items-center justify-center px-4">
             <div className="text-center max-w-4xl">
               <div className="flex items-center justify-center gap-4 mb-6">
-                <span className="text-6xl">{service.icon}</span>
+                <IconComponent className="w-16 h-16 md:w-20 md:h-20 text-white" />
               </div>
               <h1 className="text-4xl md:text-6xl font-serif text-white mb-4">
                 {serviceName}
