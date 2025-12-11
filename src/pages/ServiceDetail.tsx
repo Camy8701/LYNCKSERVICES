@@ -742,7 +742,7 @@ export default function ServiceDetail() {
           <div className="relative h-full flex items-center justify-center px-4">
             <div className="text-center max-w-4xl">
               <div className="flex items-center justify-center gap-4 mb-6">
-                <IconComponent className="w-16 h-16 md:w-20 md:h-20 text-white" />
+                <IconComponent className="w-16 h-16 md:w-20 md:h-20 text-primary" />
               </div>
               <h1 className="text-4xl md:text-6xl font-serif text-white mb-4">
                 {serviceName}
