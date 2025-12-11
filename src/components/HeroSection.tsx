@@ -20,26 +20,29 @@ const HeroSection = () => {
         {/* Left Panel */}
         <div className="relative md:p-10 lg:p-14 pt-6 pr-6 pb-6 pl-6 overflow-hidden">
           <div className="mt-10 md:mt-14 relative z-10">
-            <h1 className="mt-4 text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground font-serif font-normal drop-shadow-lg">
-              {t("Finden Sie geprüfte", "Find Trusted")}
-            </h1>
-            <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground font-serif font-normal drop-shadow-lg">
-              {t("Handwerker", "Home Services")}
-            </h2>
-            <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground font-serif font-normal drop-shadow-lg">
-              {t("in Ihrer Nähe", "in Your Area")}
-            </h2>
+            {/* Glassmorphism container for hero text */}
+            <div className="bg-white/[0.12] backdrop-blur-md border border-white/[0.25] rounded-3xl p-6 md:p-8 mb-6">
+              <h1 className="mt-0 text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground font-serif font-normal">
+                {t("Finden Sie geprüfte", "Find Trusted")}
+              </h1>
+              <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground font-serif font-normal">
+                {t("Handwerker", "Home Services")}
+              </h2>
+              <h2 className="mt-2 text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground font-serif font-normal">
+                {t("in Ihrer Nähe", "in Your Area")}
+              </h2>
 
-            <div className="mt-6 flex items-center gap-3">
-              <span className="text-sm text-foreground">
-                {t(
-                  "Kostenlos Angebote vergleichen • Geprüfte Fachleute • Schnelle Antwort",
-                  "Compare quotes for free • Verified professionals • Fast response"
-                )}
-              </span>
+              <div className="mt-6 flex items-center gap-3">
+                <span className="text-sm text-foreground">
+                  {t(
+                    "Kostenlos Angebote vergleichen • Geprüfte Fachleute • Schnelle Antwort",
+                    "Compare quotes for free • Verified professionals • Fast response"
+                  )}
+                </span>
+              </div>
             </div>
 
-            <div className="flex flex-wrap gap-4 mt-8 items-center">
+            <div className="flex flex-wrap gap-4 items-center">
               <a
                 href="#services"
                 className="relative inline-flex items-center justify-center overflow-hidden group text-white tracking-tighter bg-gray-800 rounded-3xl pt-2.5 pr-4 pb-2.5 pl-4 hover:scale-105 transition-transform duration-300"
@@ -112,7 +115,7 @@ const HeroSection = () => {
                 }}
                 className="group relative flex flex-col items-center justify-center bg-white/30 backdrop-blur-sm border border-white/40 rounded-xl p-2 md:p-4 hover:bg-white/40 hover:scale-105 transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.6),0_0_40px_rgba(16,185,129,0.4),0_0_60px_rgba(16,185,129,0.2)]"
               >
-                <IconComponent className="w-8 h-8 md:w-10 md:h-10 mb-1 md:mb-2 text-foreground" />
+                <IconComponent className="w-8 h-8 md:w-10 md:h-10 mb-1 md:mb-2 text-primary" />
                 <span className="text-[9px] md:text-[10px] text-center text-foreground font-semibold leading-tight break-words px-1">
                   {language === 'de' ? service.nameDe : service.nameEn}
                 </span>
