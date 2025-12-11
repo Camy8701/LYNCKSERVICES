@@ -44,7 +44,7 @@ const HeroSection = () => {
 
             <div className="flex flex-wrap gap-4 items-center">
               <a
-                href="/contact"
+                href="/quote-request"
                 onClick={() => {
                   // GTM Event Tracking
                   if (typeof window !== 'undefined' && (window as any).dataLayer) {
@@ -52,7 +52,7 @@ const HeroSection = () => {
                       event: 'cta_click',
                       cta_location: 'hero_section',
                       cta_text: language === 'de' ? 'Jetzt Angebot anfordern' : 'Request Quote Now',
-                      destination: 'contact_form'
+                      destination: 'quote_request_form'
                     });
                   }
                 }}

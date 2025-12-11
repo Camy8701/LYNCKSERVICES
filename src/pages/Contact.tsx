@@ -120,7 +120,8 @@ const Contact = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
-                  className="w-full bg-white/[0.03] border border-white/[0.06] rounded-lg px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="w-full bg-white/[0.05] border-2 border-white/[0.15] rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
+                  placeholder={t("Ihr Name", "Your name")}
                 />
               </div>
               <div>
@@ -133,7 +134,8 @@ const Contact = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
-                  className="w-full bg-white/[0.03] border border-white/[0.06] rounded-lg px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="w-full bg-white/[0.05] border-2 border-white/[0.15] rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
+                  placeholder={t("ihre@email.de", "your@email.com")}
                 />
               </div>
               <div>
@@ -146,7 +148,8 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   required
-                  className="w-full bg-white/[0.03] border border-white/[0.06] rounded-lg px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="w-full bg-white/[0.05] border-2 border-white/[0.15] rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
+                  placeholder={t("Betreff Ihrer Nachricht", "Subject of your message")}
                 />
               </div>
               <div>
@@ -159,7 +162,8 @@ const Contact = () => {
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   required
                   rows={4}
-                  className="w-full bg-white/[0.03] border border-white/[0.06] rounded-lg px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="w-full bg-white/[0.05] border-2 border-white/[0.15] rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors resize-none"
+                  placeholder={t("Ihre Nachricht hier...", "Your message here...")}
                 />
               </div>
               <button

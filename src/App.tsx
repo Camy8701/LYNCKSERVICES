@@ -14,6 +14,7 @@ const Index = lazy(() => import("./pages/Index"));
 const ForBusinesses = lazy(() => import("./pages/ForBusinesses"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
+const QuoteRequest = lazy(() => import("./pages/QuoteRequest"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Impressum = lazy(() => import("./pages/Impressum"));
@@ -64,6 +65,7 @@ const App = () => (
                 <Route path="/for-businesses" element={<ForBusinesses />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/quote-request" element={<QuoteRequest />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/impressum" element={<Impressum />} />
