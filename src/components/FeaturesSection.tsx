@@ -47,7 +47,7 @@ const FeaturesSection = () => {
                   style={{ backgroundImage: `url(${service.imagePath})` }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
-                    <IconComponent className="w-10 h-10 text-white" />
+                    <IconComponent className="w-10 h-10 text-primary" />
                   </div>
                 </div>
                 <h4 className="text-xl font-semibold text-foreground mb-2 tracking-tight">
