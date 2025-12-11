@@ -19,9 +19,9 @@ const HeroSection = () => {
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Left Panel */}
         <div className="relative md:p-10 lg:p-14 pt-6 pr-6 pb-6 pl-6 overflow-hidden">
-          <div className="mt-10 md:mt-14 relative z-10">
+          <div className="mt-10 md:mt-14 relative z-10 max-w-2xl">
             {/* Glassmorphism container for hero text */}
-            <div className="bg-white/[0.12] backdrop-blur-md border border-white/[0.25] rounded-3xl p-6 md:p-8 mb-6">
+            <div className="bg-white/[0.12] backdrop-blur-md border border-white/[0.25] rounded-3xl p-5 md:p-6 mb-6">
               <h1 className="mt-0 text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground font-serif font-normal">
                 {t("Finden Sie geprüfte", "Find Trusted")}
               </h1>
@@ -32,7 +32,7 @@ const HeroSection = () => {
                 {t("in Ihrer Nähe", "in Your Area")}
               </h2>
 
-              <div className="mt-6 flex items-center gap-3">
+              <div className="mt-5 flex items-center gap-3">
                 <span className="text-sm text-foreground">
                   {t(
                     "Kostenlos Angebote vergleichen • Geprüfte Fachleute • Schnelle Antwort",
