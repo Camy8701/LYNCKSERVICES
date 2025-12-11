@@ -2,6 +2,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { servicesData } from "@/data/servicesData";
+import { getIconComponent } from "@/lib/serviceIcons";
 
 const FeaturesSection = () => {
   const { t, language } = useLanguage();
@@ -22,46 +23,49 @@ const FeaturesSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesData.map((service) => (
-            <Link
-              key={service.id}
-              to={`/services/${service.slug}`}
-              onClick={() => {
-                // GTM Event Tracking
-                if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                  (window as any).dataLayer.push({
-                    event: 'service_click',
-                    service_name: language === 'de' ? service.titleDe : service.titleEn,
-                    service_slug: service.slug,
-                    click_location: 'features_grid'
-                  });
-                }
-              }}
-              className="relative group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 block"
-            >
-              <div
-                className="aspect-[4/3] overflow-hidden relative bg-cover bg-center rounded-2xl mb-6"
-                style={{ backgroundImage: `url(${service.imagePath})` }}
+          {servicesData.map((service) => {
+            const IconComponent = getIconComponent(service.icon);
+            return (
+              <Link
+                key={service.id}
+                to={`/services/${service.slug}`}
+                onClick={() => {
+                  // GTM Event Tracking
+                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                      event: 'service_click',
+                      service_name: language === 'de' ? service.titleDe : service.titleEn,
+                      service_slug: service.slug,
+                      click_location: 'features_grid'
+                    });
+                  }
+                }}
+                className="relative group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 block"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
-                  <span className="text-3xl">{service.icon}</span>
+                <div
+                  className="aspect-[4/3] overflow-hidden relative bg-cover bg-center rounded-2xl mb-6"
+                  style={{ backgroundImage: `url(${service.imagePath})` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                    <IconComponent className="w-10 h-10 text-white" />
+                  </div>
                 </div>
-              </div>
-              <h4 className="text-xl font-semibold text-foreground mb-2 tracking-tight">
-                {language === 'de' ? service.titleDe : service.titleEn}
-              </h4>
-              <p className="text-sm text-muted-foreground mb-1 font-medium">
-                {language === 'de' ? service.titleEn : service.titleDe}
-              </p>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                {language === 'de' ? service.descriptionDe : service.descriptionEn}
-              </p>
-              <span className="inline-flex items-center text-sm font-medium text-primary group-hover:text-primary/80 transition-colors">
-                {t("Mehr erfahren", "Learn more")}
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </span>
-            </Link>
-          ))}
+                <h4 className="text-xl font-semibold text-foreground mb-2 tracking-tight">
+                  {language === 'de' ? service.titleDe : service.titleEn}
+                </h4>
+                <p className="text-sm text-muted-foreground mb-1 font-medium">
+                  {language === 'de' ? service.titleEn : service.titleDe}
+                </p>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                  {language === 'de' ? service.descriptionDe : service.descriptionEn}
+                </p>
+                <span className="inline-flex items-center text-sm font-medium text-primary group-hover:text-primary/80 transition-colors">
+                  {t("Mehr erfahren", "Learn more")}
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import { ArrowRight, Check } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { servicesData } from "@/data/servicesData";
+import { getIconComponent } from "@/lib/serviceIcons";
 
 const HeroSection = () => {
   const { t, language } = useLanguage();
@@ -92,7 +93,9 @@ const HeroSection = () => {
         <div className="relative md:p-10 lg:p-14 pt-8 pr-8 pb-8 pl-8 flex items-center justify-center">
           {/* Service Cards Grid - 3x3 for 9 services */}
           <div className="grid grid-cols-3 gap-2 md:gap-3 w-full max-w-lg">
-          {servicesData.map((service) => (
+          {servicesData.map((service) => {
+              const IconComponent = getIconComponent(service.icon);
+              return (
               <a
                 key={service.id}
                 href={`/services/${service.slug}`}
@@ -109,12 +112,13 @@ const HeroSection = () => {
                 }}
                 className="group relative flex flex-col items-center justify-center bg-white/30 backdrop-blur-sm border border-white/40 rounded-xl p-2 md:p-4 hover:bg-white/40 hover:scale-105 transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.6),0_0_40px_rgba(16,185,129,0.4),0_0_60px_rgba(16,185,129,0.2)]"
               >
-                <span className="text-2xl md:text-3xl mb-1 md:mb-2">{service.icon}</span>
+                <IconComponent className="w-8 h-8 md:w-10 md:h-10 mb-1 md:mb-2 text-foreground" />
                 <span className="text-[9px] md:text-[10px] text-center text-foreground font-semibold leading-tight break-words px-1">
                   {language === 'de' ? service.nameDe : service.nameEn}
                 </span>
               </a>
-            ))}
+            );
+          })}
           </div>
         </div>
       </div>

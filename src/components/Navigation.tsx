@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { SearchBar } from "./SearchBar";
+import { servicesData } from "@/data/servicesData";
+import { getIconComponent } from "@/lib/serviceIcons";
 
 const Navigation = () => {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -22,15 +24,6 @@ const Navigation = () => {
     localStorage.setItem("theme", newTheme);
     document.documentElement.classList.toggle("dark", newTheme === "dark");
   };
-
-  const services = [
-    { icon: "🔥", name: t("Heizung & HVAC", "Heating & HVAC"), slug: "heizung" },
-    { icon: "☀️", name: t("Solar & Photovoltaik", "Solar & Photovoltaic"), slug: "solar" },
-    { icon: "🏠", name: t("Dachdecker", "Roofing"), slug: "dachdecker" },
-    { icon: "🚰", name: t("Klempner & Sanitär", "Plumbing & Sanitary"), slug: "klempner" },
-    { icon: "⚡", name: t("Elektriker", "Electrician"), slug: "elektriker" },
-    { icon: "🔨", name: t("Allgemeine Renovierung", "General Renovation"), slug: "renovierung" },
-  ];
 
   return (
     <nav className="flex items-center justify-between px-6 md:px-12 lg:px-16 py-4 mt-8 mb-4 mx-4 md:mx-6 lg:mx-8 glass-card rounded-2xl relative z-50">
@@ -54,16 +47,19 @@ const Navigation = () => {
             {servicesOpen && (
               <div className="absolute top-full left-0 pt-1 w-64 z-[100]">
                 <div className="bg-background border border-border rounded-xl shadow-xl py-2">
-                  {services.map((service) => (
-                    <a
-                      key={service.slug}
-                      href={`/services/${service.slug}`}
-                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-primary/10 hover:text-foreground transition-colors duration-200"
-                    >
-                      <span className="text-lg">{service.icon}</span>
-                      <span>{service.name}</span>
-                    </a>
-                  ))}
+                  {servicesData.map((service) => {
+                    const IconComponent = getIconComponent(service.icon);
+                    return (
+                      <a
+                        key={service.slug}
+                        href={`/services/${service.slug}`}
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-primary/10 hover:text-foreground transition-colors duration-200"
+                      >
+                        <IconComponent className="w-5 h-5" />
+                        <span>{language === 'de' ? service.nameDe : service.nameEn}</span>
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -151,17 +147,20 @@ const Navigation = () => {
                   {t("Dienstleistungen", "Services")}
                 </h3>
                 <div className="space-y-1">
-                  {services.map((service) => (
-                    <a
-                      key={service.slug}
-                      href={`/services/${service.slug}`}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center gap-3 px-2 py-2.5 text-sm text-foreground hover:bg-accent hover:text-primary rounded-lg transition-colors duration-300"
-                    >
-                      <span className="text-lg">{service.icon}</span>
-                      <span>{service.name}</span>
-                    </a>
-                  ))}
+                  {servicesData.map((service) => {
+                    const IconComponent = getIconComponent(service.icon);
+                    return (
+                      <a
+                        key={service.slug}
+                        href={`/services/${service.slug}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-3 px-2 py-2.5 text-sm text-foreground hover:bg-accent hover:text-primary rounded-lg transition-colors duration-300"
+                      >
+                        <IconComponent className="w-5 h-5" />
+                        <span>{language === 'de' ? service.nameDe : service.nameEn}</span>
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
 

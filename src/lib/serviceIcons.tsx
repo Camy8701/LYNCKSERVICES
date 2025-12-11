@@ -1,15 +1,31 @@
-import { Flame, Sun, Home, Droplets, Zap, Hammer, LucideIcon } from "lucide-react";
+import {
+  Flame,
+  Sun,
+  Home,
+  Droplets,
+  Zap,
+  Hammer,
+  Warehouse,
+  Thermometer,
+  Snowflake,
+  ClipboardList,
+  LucideIcon
+} from "lucide-react";
 
-// Map icon names from database to Lucide icon components
+// Icon mapping for all 9 services
 export const iconMap: Record<string, LucideIcon> = {
-  '🔥': Flame,
-  '☀️': Sun,
-  '🏠': Home,
-  '🚰': Droplets,
-  '⚡': Zap,
-  '🔨': Hammer,
+  'home': Home,                    // Allgemeine Renovierung
+  'warehouse': Warehouse,          // Dachdecker (Roofing)
+  'zap': Zap,                      // Elektriker
+  'flame': Flame,                  // Heizung & HVAC
+  'thermometer': Thermometer,      // Wärmepumpe (Heat Pump)
+  'droplets': Droplets,            // Klempner & Sanitär
+  'sun': Sun,                      // Solar & Photovoltaik
+  'snowflake': Snowflake,          // Klimatechnik (Air Conditioning)
+  'clipboard': ClipboardList,      // Service & Beratung
+  'hammer': Hammer,                // Default/fallback
 };
 
-export function getIconComponent(iconName: string): LucideIcon {
-  return iconMap[iconName] || Hammer; // Default to Hammer if icon not found
+export function getIconComponent(iconKey: string): LucideIcon {
+  return iconMap[iconKey.toLowerCase()] || Hammer;
 }
