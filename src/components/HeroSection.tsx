@@ -44,7 +44,7 @@ const HeroSection = () => {
 
             <div className="flex flex-wrap gap-4 items-center">
               <a
-                href="/quote-request"
+                href="/services/renovierung"
                 onClick={() => {
                   // GTM Event Tracking
                   if (typeof window !== 'undefined' && (window as any).dataLayer) {
@@ -52,11 +52,11 @@ const HeroSection = () => {
                       event: 'cta_click',
                       cta_location: 'hero_section',
                       cta_text: language === 'de' ? 'Jetzt Angebot anfordern' : 'Request Quote Now',
-                      destination: 'quote_request_form'
+                      destination: 'service_request_form'
                     });
                   }
                 }}
-                className="relative inline-flex items-center justify-center overflow-hidden group text-white tracking-tighter bg-gray-800 rounded-3xl pt-2.5 pr-4 pb-2.5 pl-4 hover:scale-105 transition-transform duration-300"
+                className="relative inline-flex items-center justify-center overflow-hidden group text-white tracking-tighter bg-gray-800 rounded-3xl pt-2.5 pr-4 pb-2.5 pl-4 hover:scale-105 transition-transform duration-300 animate-pulse-glow"
               >
                 <span className="absolute transition-all duration-500 ease-out group-hover:w-56 group-hover:h-56 bg-teal-600 w-0 h-0 rounded-full"></span>
                 <span className="relative text-base font-semibold">
