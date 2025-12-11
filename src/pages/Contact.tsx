@@ -36,44 +36,44 @@ const Contact = () => {
         .select();
 
       if (error) {
+        console.error('Supabase error:', error);
         throw error;
       }
 
-      // Send email notification (using mailto as a fallback)
-      // In production, you would use an email service like Resend, SendGrid, or Supabase Edge Functions
-      const emailSubject = encodeURIComponent(`[Lynck Services] ${formData.subject}`);
-      const emailBody = encodeURIComponent(
-        `New contact form submission:\n\n` +
-        `Name: ${formData.name}\n` +
-        `Email: ${formData.email}\n` +
-        `Subject: ${formData.subject}\n\n` +
-        `Message:\n${formData.message}\n\n` +
-        `---\n` +
-        `Submitted at: ${new Date().toLocaleString()}`
-      );
+      console.log('Message saved successfully:', data);
 
-      // Open mailto link (will prompt user to send email in their email client)
-      // This is a temporary solution - replace with proper email service in production
-      window.location.href = `mailto:info@lynckservices.de?subject=${emailSubject}&body=${emailBody}`;
-
+      // Show success message
       toast({
         title: t("Nachricht gesendet", "Message sent"),
         description: t(
-          "Wir melden uns so schnell wie möglich bei Ihnen.",
-          "We will get back to you as soon as possible."
+          "Vielen Dank für Ihre Nachricht. Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
+          "Thank you for your message. We will get back to you within 24 hours."
         )
       });
 
+      // GTM Event Tracking
+      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+        (window as any).dataLayer.push({
+          event: 'contact_form_submit',
+          form_type: 'contact_page',
+          subject: formData.subject
+        });
+      }
+
+      // Reset form
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
       console.error('Error submitting message:', error);
+
+      // Show error with fallback option
       toast({
         title: t("Fehler", "Error"),
         description: t(
-          "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.",
-          "Your message could not be sent. Please try again later."
-        ),
-        variant: "destructive"
+          "Ihre Nachricht konnte nicht gesendet werden. Bitte kontaktieren Sie uns direkt per E-Mail:",
+          "Your message could not be sent. Please contact us directly via email:"
+        ) + " info@lynckservices.de",
+        variant: "destructive",
+        duration: 10000 // Show for 10 seconds
       });
     } finally {
       setIsSubmitting(false);
