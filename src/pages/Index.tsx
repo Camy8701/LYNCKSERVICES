@@ -32,8 +32,8 @@ const Index = () => {
   return (
     <>
       <SEO
-        title="Handwerker finden in Hessen & NRW | Lynck Services - Kostenloser Angebotsvergleich"
-        description="Finden Sie handverlesene Handwerker unter den Besten in Hessen & Nordrhein-Westfalen. Kostenloser Vergleich für Heizung, Solar, Dach, Klempner, Elektriker. Jetzt Angebot anfordern!"
+        title="Handwerker finden in Hessen, NRW & RLP | Lynck Services - Kostenloser Angebotsvergleich"
+        description="Finden Sie handverlesene Handwerker unter den Besten in Hessen, Nordrhein-Westfalen & Rheinland-Pfalz. Kostenloser Vergleich für Heizung, Solar, Dach, Klempner, Elektriker. Jetzt Angebot anfordern!"
         canonicalUrl="/"
         ogType="website"
       />
@@ -41,12 +41,16 @@ const Index = () => {
       <FAQSchema
         faqs={[
           {
+            question: "In welchen Bundesländern bietet Lynck Services Handwerker an?",
+            answer: "Wir vermitteln geprüfte Handwerker in 3 Bundesländern: Hessen (10 Städte), Nordrhein-Westfalen (10 Städte) und Rheinland-Pfalz (15 Städte)."
+          },
+          {
             question: "In welchen Städten in Hessen bietet Lynck Services Handwerker an?",
             answer: "Wir vermitteln geprüfte Handwerker in 10 Städten in Hessen: Frankfurt am Main, Wiesbaden, Kassel, Darmstadt, Offenbach am Main, Hanau, Gießen, Marburg, Fulda und Rüsselsheim am Main."
           },
           {
-            question: "Welche Städte in Nordrhein-Westfalen werden abgedeckt?",
-            answer: "In NRW sind wir in 10 Städten vertreten: Köln, Düsseldorf, Dortmund, Essen, Duisburg, Bochum, Wuppertal, Bonn, Münster und Aachen."
+            question: "Welche Städte in Nordrhein-Westfalen und Rheinland-Pfalz werden abgedeckt?",
+            answer: "In NRW sind wir in 10 Städten vertreten: Köln, Düsseldorf, Dortmund, Essen, Duisburg, Bochum, Wuppertal, Bonn, Münster und Aachen. In Rheinland-Pfalz decken wir 15 Städte ab: Mainz, Ludwigshafen, Koblenz, Trier, Kaiserslautern, Worms, Neuwied, Neustadt a.d. Weinstraße, Speyer, Frankenthal, Landau, Pirmasens, Bad Kreuznach, Idar-Oberstein und Zweibrücken."
           },
           {
             question: "Ist der Service wirklich kostenlos?",
@@ -58,7 +62,7 @@ const Index = () => {
           },
           {
             question: "Welche Handwerker-Dienstleistungen werden angeboten?",
-            answer: "Wir vermitteln Fachleute für Heizung & HVAC, Solar & Photovoltaik, Dachdecker, Klempner & Sanitär, Elektriker und allgemeine Renovierungsarbeiten in Hessen und Nordrhein-Westfalen."
+            answer: "Wir vermitteln Fachleute für Heizung & HVAC, Solar & Photovoltaik, Dachdecker, Klempner & Sanitär, Elektriker, Wärmepumpe, Klimatechnik, Service & Beratung und allgemeine Renovierungsarbeiten in Hessen, Nordrhein-Westfalen und Rheinland-Pfalz."
           },
           {
             question: "Sind alle Handwerker geprüft?",

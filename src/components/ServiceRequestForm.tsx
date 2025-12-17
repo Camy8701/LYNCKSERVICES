@@ -59,6 +59,23 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
       'Wuppertal',
       'Bonn',
       'Münster'
+    ],
+    'rhineland-palatinate': [
+      'Mainz',
+      'Ludwigshafen am Rhein',
+      'Koblenz',
+      'Trier',
+      'Kaiserslautern',
+      'Worms',
+      'Neuwied',
+      'Neustadt an der Weinstraße',
+      'Speyer',
+      'Frankenthal (Pfalz)',
+      'Landau in der Pfalz',
+      'Pirmasens',
+      'Bad Kreuznach',
+      'Idar-Oberstein',
+      'Zweibrücken'
     ]
   };
 
@@ -459,6 +476,7 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
           <option value="">{t('Bundesland auswählen...', 'Select state...')}</option>
           <option value="hesse">{t('Hessen', 'Hesse')}</option>
           <option value="nrw">{t('Nordrhein-Westfalen', 'North Rhine-Westphalia')}</option>
+          <option value="rhineland-palatinate">{t('Rheinland-Pfalz', 'Rhineland-Palatinate')}</option>
         </select>
         {errors.state && <p className="mt-1 text-sm text-destructive">{errors.state}</p>}
       </div>

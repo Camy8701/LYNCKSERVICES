@@ -25,8 +25,8 @@ const About = () => {
             
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
               {t(
-                "Wir sind Ihre digitale Brücke zwischen Hausbesitzern und qualifizierten Handwerkern in Hessen und Nordrhein-Westfalen. Lynck Services wurde gegründet, um die Suche nach zuverlässigen Fachleuten zu vereinfachen und transparenter zu machen.",
-                "We are your digital bridge between homeowners and qualified contractors in Hesse and North Rhine-Westphalia. Lynck Services was founded to simplify the search for reliable professionals and make it more transparent."
+                "Wir sind Ihre digitale Brücke zwischen Hausbesitzern und qualifizierten Handwerkern in Hessen, Nordrhein-Westfalen und Rheinland-Pfalz. Lynck Services wurde gegründet, um die Suche nach zuverlässigen Fachleuten zu vereinfachen und transparenter zu machen.",
+                "We are your digital bridge between homeowners and qualified contractors in Hesse, North Rhine-Westphalia and Rhineland-Palatinate. Lynck Services was founded to simplify the search for reliable professionals and make it more transparent."
               )}
             </p>
 
@@ -66,12 +66,12 @@ const About = () => {
 
             <p className="text-muted-foreground leading-relaxed mb-6">
               {t(
-                "Wir sind stolz darauf, Hausbesitzer in zwei der größten Bundesländer Deutschlands zu bedienen:",
-                "We are proud to serve homeowners in two of Germany's largest states:"
+                "Wir sind stolz darauf, Hausbesitzer in drei der größten Bundesländer Deutschlands zu bedienen:",
+                "We are proud to serve homeowners in three of Germany's largest states:"
               )}
             </p>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <div className="p-6 bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl">
                 <h4 className="text-lg font-semibold text-foreground mb-3">
                   {t("Hessen", "Hesse")}
@@ -92,6 +92,18 @@ const About = () => {
                   {t(
                     "Köln, Düsseldorf, Dortmund, Essen, Duisburg, Bochum, Wuppertal, Bonn, Münster, Aachen",
                     "Cologne, Düsseldorf, Dortmund, Essen, Duisburg, Bochum, Wuppertal, Bonn, Münster, Aachen"
+                  )}
+                </p>
+              </div>
+
+              <div className="p-6 bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl">
+                <h4 className="text-lg font-semibold text-foreground mb-3">
+                  {t("Rheinland-Pfalz", "Rhineland-Palatinate")}
+                </h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {t(
+                    "Mainz, Ludwigshafen am Rhein, Koblenz, Trier, Kaiserslautern, Worms, Neuwied, Neustadt an der Weinstraße, Speyer, Frankenthal, Landau, Pirmasens, Bad Kreuznach, Idar-Oberstein, Zweibrücken",
+                    "Mainz, Ludwigshafen am Rhein, Koblenz, Trier, Kaiserslautern, Worms, Neuwied, Neustadt an der Weinstraße, Speyer, Frankenthal, Landau, Pirmasens, Bad Kreuznach, Idar-Oberstein, Zweibrücken"
                   )}
                 </p>
               </div>

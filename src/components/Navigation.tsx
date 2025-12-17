@@ -77,7 +77,7 @@ const Navigation = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="hidden lg:block w-96">
+        <div className="hidden xl:block w-96">
           <SearchBar />
         </div>
 
