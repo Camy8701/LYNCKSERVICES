@@ -66,6 +66,7 @@ const Breadcrumb = ({ customItems }: BreadcrumbProps) => {
     terms: { de: "AGB", en: "Terms & Conditions" },
     impressum: { de: "Impressum", en: "Legal Notice" },
     service: { de: "Dienstleistungen", en: "Services" },
+    services: { de: "Dienstleistungen", en: "Services" },
     danke: { de: "Danke", en: "Thank You" },
   };
 
@@ -84,12 +85,15 @@ const Breadcrumb = ({ customItems }: BreadcrumbProps) => {
         {pathnames.map((name, index) => {
           const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
           const isLast = index === pathnames.length - 1;
-          
+
           // Get translated label
           const translationKey = breadcrumbMap[name];
-          const label = translationKey 
+          const label = translationKey
             ? t(translationKey.de, translationKey.en)
             : name.charAt(0).toUpperCase() + name.slice(1);
+
+          // Special case: "services" should link to homepage services section
+          const linkTo = name === "services" ? "/#services" : routeTo;
 
           return (
             <li key={name} className="flex items-center gap-2">
@@ -98,7 +102,7 @@ const Breadcrumb = ({ customItems }: BreadcrumbProps) => {
                 <span className="text-foreground font-medium">{label}</span>
               ) : (
                 <Link
-                  to={routeTo}
+                  to={linkTo}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {label}
