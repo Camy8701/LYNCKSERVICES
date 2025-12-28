@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -19,6 +19,7 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
   const { language, t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const isMountedRef = useRef(true);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -80,9 +81,17 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
   };
 
   const availableCities = formData.state ? citiesByState[formData.state] || [] : [];
-  
+
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [gdprConsent, setGdprConsent] = useState(false);
+
+  // Cleanup on unmount to prevent state updates after navigation
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
   
   // Validation function
   const validateForm = () => {
@@ -225,16 +234,19 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
 
       console.log('Lead created successfully:', data.lead_id);
 
-      // Redirect to thank you page (don't set loading=false since component will unmount)
+      // Redirect to thank you page
       navigate(`/danke?lead_id=${data.lead_id}`, { replace: true });
 
     } catch (err) {
       console.error('Error creating lead:', err);
-      setError(t(
-        'Es gab einen Fehler. Bitte versuchen Sie es erneut.',
-        'There was an error. Please try again.'
-      ));
-      setLoading(false);
+      // Only update state if component is still mounted
+      if (isMountedRef.current) {
+        setError(t(
+          'Es gab einen Fehler. Bitte versuchen Sie es erneut.',
+          'There was an error. Please try again.'
+        ));
+        setLoading(false);
+      }
     }
   };
   
