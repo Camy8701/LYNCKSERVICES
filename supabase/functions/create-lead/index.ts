@@ -75,7 +75,7 @@ function validateLead(data: any) {
   // State validation (required)
   if (!data.state || typeof data.state !== 'string') {
     errors.push('State is required');
-  } else if (!['hesse', 'nrw'].includes(data.state)) {
+  } else if (!['hesse', 'nrw', 'rhineland-palatinate'].includes(data.state)) {
     errors.push('Invalid state');
   }
 
