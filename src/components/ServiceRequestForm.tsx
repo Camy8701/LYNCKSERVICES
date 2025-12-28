@@ -219,7 +219,7 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
           email: formData.email.trim(),
           state: formData.state,
           city: formData.city,
-          service_id: service.id,
+          service_id: service.slug, // Send slug instead of UUID
           service_details: enrichedDetails,
           timeline: formData.timeline,
           property_ownership: formData.property_ownership,
