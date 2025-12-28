@@ -147,7 +147,7 @@ serve(async (req) => {
       city: leadData.city.trim(),
       service_details: leadData.service_details.trim(),
       timeline: leadData.timeline.trim(),
-      service_id: leadData.service_id || null,
+      service_slug: leadData.service_id || null, // Store slug, not UUID
       property_ownership: leadData.property_ownership,
       property_type: leadData.property_type,
       source: 'website',
