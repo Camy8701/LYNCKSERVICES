@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
+import MatchingProcess from "@/components/MatchingProcess";
 import SecurityBadges from "@/components/SecurityBadges";
 import TrustBadges from "@/components/TrustBadges";
 import FeaturesSection from "@/components/FeaturesSection";
@@ -80,6 +81,7 @@ const Index = () => {
 
           <Navigation />
           <HeroSection />
+          <MatchingProcess />
           <SecurityBadges />
           <TrustBadges />
           <FeaturesSection />
