@@ -224,17 +224,16 @@ export default function ServiceRequestForm({ service, cities }: ServiceRequestFo
       }
 
       console.log('Lead created successfully:', data.lead_id);
-      
-      // Redirect to thank you page
-      navigate(`/danke?lead_id=${data.lead_id}`);
-      
+
+      // Redirect to thank you page (don't set loading=false since component will unmount)
+      navigate(`/danke?lead_id=${data.lead_id}`, { replace: true });
+
     } catch (err) {
       console.error('Error creating lead:', err);
       setError(t(
         'Es gab einen Fehler. Bitte versuchen Sie es erneut.',
         'There was an error. Please try again.'
       ));
-    } finally {
       setLoading(false);
     }
   };
