@@ -22,7 +22,7 @@ export type NetworkMetrics = {
 export const networkMetrics: NetworkMetrics = {
   totalLeadsMatched: 2847, // All-time
   totalLeadsMatchedThisYear: 1243, // 2024
-  activePartners: 156,
+  activePartners: 0, // Hidden from public display
   averageRating: 4.8,
   averageResponseTimeMinutes: 32,
   citiesCovered: 35, // Hessen (10) + NRW (10) + RLP (15)

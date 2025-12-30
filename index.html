@@ -37,6 +37,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+    <!-- Force German as default language if not set -->
+    <script>
+      (function() {
+        try {
+          const currentLang = localStorage.getItem('language');
+          // If no language is set OR if it's set to anything other than 'de' or 'en', force German
+          if (!currentLang || (currentLang !== 'de' && currentLang !== 'en')) {
+            localStorage.setItem('language', 'de');
+          }
+          // Set HTML lang attribute
+          document.documentElement.lang = localStorage.getItem('language') || 'de';
+        } catch (e) {
+          console.warn('Could not set language:', e);
+          document.documentElement.lang = 'de';
+        }
+      })();
+    </script>
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

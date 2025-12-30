@@ -53,6 +53,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const handleSetLanguage = (lang: Language) => {
     setLanguageState(lang);
     saveLanguage(lang);
+    // Update HTML lang attribute for SEO and accessibility
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = lang;
+    }
   };
 
   // Sync language across tabs/windows using storage events
