@@ -412,69 +412,69 @@ const serviceDetailsData: Record<string, {
       ]
     }
   },
-  renovierung: {
+  sanitaer: {
     benefits: {
       de: [
-        "Wertsteigerung Ihrer Immobilie",
-        "Verbesserung der Wohnqualität",
-        "Energetische Sanierung",
-        "Modernisierung veralteter Technik",
-        "Alles aus einer Hand"
+        "Wertsteigerung Ihrer Immobilie durch modernes Bad",
+        "Verbesserung der Wohnqualität und des Komforts",
+        "Barrierefreie Badlösungen für alle Altersgruppen",
+        "Wassersparende und energieeffiziente Sanitärtechnik",
+        "Komplettservice von der Planung bis zur Ausführung"
       ],
       en: [
-        "Increase in property value",
-        "Improvement of living quality",
-        "Energy renovation",
-        "Modernization of outdated technology",
-        "Everything from one source"
+        "Increase in property value through modern bathroom",
+        "Improvement of living quality and comfort",
+        "Accessible bathroom solutions for all age groups",
+        "Water-saving and energy-efficient sanitary technology",
+        "Complete service from planning to execution"
       ]
     },
     coverage: {
       de: [
-        "Komplette Wohnungsrenovierungen",
-        "Bad- und Küchenmodernisierung",
-        "Malerarbeiten und Tapezieren",
-        "Bodenverlegung (Parkett, Fliesen, Laminat)",
-        "Trockenbau und Raumaufteilung",
-        "Fenster- und Türenaustausch"
+        "Komplette Badsanierung und Badbau",
+        "Barrierefreie Badgestaltung",
+        "Moderne Sanitärinstallationen",
+        "Trinkwasserhygiene und Regenwassernutzung",
+        "Badezimmerrenovierung mit hochwertigen Materialien",
+        "Planung und Beratung für Ihr Traumbad"
       ],
       en: [
-        "Complete apartment renovations",
-        "Bathroom and kitchen modernization",
-        "Painting and wallpapering",
-        "Floor laying (parquet, tiles, laminate)",
-        "Drywall and room division",
-        "Window and door replacement"
+        "Complete bathroom renovation and construction",
+        "Accessible bathroom design",
+        "Modern sanitary installations",
+        "Drinking water hygiene and rainwater harvesting",
+        "Bathroom renovation with high-quality materials",
+        "Planning and consultation for your dream bathroom"
       ]
     },
     process: {
       de: [
-        { title: "Erstberatung", desc: "Besprechung Ihrer Wünsche und Vorstellungen" },
-        { title: "Konzepterstellung", desc: "Detaillierte Planung und Visualisierung" },
-        { title: "Koordination", desc: "Organisation aller Gewerke" },
-        { title: "Übergabe", desc: "Abnahme und Einweisung in Ihr neues Zuhause" }
+        { title: "Bedarfsanalyse", desc: "Erfassung Ihrer Wünsche und räumlichen Gegebenheiten" },
+        { title: "Badplanung", desc: "3D-Visualisierung und Materialauswahl" },
+        { title: "Fachgerechte Ausführung", desc: "Installation durch zertifizierte Sanitärfachbetriebe" },
+        { title: "Abnahme", desc: "Qualitätskontrolle und Übergabe Ihres neuen Bades" }
       ],
       en: [
-        { title: "Initial Consultation", desc: "Discussion of your wishes and ideas" },
-        { title: "Concept Creation", desc: "Detailed planning and visualization" },
-        { title: "Coordination", desc: "Organization of all trades" },
-        { title: "Handover", desc: "Acceptance and introduction to your new home" }
+        { title: "Needs Analysis", desc: "Recording your wishes and spatial conditions" },
+        { title: "Bathroom Planning", desc: "3D visualization and material selection" },
+        { title: "Professional Execution", desc: "Installation by certified sanitary specialists" },
+        { title: "Acceptance", desc: "Quality control and handover of your new bathroom" }
       ]
     },
     whyUs: {
       de: [
-        "Erfahrene Projektleitung",
-        "Netzwerk geprüfter Handwerker",
-        "Termintreue und Zuverlässigkeit",
-        "Festpreisgarantie",
-        "Persönlicher Ansprechpartner"
+        "Spezialisierte Sanitärfachbetriebe",
+        "Moderne Badtechnik und Design",
+        "Barrierefreiheit nach DIN-Norm",
+        "Kurze Bauzeiten durch gute Planung",
+        "Garantie auf Material und Ausführung"
       ],
       en: [
-        "Experienced project management",
-        "Network of verified craftsmen",
-        "Punctuality and reliability",
-        "Fixed price guarantee",
-        "Personal contact person"
+        "Specialized sanitary companies",
+        "Modern bathroom technology and design",
+        "Accessibility according to DIN standards",
+        "Short construction times through good planning",
+        "Warranty on materials and workmanship"
       ]
     }
   },
@@ -687,7 +687,7 @@ export default function ServiceDetail() {
   const serviceName = language === 'de' ? service.nameDe : service.nameEn;
   const serviceDescription = language === 'de' ? service.descriptionDe : service.descriptionEn;
   const image = service.imagePath;
-  const details = serviceDetailsData[service.slug] || serviceDetailsData.renovierung;
+  const details = serviceDetailsData[service.slug] || serviceDetailsData.sanitaer;
   const IconComponent = getIconComponent(service.icon);
 
   const seoTitle = language === 'de'

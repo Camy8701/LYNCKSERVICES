@@ -25,15 +25,15 @@ export type ServiceWithSubcategories = {
 
 export const servicesData: ServiceWithSubcategories[] = [
   {
-    id: "allgemeine-renovierung",
-    slug: "renovierung",
-    nameDe: "Allgemeine Renovierung",
-    nameEn: "General Renovation",
-    titleDe: "Allgemeine Renovierung",
-    titleEn: "General Renovation",
+    id: "sanitaer",
+    slug: "sanitaer",
+    nameDe: "Sanitär",
+    nameEn: "Sanitary",
+    titleDe: "Sanitär",
+    titleEn: "Sanitary",
     icon: "home",
-    descriptionDe: "Badzimmer, Küche, Fenster & Türen, Malerarbeiten",
-    descriptionEn: "Bathroom, Kitchen, Windows & Doors, Painting",
+    descriptionDe: "Professionelle Sanitärinstallationen und Badezimmerrenovierungen. Wir bieten komplette Badsanierung, barrierefreie Badlösungen und moderne Sanitärtechnik. Von der Planung bis zur Ausführung – alles aus einer Hand für Ihr Traumbad.",
+    descriptionEn: "Professional sanitary installations and bathroom renovations. We offer complete bathroom renovations, accessible bathroom solutions, and modern sanitary technology. From planning to execution – everything from one source for your dream bathroom.",
     imagePath: "/blog-renovation.jpg",
     subcategories: [
       {
@@ -71,8 +71,8 @@ export const servicesData: ServiceWithSubcategories[] = [
     titleDe: "Dachdecker",
     titleEn: "Roofing",
     icon: "warehouse",
-    descriptionDe: "Reparatur, Sanierung, Neueindeckung und Sturmschaden-Beseitigung",
-    descriptionEn: "Repair, Renovation, Re-roofing and Storm Damage Removal",
+    descriptionDe: "Professionelle Dacharbeiten von erfahrenen Meisterbetrieben. Ob Dachreparatur, komplette Sanierung oder Neueindeckung – wir sorgen für ein dichtes Dach über Ihrem Kopf. Schnelle Sturmschadenbehebung und langlebige Lösungen für Steildach und Flachdach.",
+    descriptionEn: "Professional roofing work from experienced master craftsmen. Whether roof repair, complete renovation, or re-roofing – we ensure a watertight roof over your head. Fast storm damage repair and durable solutions for pitched and flat roofs.",
     imagePath: "/blog-roofing.jpg",
     subcategories: [
       {
@@ -105,8 +105,8 @@ export const servicesData: ServiceWithSubcategories[] = [
     titleDe: "Elektriker",
     titleEn: "Electrician",
     icon: "zap",
-    descriptionDe: "Smart Home, Panel-Upgrades, Reparatur und Neuinstallation",
-    descriptionEn: "Smart Home, Panel Upgrades, Repair and New Installation",
+    descriptionDe: "Zertifizierte Elektroinstallationen für Sicherheit und Komfort. Von der Elektroinstallation über Smart-Home-Systeme bis zur E-Auto-Ladestation. Wir modernisieren Ihre Elektrik, installieren energiesparende Lichttechnik und sorgen für sichere Stromversorgung in Ihrem Zuhause.",
+    descriptionEn: "Certified electrical installations for safety and comfort. From electrical installations to smart home systems and EV charging stations. We modernize your electrics, install energy-saving lighting technology, and ensure safe power supply in your home.",
     imagePath: "/blog-electrician.jpg",
     subcategories: [
       {
@@ -137,15 +137,15 @@ export const servicesData: ServiceWithSubcategories[] = [
     ]
   },
   {
-    id: "heizung-hvac",
+    id: "heizung",
     slug: "heizung",
-    nameDe: "Heizung & HVAC",
-    nameEn: "Heating & HVAC",
-    titleDe: "Heizung & HVAC",
-    titleEn: "Heating & HVAC",
+    nameDe: "Heizung",
+    nameEn: "Heating",
+    titleDe: "Heizung",
+    titleEn: "Heating",
     icon: "flame",
-    descriptionDe: "Notfall-Service, Installation, Wartung und Reparatur von Heizungsanlagen",
-    descriptionEn: "Emergency Service, Installation, Maintenance and Repair of Heating Systems",
+    descriptionDe: "24-Stunden-Notdienst für Heizungsausfälle unter 0163/3293127. Professionelle Installation, Wartung und Reparatur aller Heizungssysteme. Wir denken vom Kunden her und bieten umfassende Lösungen für alle gebäudetechnischen Anforderungen – schnell, zuverlässig und kompetent.",
+    descriptionEn: "24-hour emergency service for heating failures at 0163/3293127. Professional installation, maintenance, and repair of all heating systems. We think from the customer's perspective and offer comprehensive solutions for all building technology needs – fast, reliable, and competent.",
     imagePath: "/blog-heating.jpg",
     subcategories: [
       {
@@ -173,8 +173,8 @@ export const servicesData: ServiceWithSubcategories[] = [
     titleDe: "Wärmepumpe",
     titleEn: "Heat Pump Systems",
     icon: "thermometer",
-    descriptionDe: "Luft-, Erd- und Wasserwärmepumpen, Brennstoffzelle/BHKW",
-    descriptionEn: "Air, Ground and Water Heat Pumps, Fuel Cell/CHP",
+    descriptionDe: "Zukunftssichere Heiztechnik mit Wärmepumpen. Umweltfreundlich heizen mit Luft-, Erd- oder Wasserwärmepumpen. Profitieren Sie von staatlichen Förderungen und senken Sie Ihre Heizkosten dauerhaft. Inklusive Beratung zu Brennstoffzellen und BHKW-Systemen für maximale Energieeffizienz.",
+    descriptionEn: "Future-proof heating technology with heat pumps. Eco-friendly heating with air, ground, or water heat pumps. Benefit from government subsidies and permanently reduce your heating costs. Including consultation on fuel cells and CHP systems for maximum energy efficiency.",
     imagePath: "/service-heat-pump.jpg",
     subcategories: [
       {
@@ -205,15 +205,15 @@ export const servicesData: ServiceWithSubcategories[] = [
     ]
   },
   {
-    id: "klempner-sanitaer",
+    id: "klempner",
     slug: "klempner",
-    nameDe: "Klempner & Sanitär",
-    nameEn: "Plumbing & Sanitary",
-    titleDe: "Klempner & Sanitär",
-    titleEn: "Plumbing & Sanitary",
+    nameDe: "Klempner",
+    nameEn: "Plumbing",
+    titleDe: "Klempner",
+    titleEn: "Plumbing",
     icon: "droplets",
-    descriptionDe: "Rohrreinigung, Reparaturen, Neuinstallation von Sanitäranlagen",
-    descriptionEn: "Pipe Cleaning, Repairs, New Installation of Sanitary Facilities",
+    descriptionDe: "Professionelle Klempnerarbeiten für alle Anforderungen. Rohrbruchreparaturen mit moderner Thermografie-Kamera zur Leckortung, Rohrreinigung und Neuinstallationen. Ob klassischer Rohrbruch, feuchte Stellen oder Schimmelbefall – wir lokalisieren die Ursache und beseitigen Schäden fachgerecht.",
+    descriptionEn: "Professional plumbing services for all requirements. Pipe burst repairs with modern thermography camera for leak detection, pipe cleaning, and new installations. Whether classic pipe burst, damp spots, or mold infestation – we locate the cause and professionally eliminate damage.",
     imagePath: "/blog-plumbing.png",
     subcategories: [
       {
@@ -251,8 +251,8 @@ export const servicesData: ServiceWithSubcategories[] = [
     titleDe: "Solar & Photovoltaik",
     titleEn: "Solar & Photovoltaic",
     icon: "sun",
-    descriptionDe: "Installation, Beratung und Wartung von Solaranlagen",
-    descriptionEn: "Installation, Consulting and Maintenance of Solar Systems",
+    descriptionDe: "Nachhaltige Energiegewinnung mit Photovoltaik-Anlagen. Profitieren Sie von bis zu 70% Förderung für Ihre PV-Anlage. Komplettservice von der Beratung über Installation bis zur Wartung. Inklusive Energiespeichersystemen für maximale Unabhängigkeit vom Stromnetz.",
+    descriptionEn: "Sustainable energy generation with photovoltaic systems. Benefit from up to 70% subsidies for your PV system. Complete service from consultation to installation and maintenance. Including energy storage systems for maximum independence from the power grid.",
     imagePath: "/blog-solar.jpg",
     subcategories: [
       {
@@ -273,15 +273,15 @@ export const servicesData: ServiceWithSubcategories[] = [
     ]
   },
   {
-    id: "klimatechnik",
+    id: "klimatechnik-lueftung",
     slug: "klimatechnik",
-    nameDe: "Klimatechnik",
-    nameEn: "Air Conditioning",
-    titleDe: "Klimatechnik",
-    titleEn: "Air Conditioning",
+    nameDe: "Klimatechnik & Lüftung",
+    nameEn: "Air Conditioning & Ventilation",
+    titleDe: "Klimatechnik & Lüftung",
+    titleEn: "Air Conditioning & Ventilation",
     icon: "snowflake",
-    descriptionDe: "Wohnbereich, Büros, Industrie, Kühlzellen, Serverraumkühlung",
-    descriptionEn: "Residential, Offices, Industrial, Cold Storage, Server Room Cooling",
+    descriptionDe: "Moderne Klimaanlagen und Lüftungssysteme für optimales Raumklima. Vom Wohnbereich über Büros bis zur Industrie – wir planen und installieren maßgeschneiderte Klima- und Lüftungslösungen. Inklusive Kühlzellen und Serverraumkühlung für spezielle Anforderungen.",
+    descriptionEn: "Modern air conditioning and ventilation systems for optimal indoor climate. From residential areas to offices and industry – we plan and install customized climate and ventilation solutions. Including cold storage rooms and server room cooling for special requirements.",
     imagePath: "/service-air-conditioning.jpg",
     subcategories: [
       {
@@ -319,8 +319,8 @@ export const servicesData: ServiceWithSubcategories[] = [
     titleDe: "Service & Beratung",
     titleEn: "Service & Consultation",
     icon: "clipboard",
-    descriptionDe: "Energieberatung, Heizungscheck, Thermografie, Förderung",
-    descriptionEn: "Energy Consulting, Heating Check, Thermography, Subsidies",
+    descriptionDe: "Wir machen's einfach – das ist nicht ohne Grund unsere Unternehmensphilosophie. Umfassende Beratung und Service rund um Ihre Gebäudetechnik. 24-Stunden-Notdienst unter 0163/3293127. Von Energieberatung über Thermografie bis zur Förderberatung – wir finden für (fast) alles eine Lösung.",
+    descriptionEn: "We make it simple – that's our company philosophy for a reason. Comprehensive consulting and service for all your building technology needs. 24-hour emergency service at 0163/3293127. From energy consulting to thermography and subsidy advice – we find a solution for (almost) everything.",
     imagePath: "/service-consultation.jpg",
     subcategories: [
       {
